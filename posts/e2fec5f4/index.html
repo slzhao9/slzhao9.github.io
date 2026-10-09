@@ -1,0 +1,681 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>数据结构课程大作业选题：基础、综合与提高类 | Blog</title><meta name="author" content="zsl"><meta name="copyright" content="zsl"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本课程期末采用个人大作业考查。下面共有 11 个备选题目：基础类 4 题、综合类 3 题、提高类 4 题。每人选择 1 题，完成该题的必做要求；不需要完成全部题目。所有题目均使用 C 语言编写终端程序，不要求图形界面、数据库、联网服务或真实硬件。 选题围绕本学期的 算法性能分析、单链表、顺序栈、顺序串、二叉树遍历、图的存储、查找 和 插入排序 8 次实验设计。综合类、提高类会增加少量新算法，题目中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构课程大作业选题：基础、综合与提高类">
+<meta property="og:url" content="http://example.com/posts/e2fec5f4/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="本课程期末采用个人大作业考查。下面共有 11 个备选题目：基础类 4 题、综合类 3 题、提高类 4 题。每人选择 1 题，完成该题的必做要求；不需要完成全部题目。所有题目均使用 C 语言编写终端程序，不要求图形界面、数据库、联网服务或真实硬件。 选题围绕本学期的 算法性能分析、单链表、顺序栈、顺序串、二叉树遍历、图的存储、查找 和 插入排序 8 次实验设计。综合类、提高类会增加少量新算法，题目中">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2026-10-07T05:00:00.000Z">
+<meta property="article:modified_time" content="2026-10-07T08:05:04.885Z">
+<meta property="article:author" content="zsl">
+<meta property="article:tag" content="课程大作业">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="C">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "数据结构课程大作业选题：基础、综合与提高类",
+  "url": "http://example.com/posts/e2fec5f4/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2026-10-07T05:00:00.000Z",
+  "dateModified": "2026-10-07T08:05:04.885Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "zsl",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/butterfly-icon.png"><link rel="canonical" href="http://example.com/posts/e2fec5f4/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '数据结构课程大作业选题：基础、综合与提高类',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">数据结构课程大作业选题：基础、综合与提高类</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">数据结构课程大作业选题：基础、综合与提高类</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-10-07T05:00:00.000Z" title="Created 2026-10-07 13:00:00">2026-10-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-10-07T08:05:04.885Z" title="Updated 2026-10-07 16:05:04">2026-10-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E9%AA%8C/">数据结构实验</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>本课程期末采用<strong>个人大作业</strong>考查。下面共有 <strong>11 个备选题目</strong>：基础类 4 题、综合类 3 题、提高类 4 题。<strong>每人选择 1 题</strong>，完成该题的必做要求；不需要完成全部题目。所有题目均使用 C 语言编写终端程序，不要求图形界面、数据库、联网服务或真实硬件。</p>
+<p>选题围绕本学期的 <a href="/posts/5866a81e/">算法性能分析</a>、<a href="/posts/a80e397c/">单链表</a>、<a href="/posts/4e9f8dac/">顺序栈</a>、<a href="/posts/6df3ae91/">顺序串</a>、<a href="/posts/7ab0fcd8/">二叉树遍历</a>、<a href="/posts/23c7198c/">图的存储</a>、<a href="/posts/510741dd/">查找</a> 和 <a href="/posts/ce601833/">插入排序</a> 8 次实验设计。综合类、提高类会增加少量新算法，题目中已标明范围。</p>
+<h2 id="一-选题总览"><a class="markdownIt-Anchor" href="#一-选题总览"></a> 一、选题总览</h2>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th style="text-align:right">编号</th>
+<th>题目</th>
+<th>主要对应实验</th>
+<th>核心结构或算法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础</td>
+<td style="text-align:right">1</td>
+<td>学生成绩管理系统</td>
+<td>1、7、8</td>
+<td>结构体数组、查找、插入排序</td>
+</tr>
+<tr>
+<td>基础</td>
+<td style="text-align:right">2</td>
+<td>通讯录管理系统</td>
+<td>2、4、7</td>
+<td>单链表、字符串比较、查找</td>
+</tr>
+<tr>
+<td>基础</td>
+<td style="text-align:right">3</td>
+<td>图书借阅管理系统</td>
+<td>2、7、8</td>
+<td>记录管理、查找、排序</td>
+</tr>
+<tr>
+<td>基础</td>
+<td style="text-align:right">4</td>
+<td>排序性能分析器</td>
+<td>1、8</td>
+<td>直接插入排序、折半插入排序、计数与计时</td>
+</tr>
+<tr>
+<td>综合</td>
+<td style="text-align:right">5</td>
+<td>四则表达式求值器</td>
+<td>3、4</td>
+<td>顺序栈、字符串扫描</td>
+</tr>
+<tr>
+<td>综合</td>
+<td style="text-align:right">6</td>
+<td>模拟文件目录树</td>
+<td>5、7</td>
+<td>树的二叉链式表示、遍历、查找</td>
+</tr>
+<tr>
+<td>综合</td>
+<td style="text-align:right">7</td>
+<td>哈夫曼编码与解码器</td>
+<td>5、8</td>
+<td>二叉树、最小权值结点选择</td>
+</tr>
+<tr>
+<td>提高</td>
+<td style="text-align:right">8</td>
+<td>校园导航系统</td>
+<td>6、7</td>
+<td>加权无向图、最短距离路径</td>
+</tr>
+<tr>
+<td>提高</td>
+<td style="text-align:right">9</td>
+<td>地铁线路查询系统</td>
+<td>3、6、7</td>
+<td>站点图、广度优先查找、换乘统计</td>
+</tr>
+<tr>
+<td>提高</td>
+<td style="text-align:right">10</td>
+<td>通信网络路由模拟器</td>
+<td>6、7</td>
+<td>加权有向图、路由重算</td>
+</tr>
+<tr>
+<td>提高</td>
+<td style="text-align:right">11</td>
+<td>社交网络关系分析器</td>
+<td>6、7、8</td>
+<td>无向图、共同邻居、关系路径</td>
+</tr>
+</tbody>
+</table>
+<p>类别表示任务涉及的知识量，<strong>不直接决定分数</strong>。基础类做好数据结构、边界测试和讲解，同样可以取得完整的基础分；提高类只适合已完成图的实验、愿意继续学习路径算法的同学。</p>
+<h3 id="各题通用的个人化要求"><a class="markdownIt-Anchor" href="#各题通用的个人化要求"></a> 各题通用的个人化要求</h3>
+<p>令 <code>k</code> 为本人学号末两位组成的整数，例如末两位为 <code>07</code>，则 <code>k=7</code>。每题都有一项由 <code>k</code> 决定的参数或数据。程序启动时输出本人<strong>真实学号、姓名、题号和实际参数值</strong>，报告中写明计算过程。个人化参数不是唯一的独立完成证据，还需提交自己设计的测试数据、开发记录并完成现场讲解。</p>
+<h3 id="通用验收规则"><a class="markdownIt-Anchor" href="#通用验收规则"></a> 通用验收规则</h3>
+<ul>
+<li>程序须能接受现场输入的操作或查询参数；只打印预先写死的“正确结果”不算完成功能。自拟初始数据可以写在程序中，不强制实现文件保存。</li>
+<li>各题“功能测试”中的每个编号都是一组必须完成的测试。报告按编号逐组写出“输入、预期、实际”，<strong>每个编号对应一张独立的运行结果截图</strong>；截图须看清该组的输入、输出及需要核对的状态。可以在同一组测试中连续执行几步，但不能用一张截图代替多个编号的验证。</li>
+<li>对可拒绝的新增、修改、查询等操作，程序应给出明确提示；失败操作不能意外改变人数、结点数、边数、借阅状态或当前表达式等已有数据。除题目另有说明外，非法输入不得导致程序崩溃。</li>
+</ul>
+<h2 id="二-基础类"><a class="markdownIt-Anchor" href="#二-基础类"></a> 二、基础类</h2>
+<h3 id="题目-1学生成绩管理系统"><a class="markdownIt-Anchor" href="#题目-1学生成绩管理系统"></a> 题目 1：学生成绩管理系统</h3>
+<p><strong>目标与数据：</strong> 用结构体数组管理一个班的成绩。每条记录包含学号（唯一正整数）、姓名（不含空格，最长 20 字节）、3 门整数成绩和录入顺序。程序容量为 50 人，初始数据至少 15 人；第 1、2 门成绩范围为 <code>0～100</code>，第 3 门为 <code>0～M</code>，其中 <code>M = 80 + k % 21</code>。平均分按三门原始分数的算术平均计算，显示 2 位小数。</p>
+<p><strong>必做功能：</strong></p>
+<ol>
+<li>新增学生：检查容量、学号重复和各科分数范围；失败时人数与原数据不变。</li>
+<li>按学号查找并输出该生三科成绩与平均分；允许修改某一科成绩，修改后平均分随之更新。</li>
+<li>按学号删除一人并更新人数；能输出原始录入顺序的全部记录。</li>
+<li>用<strong>直接插入排序</strong>输出平均分从高到低的名单；平均分相同保持原录入先后顺序。排序后的展示不能让“原始录入顺序”丢失。</li>
+</ol>
+<p><strong>功能测试：</strong></p>
+<ol>
+<li>显示初始名单，核对人数不少于 15，并输出本人计算的 <code>M</code>。</li>
+<li>新增一名学生并按学号查找，核对人数增加 1、三科成绩与录入值一致。</li>
+<li>修改该生第 3 门成绩后再次查找，核对平均分重算；例如三科 <code>90、80、70</code> 的平均分为 <code>80.00</code>。</li>
+<li>删除该生并再次查找，核对人数恢复、查询结果为“不存在”；另删除首条与末条，核对剩余记录仍可显示。</li>
+<li>输出按平均分降序排列的名单，设置两人平均分相同，核对这两人的原录入顺序不变；再显示原始名单，核对其顺序未丢失。</li>
+<li>用重复学号或非正整数学号尝试新增，核对程序拒绝且操作前后人数相同。</li>
+<li>分别输入成绩 <code>-1</code> 和第 3 门成绩 <code>M+1</code>，核对均被拒绝且原记录不变。</li>
+<li>使用空表测试数据执行显示与查找，核对人数为 0、程序正常返回。</li>
+</ol>
+<p><strong>可选：</strong> 统计平均分在指定闭区间内的人数，检验区间上下界颠倒时的处理。</p>
+<h3 id="题目-2通讯录管理系统"><a class="markdownIt-Anchor" href="#题目-2通讯录管理系统"></a> 题目 2：通讯录管理系统</h3>
+<p><strong>目标与数据：</strong> 用<strong>带头结点的单链表</strong>管理联系人。每条记录含唯一正整数编号、姓名（不含空格，最长 20 字节）和电话号码（恰好 11 位数字，以字符串保存，允许首位为 <code>0</code>）。使用虚构联系人，不录入真实同学号码；初始至少 10 条，链表最多 50 条。起始编号为 <code>100 + 10 × k</code>，数据中必须有“起始编号 + 3”。</p>
+<p><strong>必做功能：</strong></p>
+<ol>
+<li>初始化空链表，尾插新增联系人；拒绝重复编号和格式错误的号码。</li>
+<li>按编号查找，输出完整记录；按编号修改姓名或号码，修改失败不改变原记录。</li>
+<li>按编号删除，正确处理首元结点、中间结点和尾结点；输出全部联系人及当前人数。</li>
+<li>退出时释放头结点和全部数据结点；报告中画出一次删除前后的指针连接。</li>
+</ol>
+<p><strong>功能测试：</strong></p>
+<ol>
+<li>显示初始联系人，核对不少于 10 条且包含“起始编号 + 3”。</li>
+<li>尾插一名联系人并查询，核对新结点位于链表末尾、人数增加 1。</li>
+<li>查询“起始编号 + 3”，修改其姓名或号码后再次查询，核对新值生效。</li>
+<li>分别删除首元结点、中间结点和尾结点，核对每次人数减少 1、剩余联系人仍可遍历。</li>
+<li>用重复编号尝试新增，核对被拒绝、人数不变。</li>
+<li>分别测试含非数字、只有 10 位和达到 12 位的号码，核对均被拒绝；另验证以 <code>0</code> 开头的 11 位号码可保存。</li>
+<li>查找、修改或删除不存在的编号，核对提示明确且链表未改变。</li>
+<li>连续删除至空表，再查找或删除，核对人数为 0、程序不崩溃；退出时正常释放链表。</li>
+</ol>
+<p><strong>可选：</strong> 按姓名关键字检索，重名时列出全部匹配联系人。</p>
+<h3 id="题目-3图书借阅管理系统"><a class="markdownIt-Anchor" href="#题目-3图书借阅管理系统"></a> 题目 3：图书借阅管理系统</h3>
+<p><strong>目标与数据：</strong> 用容量为 50 的结构体数组管理班级书架。每本书含唯一正整数编号、短书名（不含空格，最多 30 字节）、状态 <code>在架/已借出</code>；初始至少 12 本。编号从 <code>1000 + 10 × k</code> 开始，数据中包含“起始编号 + 5”。</p>
+<p><strong>必做功能：</strong></p>
+<ol>
+<li>新增图书：检查容量、编号重复和书名是否为空；新增书默认“在架”。</li>
+<li>按编号查找并显示状态；只有“在架”书可借出，只有“已借出”书可归还。</li>
+<li>显示全部图书、仅在架图书、总册数和在架册数；借还操作只改变状态，不改变总册数。</li>
+<li>使用<strong>直接插入排序</strong>按编号升序显示全部图书；排序前后的借阅状态和图书数量必须一致。</li>
+</ol>
+<p><strong>功能测试：</strong></p>
+<ol>
+<li>显示初始全部图书与仅在架图书，核对总数不少于 12，且包含“起始编号 + 5”。</li>
+<li>新增一本书并查询，核对总数与在架数各增加 1，状态为“在架”。</li>
+<li>查询“起始编号 + 5”并借出，核对总数不变、在架数减少 1、状态改为“已借出”。</li>
+<li>对同一本书再次借出，核对程序拒绝、总数与在架数不变。</li>
+<li>归还该书，核对在架数增加 1；再次归还应被拒绝，状态不变。</li>
+<li>按编号升序显示图书，核对排序后编号有序、每本书状态及总数未变。</li>
+<li>分别测试重复编号、空书名和不存在编号的查询或借还，核对错误提示及数据不变。</li>
+<li>在一组全部已借出的测试数据上显示在架列表，核对在架数为 0。</li>
+<li>使用 50 本书的测试数据尝试新增第 51 本，核对被拒绝、总数仍为 50；不必手工逐本录入。</li>
+</ol>
+<p><strong>可选：</strong> 按书名关键字筛选，重复书名时列出所有匹配编号。</p>
+<h3 id="题目-4排序性能分析器"><a class="markdownIt-Anchor" href="#题目-4排序性能分析器"></a> 题目 4：排序性能分析器</h3>
+<p><strong>目标与数据：</strong> 比较直接插入排序和折半插入排序。各实现独立接收整数数组，测试 <code>n=100、1000、5000</code>。每组先从 <code>x=k+1</code> 开始重复计算 <code>x=(73×x+41)%10007</code>，依次取新的 <code>x</code> 作为数组元素；生成一份原数组，再复制成两份供两个算法使用。</p>
+<p><strong>必做功能：</strong></p>
+<ol>
+<li>两种算法都按升序排列；分别统计<strong>关键字间比较次数</strong>及<strong>写入数组的次数</strong>（移动次数）。循环边界判断、<code>temp</code> 变量赋值不计入这两项。</li>
+<li>使用 <code>clock()</code> 分别测量两次排序的 CPU 时间；计时区不包含造数、复制、输出。每组打印 <code>n</code>、两种计数、耗时、首尾元素和“两个排序结果是否逐项相同”。</li>
+<li>检查每份结果从头到尾非递减；在报告中比较不同输入下的计数。折半查找可能减少确定插入位置的比较，但在已经有序等输入下<strong>不保证每次都更少</strong>，而元素仍须移动。</li>
+</ol>
+<p><strong>功能测试：</strong></p>
+<ol>
+<li>按规定生成 <code>n=100</code> 的数组，展示两种算法的计数、耗时、首尾元素和逐项一致性。</li>
+<li>按相同规则分别测试 <code>n=1000</code> 与 <code>n=5000</code>，核对两份结果均非递减且逐项相同；记录计数变化。计时可能显示 <code>0.000000</code>。</li>
+<li>输入 <code>&#123;49,38,65,97,76,13,27,49&#125;</code>，核对两种算法均输出 <code>13 27 38 49 49 65 76 97</code>。</li>
+<li>测试 <code>n=0</code> 与 <code>n=1</code>，核对程序正常结束；<code>n=0</code> 时不读取首尾元素，显示“无数据”。</li>
+<li>分别测试已升序与已降序的数组，核对输出正确，并记录两种算法的比较、写入次数。</li>
+<li>测试所有元素相等的数组，核对元素数量不变、排序结果正确。</li>
+<li>请求超出数组容量的规模，核对被拒绝、未越界访问。</li>
+</ol>
+<p><strong>可选：</strong> 每组重复 5 次报告平均耗时，或用成对标签证明两个算法保持相等元素的相对次序。</p>
+<h2 id="三-综合类"><a class="markdownIt-Anchor" href="#三-综合类"></a> 三、综合类</h2>
+<h3 id="题目-5四则表达式求值器"><a class="markdownIt-Anchor" href="#题目-5四则表达式求值器"></a> 题目 5：四则表达式求值器</h3>
+<p><strong>目标与输入：</strong> 每次读入一行不超过 80 个字符的表达式。只要求<strong>非负整数常量</strong>、二元运算符 <code>+ - * /</code>、圆括号和空格；中间结果允许为负数。采用整数除法，向 0 截断，例如 <code>7/2=3</code>。不要求一元负号、浮点数或大整数；合法测试的中间结果控制在 <code>-10^9～10^9</code> 内。</p>
+<p><strong>必做功能：</strong></p>
+<ol>
+<li>用一个顺序栈保存整数、另一个顺序栈保存运算符；逐字符扫描并合并多位数字，空格可以跳过。</li>
+<li>正确处理乘除高于加减、同级从左到右、括号优先；输出计算结果，能连续处理至少 5 条表达式。</li>
+<li>识别并拒绝空表达式、非法字符、缺少操作数、连续运算符、括号不配对及除数为 0；错误时给出原因，继续接收下一条输入。</li>
+</ol>
+<p><strong>个人化要求：</strong> 使用 <code>a=k+3</code> 构造 <code>(a+4)*2-6</code>，并在报告中手算结果、展示栈处理顺序。</p>
+<p><strong>功能测试：</strong></p>
+<ol>
+<li>输入本人参数 <code>a=k+3</code> 构造的 <code>(a+4)*2-6</code>，核对结果为 <code>2a+2</code>，并与报告中的手算一致。</li>
+<li>分别计算 <code>2+3*4</code> 与 <code>(2+3)*4</code>，核对结果为 <code>14</code>、<code>20</code>，验证优先级和括号。</li>
+<li>分别计算 <code>20/3</code> 与 <code>8-12</code>，核对结果为 <code>6</code>、<code>-4</code>，验证整数除法与负的中间结果。</li>
+<li>连续输入至少 5 条合法表达式，核对每条都有独立结果，前一条不影响后一条。</li>
+<li>输入空行与非法字符表达式 <code>2+a</code>，核对各自报错且可继续输入。</li>
+<li>输入 <code>3+</code> 与 <code>1--2</code>，核对缺操作数或连续运算符被拒绝。</li>
+<li>输入 <code>(2+3</code> 与 <code>5/(3-3)</code>，核对括号不配对、除数为 0 分别报错。</li>
+<li>输入超过 80 个字符的表达式，核对被拒绝且不会把剩余字符当作下一条合法表达式。</li>
+</ol>
+<p><strong>可选：</strong> 在必做部分正确后，扩展一元负号或小数运算，并重新说明输入语法与测试范围。</p>
+<h3 id="题目-6模拟文件目录树"><a class="markdownIt-Anchor" href="#题目-6模拟文件目录树"></a> 题目 6：模拟文件目录树</h3>
+<p><strong>目标与数据：</strong> 在内存中模拟目录，不读取或修改计算机上的真实文件。自行设计 <strong>10～20 个结点</strong>（含根），至少 <strong>3 层</strong>（根为第 1 层）、至少 <strong>3 个目录</strong>与 <strong>5 个文件</strong>，并让不同目录下至少有两个同名文件。每个结点保存名称、目录/文件标志、“第一个孩子”指针和“下一个兄弟”指针；这是普通树的一种二叉链式表示。文件结点没有孩子。</p>
+<p><strong>必做功能：</strong></p>
+<ol>
+<li>建立并缩进输出目录树，缩进深度与层数一致；统计并输出目录数、文件数、结点总数，满足“目录数 + 文件数 = 总数”。</li>
+<li>按名称查找，输出<strong>全部</strong>同名结点的完整路径，如 <code>/class07/doc/note.txt</code>；找不到时输出明确提示。</li>
+<li>按完整路径查询一个结点的类型，并列出指定目录的直接孩子；对文件路径执行“列出孩子”应被拒绝。</li>
+</ol>
+<p><strong>个人化要求：</strong> 根目录名为 <code>class</code> 加学号末两位，例如 <code>class07</code>；报告中画出全部结点的“孩子/兄弟”连接。可用静态结点，不要求动态插入或访问真实磁盘。</p>
+<p><strong>功能测试：</strong></p>
+<ol>
+<li>显示完整目录树与统计，核对 10～20 个结点、至少 3 层、至少 3 个目录和 5 个文件，且目录数加文件数等于总数。</li>
+<li>按名称查找根目录和一个叶子文件，核对类型与完整路径正确。</li>
+<li>查找同名文件，核对输出至少两个不同目录下的完整路径。</li>
+<li>查找不存在的名称，核对明确提示且结点总数不变。</li>
+<li>按完整路径查询一个目录，并列出其直接孩子，核对不误列孙结点。</li>
+<li>按完整路径查询一个文件，核对类型正确；尝试列出其孩子时应被拒绝。</li>
+<li>输入不存在的完整路径，核对查询失败且程序正常返回。</li>
+</ol>
+<p><strong>可选：</strong> 在指定目录下新增文件结点，再核对缩进输出和统计均增加 1。</p>
+<h3 id="题目-7哈夫曼编码与解码器"><a class="markdownIt-Anchor" href="#题目-7哈夫曼编码与解码器"></a> 题目 7：哈夫曼编码与解码器</h3>
+<p><strong>目标与输入：</strong> 输入 <strong>6～10 个互不相同的单字节字符</strong>（可选英文字母）及各自的正整数频次 <code>1～100</code>；消息长度为 <strong>1～50 个字符</strong>，仅可使用已录入的字符。不要求压缩真实文件。</p>
+<p><strong>必做功能：</strong></p>
+<ol>
+<li>每轮从尚未成为孩子的结点中选权值最小的两个，合并为一个父结点，直到剩一个根。树共有 <code>2n-1</code> 个结点；在报告中记录至少前两轮的选取和合并过程。</li>
+<li>约定左边为 <code>0</code>、右边为 <code>1</code>，输出每个字符的编码和编码长度；输出带权路径长度 <code>WPL = Σ(频次 × 编码长度)</code>。</li>
+<li>把消息编码为比特串，再沿树解码；程序必须逐字符核对解码消息与原消息一致，并报告比特串长度。</li>
+</ol>
+<p><strong>个人化要求：</strong> 第一个字符频次为 <code>1+k%9</code>。遇到相同权值时，按结点创建编号较小者优先选取；左右孩子也按相同规则确定。</p>
+<p><strong>功能测试：</strong></p>
+<ol>
+<li>用 6 个字符及频次 <code>5、9、12、13、16、45</code> 建树，核对结点数为 <code>11</code>、<code>WPL=224</code>，并显示各字符编码与长度。</li>
+<li>用个人化频次建树，核对第一个字符频次为 <code>1+k%9</code>；若出现相同权值，核对选取顺序符合约定。</li>
+<li>输入仅含已录入字符的消息，核对编码、比特串长度及解码结果，解码消息须与原消息逐字符相同。</li>
+<li>分别测试长度为 <code>1</code> 与 <code>50</code> 的合法消息，核对均可编码和解码。</li>
+<li>输入重复字符或零、负频次，核对建树被拒绝且未输出成功编码。</li>
+<li>输入超过 50 字符的消息或含未知字符的消息，核对被拒绝且可继续测试。</li>
+<li>输入含非 <code>0/1</code> 字符的比特串，核对解码被拒绝。</li>
+<li>输入结束于非叶结点的比特串，核对“不完整编码”提示，不能误报为成功解码。</li>
+</ol>
+<p><strong>可选：</strong> 比较同一条消息使用固定长度编码与哈夫曼编码时的比特数。</p>
+<h2 id="四-提高类"><a class="markdownIt-Anchor" href="#四-提高类"></a> 四、提高类</h2>
+<h3 id="题目-8校园导航系统"><a class="markdownIt-Anchor" href="#题目-8校园导航系统"></a> 题目 8：校园导航系统</h3>
+<p><strong>目标与数据：</strong> 自拟校园地点，不依赖真实地图；建立 <strong>8～12 个地点、12～20 条道路</strong>的加权无向图，道路长度为正整数（单位统一用米）。地点编号从 <code>0</code> 开始，至少有一对地点不连通；同一对地点最多一条道路。道路可从程序内的边表建立；另备可修改的测试边表，用来验证非法道路会被拒绝。</p>
+<p><strong>必做功能：</strong></p>
+<ol>
+<li>输出地点编号/名称和道路两端/长度；建图时同步写入 <code>A[i][j]</code> 与 <code>A[j][i]</code>，用明确标记表示无路，不把权值 0 当成真实道路。</li>
+<li>输入起点和终点，使用 <strong>Dijkstra 算法</strong>求总长度最短的路线；输出最短总长度和完整地点序列，不能只给一个距离值。</li>
+<li>找不到路线时输出“不可达”，起终点相同时输出长度 <code>0</code> 与单个地点；拒绝不存在的编号。</li>
+</ol>
+<p><strong>个人化要求：</strong> 指定一条道路长度为 <code>50+10×(k%8)</code>，在手绘图、边表和程序中一致；报告中另画一个不超过 5 点的小图，手算最短路并与程序核对。</p>
+<p><strong>功能测试：</strong></p>
+<ol>
+<li>显示 8～12 个地点及 12～20 条道路，核对个人化道路长度与边表一致，并检查无向边的两个方向长度相同。</li>
+<li>查询起终点相同的路线，核对距离为 <code>0</code>，路径只含该地点。</li>
+<li>查询直接相邻地点，核对输出完整路径和最短总长度；若另有更短的绕行路线，应输出绕行路线。</li>
+<li>查询需经过至少两个中转点的路线，核对每段道路存在、各段长度之和等于输出总长度，并与手算小图结果核对。</li>
+<li>查询不连通的两点，核对输出“不可达”，不输出伪造的路径。</li>
+<li>输入不存在的地点编号，核对被拒绝且可继续查询。</li>
+<li>在测试边表中分别加入重复道路、零长度和负长度道路，核对建图被拒绝且原图不变。</li>
+<li>在有同长最短路的测试图上查询，核对输出其中一条正确路径及其总长度。</li>
+</ol>
+<p><strong>可选：</strong> 临时关闭一条道路再计算，说明路径或距离的变化。</p>
+<h3 id="题目-9地铁线路查询系统"><a class="markdownIt-Anchor" href="#题目-9地铁线路查询系统"></a> 题目 9：地铁线路查询系统</h3>
+<p><strong>目标与数据：</strong> 自拟 <strong>2～3 条线路、12～18 个不同站点、至少 2 个换乘站</strong>。站点是图顶点，相邻站点形成无权边；每条边只属于一条线路，共享换乘站在站点表中只出现一次。线路可从程序内的站名数组建立；另备可修改的测试线路，验证重复站名、不连通等情况。若自拟线路图的全部站点互通，不连通测试须使用另一组含独立线路的测试图。不要调用真实地图或网络接口。</p>
+<p><strong>必做功能：</strong></p>
+<ol>
+<li>输出每条线路的站点顺序和换乘站标记；按站名查询编号，站名必须唯一。</li>
+<li>用队列实现的<strong>广度优先查找</strong>找到经过车站数最少的一条路线；输出站点序列、车站数（含起终点）、区间数（车站数减 1）和每段所属线路。</li>
+<li>沿选中的路线比较相邻区间所属线路，统计实际换乘次数；换乘发生在共享站点。起终点相同时区间数、换乘数均为 <code>0</code>。</li>
+</ol>
+<p><strong>个人化要求：</strong> 至少一个自拟站名包含学号末两位原样文本（如 <code>07</code>），报告中画线路图。</p>
+<p><strong>功能测试：</strong></p>
+<ol>
+<li>显示 2～3 条线路、12～18 个不同站点及至少 2 个换乘站，核对含学号末两位的站名和站点编号。</li>
+<li>查询起终点为同一站，核对只输出一个站、区间数与换乘数均为 <code>0</code>。</li>
+<li>查询相邻站及三站组成的直达路线，核对三站路线为 <strong>3 站、2 区间</strong>，每段线路标记正确。</li>
+<li>查询经过至少一个换乘站的路线，核对站点序列、最少区间数、各段所属线路和实际换乘次数一致。</li>
+<li>查询不连通的两站，核对明确提示不可达；输入错误站名，核对查询被拒绝。</li>
+<li>在测试线路中使用重复站名，核对建图被拒绝、原站点表不变。</li>
+<li>在一条测试线路中连续重复同一站点，核对建图被拒绝、不生成自环。</li>
+<li>构造两条区间数相同的最短路线，核对可任选其一，但输出的换乘数必须与该路线一致；本题不要求最少换乘。</li>
+</ol>
+<p><strong>可选：</strong> 另做换乘优先查询，并比较两个目标可能得到的不同路线。</p>
+<h3 id="题目-10通信网络路由模拟器"><a class="markdownIt-Anchor" href="#题目-10通信网络路由模拟器"></a> 题目 10：通信网络路由模拟器</h3>
+<p><strong>目标与数据：</strong> 自拟 <strong>6～10 个节点、10～20 条加权有向链路</strong>，每条代价为正整数；允许 <code>u→v</code> 存在而 <code>v→u</code> 不存在。使用邻接矩阵或邻接表；链路可从程序内的边表建立，另备可修改的测试边表验证建图错误及不同故障情形。每次故障测试前恢复初始图，避免前一次删除影响下一次结果。不要求实现真实网络协议、数据包或联网通信。</p>
+<p><strong>必做功能：</strong></p>
+<ol>
+<li>输入源节点，以总代价最小为目标运行 <strong>Dijkstra 算法</strong>，输出到每个目标节点的路由表：目标编号、最小总代价、下一跳；对不可达目标显示“不可达”。</li>
+<li>指定一条现有有向链路模拟故障，仅删除这一方向；重新计算并输出故障后路由表，逐行标明“代价变化、下一跳变化、变为不可达或不变”。</li>
+<li>输出所查询的一条完整路径，供教师核对“下一跳”与路径首段是否一致。源到自身代价为 <code>0</code>，下一跳标为“自身”。</li>
+</ol>
+<p><strong>个人化要求：</strong> 指定一条链路代价为 <code>1+k%9</code>；自拟图中所选故障链路必须让至少一项目标路由发生变化。</p>
+<p><strong>功能测试：</strong></p>
+<ol>
+<li>显示 6～10 个节点、10～20 条有向链路及个人化代价，核对方向和权值正确。</li>
+<li>从指定源节点生成完整路由表，核对可达目标的最小代价、下一跳及一条完整路径一致。</li>
+<li>查询源到自身，核对代价为 <code>0</code>、下一跳显示“自身”；查询不可达目标，核对显示“不可达”。</li>
+<li>用小图 <code>0→1(4)、0→2(10)、1→2(3)</code> 查询到 <code>2</code> 的路由，核对故障前代价 <code>7</code>、下一跳 <code>1</code>；删除 <code>1→2</code> 后核对代价 <code>10</code>、下一跳 <code>2</code>。</li>
+<li>在自拟图中移除一条现有有向链路，核对仅该方向消失，重算路由表并标明至少一项变化。</li>
+<li>构造故障后不可达的目标，核对该行标为“变为不可达”，不输出无效下一跳。</li>
+<li>构造两条同代价路径，核对可选任意一条，但代价、下一跳与完整路径匹配。</li>
+<li>输入非法节点编号，核对被拒绝且原路由表不变。</li>
+<li>在测试边表中分别加入重复有向边、零代价和负代价，核对建图被拒绝且原图不变。</li>
+</ol>
+<p><strong>可选：</strong> 恢复故障链路后重算，检查路由表回到初始状态。</p>
+<h3 id="题目-11社交网络关系分析器"><a class="markdownIt-Anchor" href="#题目-11社交网络关系分析器"></a> 题目 11：社交网络关系分析器</h3>
+<p><strong>目标与数据：</strong> 自拟 <strong>10～20 个虚构人物、12～30 条无向好友关系</strong>，至少有两个互不连通的关系分组；不使用真实同学的关系数据。每个编号唯一，任意两人之间最多一条好友边，不允许自己与自己加边。</p>
+<p><strong>必做功能：</strong></p>
+<ol>
+<li>输出某人的直接好友（按编号升序）及其度数；新增好友关系时，在无向图两端同时更新，拒绝重复关系与自环。</li>
+<li>查询两人的共同好友，输出共同好友编号及人数；没有时显示 <code>0</code>，同一个人查询时按其直接好友集合处理并说明这一约定。</li>
+<li>用广度优先查找两人之间经过边数最少的一条关系链，输出完整人物序列和边数；不连通时显示“无关系链”。</li>
+</ol>
+<p><strong>个人化要求：</strong> 一个虚构人物的编号设为 <code>100+k</code>，其余编号唯一；报告中画出自拟图并核对“图的边数 = 所有顶点度数之和 ÷ 2”。</p>
+<p><strong>功能测试：</strong></p>
+<ol>
+<li>显示 10～20 个虚构人物及 12～30 条好友关系，核对至少两个连通分组、个人化编号和“度数之和 = 边数 × 2”。</li>
+<li>查询一人的直接好友，核对编号升序与度数正确；新增一条好友边后核对两端度数各增加 1。</li>
+<li>重复添加同一好友边，再尝试添加自环，核对均被拒绝、两端度数和边数不变。</li>
+<li>查询有共同好友的两人，核对名单与人数；例如 <code>A—B—C</code> 中 <code>A</code> 与 <code>C</code> 的共同好友为 <code>B</code>。</li>
+<li>查询无共同好友的两人，核对人数为 <code>0</code>；同一人查询时，核对返回其直接好友集合。</li>
+<li>查询连通两人的最短关系链，核对每条边实际存在、边数正确；例如 <code>A—B—C</code> 的 <code>A</code> 到 <code>C</code> 为 <strong>2 条边</strong>。</li>
+<li>查询分属不同连通分组的两人，核对输出“无关系链”。</li>
+<li>输入不存在的人物编号，核对查询或新增关系被拒绝、原图不变。</li>
+</ol>
+<p><strong>可选：</strong> 输出度数最高的前三人；度数相同按编号升序排列。</p>
+<h2 id="五-现场验收速查"><a class="markdownIt-Anchor" href="#五-现场验收速查"></a> 五、现场验收速查</h2>
+<p>学生应先展示各题规定规模的数据，再由教师从本人测试记录中抽查，并临时指定至少 <strong>1 次正常操作、1 次边界操作、1 次错误操作</strong>。下面列出每题最关键的观察结果；详细测试要求仍以题目正文为准。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">题号</th>
+<th>必须现场看见的结果</th>
+<th>一项关键边界或错误</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>15 人以上；新增、修改、删除后人数与平均分正确；降序名单</td>
+<td>第 3 门 <code>M+1</code> 被拒，人数不变</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td>10 位以上；头尾结点删除后链表仍能遍历</td>
+<td>空表删除不崩溃，人数为 0</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>12 本以上；借出/归还前后总数不变、在架数变化</td>
+<td>重复借出被拒，状态不变</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>三种规模的两份排序结果相同，计数与耗时显示</td>
+<td><code>n=0</code> 不读取首尾元素</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>优先级、括号、整数除法得到规定结果</td>
+<td>除数为 0 报错并能继续输入</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td>目录树缩进、计数及同名文件两条路径</td>
+<td>对文件执行“列出孩子”被拒</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td>编码后解码回原消息，经典频次 <code>WPL=224</code></td>
+<td>未知字符或不完整比特串被拒</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td>最短总长度及完整地点路径</td>
+<td>不连通查询输出“不可达”</td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td>最少区间路线、线路标记与换乘次数</td>
+<td>同站查询区间数和换乘数为 0</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>故障前后路由表、变化标记与正确下一跳</td>
+<td>故障后不可达目标有明确标记</td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td>度数、共同好友及最短关系链</td>
+<td>重复加边被拒，度数不变</td>
+</tr>
+</tbody>
+</table>
+<h2 id="六-提交材料与独立完成核查"><a class="markdownIt-Anchor" href="#六-提交材料与独立完成核查"></a> 六、提交材料与独立完成核查</h2>
+<ol>
+<li><strong>C 源码：</strong> 提交可以直接编译运行的文本文件。关键数据结构、核心循环、指针或下标变化、错误处理须有必要的<strong>中文注释</strong>；截图不能代替源码。</li>
+<li><strong>简短报告：</strong> 写清题目编号、学号姓名、数据结构示意图、主要函数分工、个人化参数的计算、每个编号测试的输入与预期/实际结果；把程序的限制写明。按本题“功能测试”的编号排列，每项结果旁放对应截图，不能只提供截图文件夹。</li>
+<li><strong>运行截图：</strong> 本题“功能测试”每个编号各提供 <strong>1 张独立的验证截图</strong>，截图编号与测试编号一一对应；同一编号内的连续步骤应完整显示输入、输出及状态变化。每张截图都要清晰显示本人真实学号、姓名、题号、个人化参数，不得保留身份占位符。</li>
+<li><strong>过程记录：</strong> 至少保留“数据设计—核心功能—测试修正”三个阶段的代码版本或带日期的开发日志，并记录一次本人发现且修复的问题。可使用 Git，也可以提交简短版本记录，不强制安装额外工具。</li>
+<li><strong>资料与工具说明：</strong> 列出参考过的实验指导书、资料和辅助工具。如使用 AI 辅助，说明用于什么问题、自己做了哪些修改、如何验证；如实说明工具使用不直接扣分。</li>
+</ol>
+<p>验收时会进行简短演示与提问，例如更换一组输入、解释某个变量的变化、处理一个未提前展示的边界情况。允许讨论思路、查阅资料或用工具解释概念；最终代码须由本人理解并能修改。<strong>不能只凭代码相似度或“AI 检测率”判断是否独立完成</strong>，会结合源码、过程记录、测试和现场说明综合核对。</p>
+<h2 id="七-评分参考100-分"><a class="markdownIt-Anchor" href="#七-评分参考100-分"></a> 七、评分参考（100 分）</h2>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">分值</th>
+<th>主要检查点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>必做功能</td>
+<td style="text-align:right">35</td>
+<td>功能完整，结果与题目约定一致</td>
+</tr>
+<tr>
+<td>数据结构与算法</td>
+<td style="text-align:right">25</td>
+<td>使用指定结构或算法，能解释关键步骤</td>
+</tr>
+<tr>
+<td>测试与边界处理</td>
+<td style="text-align:right">15</td>
+<td>正常、边界、错误输入均有可信记录</td>
+</tr>
+<tr>
+<td>文档、注释与过程</td>
+<td style="text-align:right">15</td>
+<td>说明清楚，中文注释有帮助，开发记录与个人化参数齐全</td>
+</tr>
+<tr>
+<td>现场演示与讲解</td>
+<td style="text-align:right">10</td>
+<td>能运行、解释并完成小范围输入或功能调整</td>
+</tr>
+</tbody>
+</table>
+<p>可选功能用于展示更深入的思考，不能替代必做要求。请依据自己的基础和时间选题，先做出正确、可解释的版本。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AF%BE%E7%A8%8B%E5%A4%A7%E4%BD%9C%E4%B8%9A/">课程大作业</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><a class="post-meta__tags" href="/tags/C/">C</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/e3eb4e85/" title="通信工程专业导论课程大作业任务书（大一简化版）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">通信工程专业导论课程大作业任务书（大一简化版）</div></div><div class="info-2"><div class="info-item-1"> 一、任务说明 本次大作业满分 100 分，所有学生完成同一套题目，独立完成。请以“一条信息如何表示、发送、传输、接收”为主线，把计算机基础、通信基础和自己的网络观察联系起来。不要求编程、复杂协议分析或通信电路设计。 最终只提交 1 份 PDF 报告，命名为 学号_姓名_通信工程专业导论大作业.pdf。首页写明课程名称、学号、姓名和完成日期；报告中按本任务书的题号呈现计算过程、流程图、表格、实测截图与分析。建议先完成实验记录，再撰写解释和总结。 统一约定： 1 Byte = 8 bit；1 KB = 1000 Byte，1 MB = 1000 KB；1 Mbit = 10610^6106 bit。容量与链路速率均按十进制计算；若补充使用 1024 进制，应写成 KiB、MiB。只计算题目给出的原始数据，不计文件头、压缩、协议开销及重传，除非题目特别要求讨论。  二、第一部分：信息怎样变成数据（30 分）  1. 进制与字符编码（10 分） 取本人学号最后三位组成的十进制整数 NNN（例如末三位为 007，则 N=7N=7N=7），完成：  将 NNN 转换成二进制和十六进制，写出...</div></div></div></a><a class="pagination-related" href="/posts/6df3ae91/" title="04 顺序串基本运算实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">04 顺序串基本运算实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  领会顺序串的存储结构。 掌握顺序串赋值、复制、比较、求长度、连接、求子串、插入、删除和替换等基本运算。 理解顺序串中字符位置和串长度的关系。 能够综合使用顺序串的基本运算完成实验程序。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等   提交与截图要求  必须提交运行截图：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。 本次截图重点：原串、长度、子串 bcdefghefg 和删除结果 aghefghijklmn。完成提高或选做任务的同学，还应附相应结果截图。 必须提交带中文注释的 C 源码：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 TODO 提示不能代替自己完成的注释，也不能只交代码或只交截图。   三、实验内容 编写 sqstring.c，实现顺序串的各种基本运算。假设顺序串中的元素类型为...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/posts/1769ec6e/" title="数据结构第 1—9 章 LeetCode 简单题单"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-09</div><div class="info-item-2">数据结构第 1—9 章 LeetCode 简单题单</div></div><div class="info-2"><div class="info-item-1">本题单按第 1—9 章编排，共 28 道 LeetCode 简单题，由基础到巩固排列。题号可用于站内搜索。建议先手工走一遍示例，再用 C 语言完成练习，并说明所用数据结构与时间复杂度。  第 1 章 绪论：数据、算法与复杂度  1480. 一维数组的动态和 — 数组遍历、循环不变量。 想清楚处理到下标 i 时，已得到的前缀结果表示什么；比较一次扫描与反复求和的操作次数。 1929. 数组串联 — 数组下标、数据规模与空间。 明确原数组长度 n、结果长度 2n，检查第二段元素应写到什么下标。 1672. 最富有客户的资产总量 — 二维数组与两重循环。 先逐行求和，再维护最大值；分别分析行数、列数对操作次数的影响。   第 2 章 线性表：单链表与指针  83. 删除排序链表中的重复元素 — 删除结点、维护后继。 利用有序性只比较相邻结点；删除前先保留需要继续访问的链接。 206. 反转链表 — 链接方向与边界。 画出 前驱—当前—后继 三个指针，逐次改变 next；检查空链与单结点链。 21. 合并两个有序链表 — 带头结点思路与有序合并。 每次接入较小的当前结点；某一条链先到尾时...</div></div></div></a><a class="pagination-related" href="/posts/7ab0fcd8/" title="05 二叉树遍历算法实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">05 二叉树遍历算法实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  领会二叉树的存储结构。 理解先序、中序、后序和层次遍历的访问顺序。 掌握二叉树三种递归遍历算法的设计方法。 掌握利用栈实现先序、中序和后序非递归遍历的方法。 掌握利用队列实现二叉树层次遍历的方法。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等   提交与截图要求  必须提交运行截图：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。 本次截图重点：先序、中序、后序三种递归遍历结果。完成提高或选做任务的同学，还应附相应结果截图。 必须提交带中文注释的 C 源码：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 TODO 提示不能代替自己完成的注释，也不能只交代码或只交截图。   三、实验内容 编写 C 语言程序 exp5-1.c，实现二叉树的先序、中序、后序和层次遍历算法。其中，先序、中序和后序遍历分别...</div></div></div></a><a class="pagination-related" href="/posts/a80e397c/" title="02 单链表基本运算实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">02 单链表基本运算实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  领会单链表的存储结构。 掌握单链表初始化、插入、删除、查找、输出和销毁等基本运算。 掌握采用尾插法建立单链表的算法。 综合使用单链表的基本运算完成实验程序。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等   提交与截图要求  必须提交运行截图：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。 本次截图重点：单链表 a b c d e、长度 5 和释放提示。完成提高或选做任务的同学，还应附相应结果截图。 必须提交带中文注释的 C 源码：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 TODO 提示不能代替自己完成的注释，也不能只交代码或只交截图。   三、实验内容 编写 linklist.c，实现单链表的各种基本运算和整体建表算法。假设单链表的元素类型 ElemType 为 char。 在此基础上设...</div></div></div></a><a class="pagination-related" href="/posts/5866a81e/" title="01 算法性能分析实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">01 算法性能分析实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  掌握程序执行时间的基本测试方法。 理解问题规模变化对算法运行时间的影响。 观察常见时间函数随问题规模增长的变化规律。 通过比较不同算法，体会算法设计对程序性能的影响。   二、实验环境  编程语言：C 开发环境：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等 本实验包含 1 个课堂必做任务 + 1 个提高任务 + 1 个选做任务。   计时方法参考  C 1234567891011121314#include &lt;time.h&gt;clock_t start, end;double elapsed;void measure(void)&#123;    start = clock();    /* 调用待测试算法 */    end = clock();    elapsed = (double)(end - start) / CLOCKS_PER_SEC;&#125; 如果单次执行时间过短，可以重复执行多次后取平均值。不同计算机和运行环境的实际运行时间可能不同，本实验重点观察同一环境下算法性能随问题规模变化的...</div></div></div></a><a class="pagination-related" href="/posts/ce601833/" title="08 直接插入排序和折半插入排序实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">08 直接插入排序和折半插入排序实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  理解插入排序的基本思想。 掌握直接插入排序算法的设计方法。 掌握折半插入排序算法的设计方法。 理解折半查找在插入排序中的应用。 比较直接插入排序和折半插入排序的查找与移动过程。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等   提交与截图要求  必须提交运行截图：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。 本次截图重点：原始序列，以及直接插入排序和折半插入排序的升序结果。完成提高或选做任务的同学，还应附相应结果截图。 必须提交带中文注释的 C 源码：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 TODO 提示不能代替自己完成的注释，也不能只交代码或只交截图。   三、实验内容 编写程序 exp8-1.c，实现直接插入排序算法和折半插入排序算法，并完成以下功能：  建立一个待排序的整数序列。...</div></div></div></a><a class="pagination-related" href="/posts/510741dd/" title="07 顺序查找和折半查找实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">07 顺序查找和折半查找实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  理解查找表和关键字的基本概念。 掌握顺序查找算法的设计方法。 掌握折半查找算法的设计方法。 理解折半查找对数据有序性的要求。 比较顺序查找和折半查找的时间复杂度及适用场景。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等   提交与截图要求  必须提交运行截图：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。 本次截图重点：关键字 29 的成功结果和关键字 30 的失败结果（两种算法均需显示）。完成提高或选做任务的同学，还应附相应结果截图。 必须提交带中文注释的 C 源码：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 TODO 提示不能代替自己完成的注释，也不能只交代码或只交截图。   三、实验内容 编写程序 exp7-1.c，实现顺序查找算法和折半查找算法，并完成以下功能：  建立一个按关键字升...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">zsl</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">31</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">69</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">5</div></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E9%80%89%E9%A2%98%E6%80%BB%E8%A7%88"><span class="toc-number">1.</span> <span class="toc-text"> 一、选题总览</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%84%E9%A2%98%E9%80%9A%E7%94%A8%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8C%96%E8%A6%81%E6%B1%82"><span class="toc-number">1.1.</span> <span class="toc-text"> 各题通用的个人化要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E9%AA%8C%E6%94%B6%E8%A7%84%E5%88%99"><span class="toc-number">1.2.</span> <span class="toc-text"> 通用验收规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E5%9F%BA%E7%A1%80%E7%B1%BB"><span class="toc-number">2.</span> <span class="toc-text"> 二、基础类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-1%E5%AD%A6%E7%94%9F%E6%88%90%E7%BB%A9%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.1.</span> <span class="toc-text"> 题目 1：学生成绩管理系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-2%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.2.</span> <span class="toc-text"> 题目 2：通讯录管理系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-3%E5%9B%BE%E4%B9%A6%E5%80%9F%E9%98%85%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.3.</span> <span class="toc-text"> 题目 3：图书借阅管理系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-4%E6%8E%92%E5%BA%8F%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E5%99%A8"><span class="toc-number">2.4.</span> <span class="toc-text"> 题目 4：排序性能分析器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E7%BB%BC%E5%90%88%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text"> 三、综合类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-5%E5%9B%9B%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC%E5%99%A8"><span class="toc-number">3.1.</span> <span class="toc-text"> 题目 5：四则表达式求值器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-6%E6%A8%A1%E6%8B%9F%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E6%A0%91"><span class="toc-number">3.2.</span> <span class="toc-text"> 题目 6：模拟文件目录树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-7%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81%E4%B8%8E%E8%A7%A3%E7%A0%81%E5%99%A8"><span class="toc-number">3.3.</span> <span class="toc-text"> 题目 7：哈夫曼编码与解码器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E6%8F%90%E9%AB%98%E7%B1%BB"><span class="toc-number">4.</span> <span class="toc-text"> 四、提高类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-8%E6%A0%A1%E5%9B%AD%E5%AF%BC%E8%88%AA%E7%B3%BB%E7%BB%9F"><span class="toc-number">4.1.</span> <span class="toc-text"> 题目 8：校园导航系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-9%E5%9C%B0%E9%93%81%E7%BA%BF%E8%B7%AF%E6%9F%A5%E8%AF%A2%E7%B3%BB%E7%BB%9F"><span class="toc-number">4.2.</span> <span class="toc-text"> 题目 9：地铁线路查询系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-10%E9%80%9A%E4%BF%A1%E7%BD%91%E7%BB%9C%E8%B7%AF%E7%94%B1%E6%A8%A1%E6%8B%9F%E5%99%A8"><span class="toc-number">4.3.</span> <span class="toc-text"> 题目 10：通信网络路由模拟器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-11%E7%A4%BE%E4%BA%A4%E7%BD%91%E7%BB%9C%E5%85%B3%E7%B3%BB%E5%88%86%E6%9E%90%E5%99%A8"><span class="toc-number">4.4.</span> <span class="toc-text"> 题目 11：社交网络关系分析器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E7%8E%B0%E5%9C%BA%E9%AA%8C%E6%94%B6%E9%80%9F%E6%9F%A5"><span class="toc-number">5.</span> <span class="toc-text"> 五、现场验收速查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD-%E6%8F%90%E4%BA%A4%E6%9D%90%E6%96%99%E4%B8%8E%E7%8B%AC%E7%AB%8B%E5%AE%8C%E6%88%90%E6%A0%B8%E6%9F%A5"><span class="toc-number">6.</span> <span class="toc-text"> 六、提交材料与独立完成核查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83-%E8%AF%84%E5%88%86%E5%8F%82%E8%80%83100-%E5%88%86"><span class="toc-number">7.</span> <span class="toc-text"> 七、评分参考（100 分）</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/1769ec6e/" title="数据结构第 1—9 章 LeetCode 简单题单">数据结构第 1—9 章 LeetCode 简单题单</a><time datetime="2026-10-08T16:00:00.000Z" title="Created 2026-10-09 00:00:00">2026-10-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/e3eb4e85/" title="通信工程专业导论课程大作业任务书（大一简化版）">通信工程专业导论课程大作业任务书（大一简化版）</a><time datetime="2026-10-07T09:16:46.000Z" title="Created 2026-10-07 17:16:46">2026-10-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/e2fec5f4/" title="数据结构课程大作业选题：基础、综合与提高类">数据结构课程大作业选题：基础、综合与提高类</a><time datetime="2026-10-07T05:00:00.000Z" title="Created 2026-10-07 13:00:00">2026-10-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/5866a81e/" title="01 算法性能分析实验">01 算法性能分析实验</a><time datetime="2026-10-06T16:00:00.000Z" title="Created 2026-10-07 00:00:00">2026-10-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/a80e397c/" title="02 单链表基本运算实验">02 单链表基本运算实验</a><time datetime="2026-10-06T16:00:00.000Z" title="Created 2026-10-07 00:00:00">2026-10-07</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By zsl</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/katex.min.css')
+    if (false) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const config = mermaidSrc.dataset.config ? JSON.parse(mermaidSrc.dataset.config) : {}
+      if (!config.theme) {
+        config.theme = theme
+      }
+      const mermaidThemeConfig = `%%{init: ${JSON.stringify(config)}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid@11.12.2/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

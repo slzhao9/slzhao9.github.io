@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Blog</title><meta name="author" content="zsl"><meta name="copyright" content="zsl"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="Blog">
+<meta property="og:url" content="http://example.com/page/3/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:author" content="zsl">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/butterfly-icon.png"><link rel="canonical" href="http://example.com/page/3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Blog',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Blog</span></a></span><div id="menus"></div></nav><h1 class="title-seo">Blog</h1></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/48de462d/" title="06 矩阵键盘识别实验">06 矩阵键盘识别实验</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-04-27T16:00:00.000Z" title="Created 2026-04-28 00:00:00">2026-04-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA%E5%AE%9E%E9%AA%8C/">单片机实验</a></span></div><div class="content"> 一、实验目的  理解独立按键和矩阵键盘的工作原理 掌握按键消抖的软件实现方法 掌握矩阵键盘逐行扫描的编程方法 综合运用数码管显示和键盘扫描完成交互系统设计   二、实验设备  windows操作系统 keil5 STC-ISP   三、实验内容 设计一个4×4矩阵键盘，键盘编号0~15，单片机能根据键盘排列顺序，将按下的键盘号正确识别出来，并采用两个数码管分别显示键盘号码的个位和十位。  四、实验原理  独立按键原理：按键一端接单片机IO口，另一端接地。按键未按下时IO口为高电平（内部上拉），按下后IO口被拉低为低电平。通过检测IO口电平变化即可判断按键状态。 矩阵键盘原理：4×4矩阵键盘由4根行线和4根列线交叉组成，共16个按键位于交叉点上。通过&quot;逐行扫描法&quot;识别按键：先将某一行拉低，其余行拉高，然后读取列线状态——如果某列也为低电平，说明该行列交叉处的按键被按下。 按键消抖：机械按键在按下和释放的瞬间会产生1020ms的抖动，可能导致一次按键被误识别为多次。解决方法是在检测到电平变化后延时1020ms再次确认。 蓝桥杯开发板引脚说明：  行线（输出）：P...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/6376eb68/" title="08 DAC实验">08 DAC实验</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-04-27T16:00:00.000Z" title="Created 2026-04-28 00:00:00">2026-04-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA%E5%AE%9E%E9%AA%8C/">单片机实验</a></span></div><div class="content"> 一、实验目的  理解数模转换（DAC）的基本原理 掌握I2C总线协议的底层时序（起始、停止、应答、字节传输） 掌握PCF8591芯片的DAC编程方法 综合运用DAC输出实现呼吸灯和波形发生器   二、实验设备  windows操作系统 keil5 STC-ISP   三、实验内容 单片机控制PCF8591的DAC输出递增电压，控制发光二极管渐亮，然后再控制DAC输出递减电压，控制二极管渐灭，形成呼吸灯效果。  四、实验原理   DAC（数模转换）原理：DAC将数字量转换为模拟电压。PCF8591是8位DAC，输入数字量范围0~255，对应输出电压 Vout=Vref×Data255V_{out} = \frac{V_{ref} \times Data}{255}Vout​=255Vref​×Data​。例如当VCC=5V时，输入127约输出2.5V，输入255输出5V，输入0输出0V。 PCF8591简介：PCF8591是飞利浦公司生产的8位A/D和D/A转换芯片，集成了4路模拟输入（ADC）和1路模拟输出（DAC），通过I2C总线与单片机通信，仅需2根线（SCL和SDA）即可...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/8d248fa7/" title="04 数码管动态显示实验">04 数码管动态显示实验</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-04-27T16:00:00.000Z" title="Created 2026-04-28 00:00:00">2026-04-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA%E5%AE%9E%E9%AA%8C/">单片机实验</a></span></div><div class="content"> 一、实验目的  掌握单片机控制数码管动态显示的方法   二、实验设备  windows操作系统 keil5 STC-ISP   三、实验内容 在8位数码管上动态显示学号后8位  四、实验原理 各位扫描显示：由于8位LED所有段选线皆由P0口控制，要想每位显示不同的字符，就必须采用扫描方法轮流点亮各位LED，在每一瞬间只使某一位显示字符。 段选码、位选码控制：P0口输出相应字符段选码，锁存后再由P0口对该显示位送选通电平，保证该位显示相应字符，如此轮流。 扫描延时：段选码、位选码每送一次后至少延时2ms，保证每位有一定亮度，因人眼的视觉暂留效应，看上去每个数码管总在亮。     显示1位数字–示例代码 123456789101112131415161718192021222324252627282930313233#include &lt;STC15F2K60S2.H&gt; void Delay1ms()		//@12.000MHz&#123;	unsigned char i, j;	i = 12;	j = 169;	do	&#123;		while (--j);	&#125;...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/53c17de9/" title="实验1 虚拟机安装">实验1 虚拟机安装</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-04-27T16:00:00.000Z" title="Created 2026-04-28 00:00:00">2026-04-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C/">计算机网络实验</a></span></div><div class="content"> 一、实验目的  掌握 VMware Workstation 虚拟化软件的安装流程。 深入理解虚拟机三种网络模式（桥接模式、NAT 模式、仅主机模式）的工作原理。 学会根据不同的网络需求配置虚拟网络环境。 掌握基础的网络诊断命令（如 ping, ipconfig, ifconfig 等）验证网络连通性。   二、实验环境  硬件：支持硬件虚拟化技术（VT-x 或 AMD-V）的个人电脑。 操作系统：Windows 10/11 主机。 软件：  VMware Workstation Pro 17 或更高版本。 已安装好的客户机操作系统（建议使用 Ubuntu 或 Windows 10 虚拟机镜像）。     三、实验内容及步骤  1. VMware 的安装与准备  步骤：下载并运行 VMware Workstation 安装包，按照提示完成安装。 注意：安装过程中勾选&quot;增强型键盘驱动程序&quot;以获得更好体验。安装完成后，需进入 BIOS 确认 CPU 虚拟化功能已开启。   2. 桥接模式（Bridged Mode）配置与验证 原理：虚拟机如同局域网中一台独立的主机...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/6f12482c/" title="实验3 碰撞域与广播域的验证">实验3 碰撞域与广播域的验证</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-04-27T16:00:00.000Z" title="Created 2026-04-28 00:00:00">2026-04-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C/">计算机网络实验</a></span></div><div class="content"> 一、实验目的  理解集线器、交换机、路由器在二层（数据链路层）和三层（网络层）的工作差异。 通过抓包比较 Hub 与交换机的转发行为，并理解碰撞域的划分。 通过 ARP 报文流向，验证**广播域（Broadcast Domain）**的隔离特性。 掌握 eNSP 抓包工具的使用方法及 ICMP/ARP 协议分析。   二、实验环境  硬件：win10操作系统 软件：eNSP、Wireshark、VirtualBox   三、实验内容及步骤  1. Hub 与交换机的转发行为（联系碰撞域） 抓包能够观察帧出现在哪些链路上，但仅凭一次 Ping 抓包不能证明实际发生了以太网碰撞。传统半双工 Hub 的端口共享一个碰撞域；交换机每个端口分别连接一个独立网段，全双工链路中不发生传统意义的碰撞。本实验用转发范围帮助理解两种设备的区别。  (1) 拓扑搭建  场景 A（集线器）：拖入一个 Hub，连接三台 PC（PC1, PC2, PC3）。 场景 B（交换机）：拖入一台 S5700，连接三台 PC（PC4, PC5, PC6）。   (2) IP 配置    设备 IP 地址 子网掩码 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/cf811f6/" title="实验2 常用的网络命令">实验2 常用的网络命令</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-04-27T16:00:00.000Z" title="Created 2026-04-28 00:00:00">2026-04-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C/">计算机网络实验</a></span></div><div class="content"> 一、实验目的  掌握 Windows/Linux 环境下常用的网络诊断命令及其参数含义。 通过命令观察并分析网络接口配置、连通性、路由路径及端口监听状态。 理解网络层（IP、ICMP）、数据链路层（ARP）及传输层（TCP/UDP）的基本运作原理。 培养基本的网络故障排查与诊断能力。   二、实验环境  硬件：连接至局域网（或互联网）的个人电脑。 操作系统：Windows 10/11（主环境），建议配合上一实验的 Linux 虚拟机对比操作。 工具：命令提示符（CMD）或 PowerShell、终端（Terminal）。   三、实验内容及步骤、结果  1. 网络配置查看命令：ipconfig  实验步骤：  打开 CMD，输入 ipconfig 查看基础信息。 输入 ipconfig /all 查看详细信息（包括 MAC 地址、DNS 服务器、DHCP 租约等）。   记录结果：  IPv4 地址：____________________ 默认网关：____________________ 物理地址（MAC）：____________________ DNS 服务器：____...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/73fcf5d8/" title="实验4 交换机基本配置与VLAN">实验4 交换机基本配置与VLAN</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-04-27T16:00:00.000Z" title="Created 2026-04-28 00:00:00">2026-04-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C/">计算机网络实验</a></span></div><div class="content"> 一、实验目的  熟悉 eNSP 中两台交换机与四台 PC 的拓扑搭建。 掌握华为 VRP 的用户视图、系统视图和接口视图切换。 配置 Access 口、Trunk 口及 VLAN 10、VLAN 20。 验证“同一 VLAN 可跨交换机通信、不同 VLAN 在没有三层转发时不能通信”。   二、实验环境  软件：eNSP、VirtualBox；使用两台 S5700 交换机和四台 PC。 本实验仅验证二层 VLAN，不配置 VLANIF、默认网关或 VLAN 间路由。   三、实验内容与步骤  1. 搭建拓扑 PC1、PC2 分别连接 SW1 的 GE0/0/1、GE0/0/2；PC3、PC4 分别连接 SW2 的 GE0/0/1、GE0/0/2。两台交换机的 GE0/0/3 相连。  先给四台 PC 配置如下地址。四台 PC 的掩码均为 255.255.255.0，默认网关留空。    设备 IPv4 地址 接入交换机与端口 所属 VLAN     PC1 192.168.2.1 SW1 GE0/0/1 10   PC2 192.168.2.2 SW1 GE0/0/2 20  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/d61a7e97/" title="实验6 动态路由配置（RIP、OSPF）">实验6 动态路由配置（RIP、OSPF）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-04-27T16:00:00.000Z" title="Created 2026-04-28 00:00:00">2026-04-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C/">计算机网络实验</a></span></div><div class="content"> 一、实验目的  理解路由的基本概念，区分静态路由与动态路由的区别。 掌握静态路由的配置方法及路由表的查看方式。 掌握 RIP（Routing Information Protocol）协议的配置流程，理解其工作原理。 掌握 OSPF（Open Shortest Path First）协议的配置流程，理解区域划分的概念。 能够对比三种路由方式的异同，并能通过 ping 命令验证网络连通性。   二、实验环境  硬件：个人电脑（建议内存 8G 以上，以流畅运行 eNSP）。 软件：  eNSP V100R003 或更高版本。 Wireshark（用于后续协议分析）。 VirtualBox（eNSP 运行底座）。     三、实验内容及步骤、结果  1. 拓扑搭建  操作：  打开 eNSP，新建拓扑。 在左侧设备栏选择 路由器 (Router)，拖入两台 AR2220 路由器。 选择 终端 (End Device)，拖入两台 PC 终端机。 使用 连接线 (Copper)，将 PC1 连接至路由器 R1 的 GigabitEthernet 0/0/0，PC2 连接至路由器 R2 的...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/c2f8937e/" title="实验5 路由器基本配置与静态路由">实验5 路由器基本配置与静态路由</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-04-27T16:00:00.000Z" title="Created 2026-04-28 00:00:00">2026-04-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C/">计算机网络实验</a></span></div><div class="content"> 一、实验目的  掌握路由器物理接口 IP 地址的配置方法。 理解路由器与交换机在接口属性上的区别（三层接口 vs 二层接口）。 掌握查看路由器路由表（Routing Table）的方法。 通过配置静态路由（Static Route），实现跨网段的端到端通信。 理解&quot;下一跳&quot;和&quot;出接口&quot;在路由配置中的含义。   二、实验环境  硬件：个人电脑（建议内存 8G 以上）。 软件：eNSP 仿真平台。 设备选型：Router (如 AR2220) 两台，PC 两台。   三、实验内容及步骤、结果  1. 实验拓扑回顾 (eNSP)   PC1 (192.168.1.1/24) &lt;–&gt; R1 [GE 0/0/0]   R1 [GE 0/0/1] (10.0.0.1/30) &lt;–&gt; R2 [GE 0/0/1] (10.0.0.2/30)   R2 [GE 0/0/0] &lt;–&gt; PC2 (192.168.2.1/24)    2. 路由器 R1 的详细配置 请在 R1 的 CLI 窗口依次输入以下命令： 123456...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/b9a6b08c/" title="实验8 应用层协议模拟（HTTP、DNS、FTP、DHCP）">实验8 应用层协议模拟（HTTP、DNS、FTP、DHCP）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-04-27T16:00:00.000Z" title="Created 2026-04-28 00:00:00">2026-04-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C/">计算机网络实验</a></span></div><div class="content"> 一、实验目的  理解 HTTP 协议的工作原理，掌握在 eNSP 中搭建 Web 服务器并通过客户端访问的方法。 理解 DNS 协议的域名解析过程，掌握在 eNSP 中配置 DNS 服务器实现域名访问的方法。 理解 FTP 协议的文件传输机制，掌握在 eNSP 中配置 FTP 服务器并完成上传、下载操作。 理解 DHCP 协议的自动地址分配原理，掌握在华为路由器上配置 DHCP 服务器的方法。 能够使用 Wireshark 抓包分析各协议的数据交互过程。   二、实验环境  硬件：个人电脑（建议内存 8G 以上，以流畅运行 eNSP）。 软件：  eNSP V100R003 或更高版本。 Wireshark（用于协议抓包分析）。 VirtualBox（eNSP 运行底座）。     三、实验内容及步骤、结果  1. HTTP 服务配置与访问  1.1 拓扑搭建  操作：  打开 eNSP，新建拓扑。 拖入一台 Client 终端和一台 Server 服务器，使用连接线直连。 点击工具栏的&quot;开启&quot;按钮，等待设备图标由红变绿。      1.2 Client 与...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/4/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">zsl</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">31</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">69</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">5</div></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/1769ec6e/" title="数据结构第 1—9 章 LeetCode 简单题单">数据结构第 1—9 章 LeetCode 简单题单</a><time datetime="2026-10-08T16:00:00.000Z" title="Created 2026-10-09 00:00:00">2026-10-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/e3eb4e85/" title="通信工程专业导论课程大作业任务书（大一简化版）">通信工程专业导论课程大作业任务书（大一简化版）</a><time datetime="2026-10-07T09:16:46.000Z" title="Created 2026-10-07 17:16:46">2026-10-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/e2fec5f4/" title="数据结构课程大作业选题：基础、综合与提高类">数据结构课程大作业选题：基础、综合与提高类</a><time datetime="2026-10-07T05:00:00.000Z" title="Created 2026-10-07 13:00:00">2026-10-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/5866a81e/" title="01 算法性能分析实验">01 算法性能分析实验</a><time datetime="2026-10-06T16:00:00.000Z" title="Created 2026-10-07 00:00:00">2026-10-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/a80e397c/" title="02 单链表基本运算实验">02 单链表基本运算实验</a><time datetime="2026-10-06T16:00:00.000Z" title="Created 2026-10-07 00:00:00">2026-10-07</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%AF%BC%E8%AE%BA%E5%A4%A7%E4%BD%9C%E4%B8%9A/"><span class="card-category-list-name">专业导论大作业</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA%E5%AE%9E%E9%AA%8C/"><span class="card-category-list-name">单片机实验</span><span class="card-category-list-count">12</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E9%AA%8C/"><span class="card-category-list-name">数据结构实验</span><span class="card-category-list-count">9</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%99%84%E5%8A%A0%E7%BB%83%E4%B9%A0/"><span class="card-category-list-name">数据结构附加练习</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C/"><span class="card-category-list-name">计算机网络实验</span><span class="card-category-list-count">8</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/STC-ISP/" style="font-size: 1.1em; color: #999">STC-ISP</a> <a href="/tags/ipconfig/" style="font-size: 1.1em; color: #999">ipconfig</a> <a href="/tags/keil/" style="font-size: 1.1em; color: #999">keil</a> <a href="/tags/PCF8591/" style="font-size: 1.1em; color: #999">PCF8591</a> <a href="/tags/AT24C02/" style="font-size: 1.1em; color: #999">AT24C02</a> <a href="/tags/%E9%A1%BA%E5%BA%8F%E6%9F%A5%E6%89%BE/" style="font-size: 1.1em; color: #999">顺序查找</a> <a href="/tags/%E6%8A%98%E5%8D%8A%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" style="font-size: 1.1em; color: #999">折半插入排序</a> <a href="/tags/%E5%B9%BF%E6%92%AD%E5%9F%9F/" style="font-size: 1.1em; color: #999">广播域</a> <a href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/" style="font-size: 1.1em; color: #999">单片机</a> <a href="/tags/DAC/" style="font-size: 1.1em; color: #999">DAC</a> <a href="/tags/%E5%8D%95%E9%93%BE%E8%A1%A8/" style="font-size: 1.1em; color: #999">单链表</a> <a href="/tags/OSPF/" style="font-size: 1.1em; color: #999">OSPF</a> <a href="/tags/ping/" style="font-size: 1.1em; color: #999">ping</a> <a href="/tags/FTP/" style="font-size: 1.23em; color: #999ea6">FTP</a> <a href="/tags/STC15/" style="font-size: 1.1em; color: #999">STC15</a> <a href="/tags/%E7%9F%A9%E9%98%B5%E9%94%AE%E7%9B%98/" style="font-size: 1.1em; color: #999">矩阵键盘</a> <a href="/tags/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" style="font-size: 1.1em; color: #999">时间复杂度</a> <a href="/tags/%E6%9F%A5%E6%89%BE/" style="font-size: 1.1em; color: #999">查找</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/" style="font-size: 1.1em; color: #999">算法分析</a> <a href="/tags/eNSP/" style="font-size: 1.37em; color: #99a4b2">eNSP</a> <a href="/tags/%E6%A8%A1%E6%95%B0%E8%BD%AC%E6%8D%A2/" style="font-size: 1.1em; color: #999">模数转换</a> <a href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/" style="font-size: 1.1em; color: #999">定时器</a> <a href="/tags/EEPROM/" style="font-size: 1.1em; color: #999">EEPROM</a> <a href="/tags/ADC/" style="font-size: 1.1em; color: #999">ADC</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%A4%A7%E4%BD%9C%E4%B8%9A/" style="font-size: 1.23em; color: #999ea6">课程大作业</a> <a href="/tags/%E6%A0%88/" style="font-size: 1.1em; color: #999">栈</a> <a href="/tags/VLAN/" style="font-size: 1.1em; color: #999">VLAN</a> <a href="/tags/PlatformIO/" style="font-size: 1.1em; color: #999">PlatformIO</a> <a href="/tags/%E9%A1%BA%E5%BA%8F%E6%A0%88/" style="font-size: 1.1em; color: #999">顺序栈</a> <a href="/tags/%E6%95%B0%E7%A0%81%E7%AE%A1/" style="font-size: 1.1em; color: #999">数码管</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1.5em; color: #99a9bf">数据结构</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 1.1em; color: #999">字符串</a> <a href="/tags/%E9%A1%BA%E5%BA%8F%E4%B8%B2/" style="font-size: 1.1em; color: #999">顺序串</a> <a href="/tags/%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2/" style="font-size: 1.1em; color: #999">数模转换</a> <a href="/tags/%E4%B8%93%E4%B8%9A%E5%AF%BC%E8%AE%BA/" style="font-size: 1.1em; color: #999">专业导论</a> <a href="/tags/%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE/" style="font-size: 1.1em; color: #999">折半查找</a> <a href="/tags/VMware/" style="font-size: 1.1em; color: #999">VMware</a> <a href="/tags/%E6%B5%81%E6%B0%B4%E7%81%AF/" style="font-size: 1.1em; color: #999">流水灯</a> <a href="/tags/%E5%9B%BE/" style="font-size: 1.1em; color: #999">图</a> <a href="/tags/LCD/" style="font-size: 1.1em; color: #999">LCD</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/10/">
+            <span class="card-archive-list-date">
+              October 2026
+            </span>
+            <span class="card-archive-list-count">11</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/05/">
+            <span class="card-archive-list-date">
+              May 2026
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/04/">
+            <span class="card-archive-list-date">
+              April 2026
+            </span>
+            <span class="card-archive-list-count">17</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">31</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-10-09T02:29:12.285Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By zsl</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const config = mermaidSrc.dataset.config ? JSON.parse(mermaidSrc.dataset.config) : {}
+      if (!config.theme) {
+        config.theme = theme
+      }
+      const mermaidThemeConfig = `%%{init: ${JSON.stringify(config)}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid@11.12.2/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

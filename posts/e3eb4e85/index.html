@@ -1,0 +1,503 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>通信工程专业导论课程大作业任务书（大一简化版） | Blog</title><meta name="author" content="zsl"><meta name="copyright" content="zsl"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、任务说明 本次大作业满分 100 分，所有学生完成同一套题目，独立完成。请以“一条信息如何表示、发送、传输、接收”为主线，把计算机基础、通信基础和自己的网络观察联系起来。不要求编程、复杂协议分析或通信电路设计。 最终只提交 1 份 PDF 报告，命名为 学号_姓名_通信工程专业导论大作业.pdf。首页写明课程名称、学号、姓名和完成日期；报告中按本任务书的题号呈现计算过程、流程图、表格、实测截">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通信工程专业导论课程大作业任务书（大一简化版）">
+<meta property="og:url" content="http://example.com/posts/e3eb4e85/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="一、任务说明 本次大作业满分 100 分，所有学生完成同一套题目，独立完成。请以“一条信息如何表示、发送、传输、接收”为主线，把计算机基础、通信基础和自己的网络观察联系起来。不要求编程、复杂协议分析或通信电路设计。 最终只提交 1 份 PDF 报告，命名为 学号_姓名_通信工程专业导论大作业.pdf。首页写明课程名称、学号、姓名和完成日期；报告中按本任务书的题号呈现计算过程、流程图、表格、实测截">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2026-10-07T09:16:46.000Z">
+<meta property="article:modified_time" content="2026-10-07T09:24:35.556Z">
+<meta property="article:author" content="zsl">
+<meta property="article:tag" content="通信工程">
+<meta property="article:tag" content="专业导论">
+<meta property="article:tag" content="课程大作业">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "通信工程专业导论课程大作业任务书（大一简化版）",
+  "url": "http://example.com/posts/e3eb4e85/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2026-10-07T09:16:46.000Z",
+  "dateModified": "2026-10-07T09:24:35.556Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "zsl",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/butterfly-icon.png"><link rel="canonical" href="http://example.com/posts/e3eb4e85/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '通信工程专业导论课程大作业任务书（大一简化版）',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">通信工程专业导论课程大作业任务书（大一简化版）</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">通信工程专业导论课程大作业任务书（大一简化版）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-10-07T09:16:46.000Z" title="Created 2026-10-07 17:16:46">2026-10-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-10-07T09:24:35.556Z" title="Updated 2026-10-07 17:24:35">2026-10-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%B8%93%E4%B8%9A%E5%AF%BC%E8%AE%BA%E5%A4%A7%E4%BD%9C%E4%B8%9A/">专业导论大作业</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><h2 id="一-任务说明"><a class="markdownIt-Anchor" href="#一-任务说明"></a> 一、任务说明</h2>
+<p>本次大作业满分 <strong>100 分</strong>，所有学生完成同一套题目，独立完成。请以“一条信息如何表示、发送、传输、接收”为主线，把计算机基础、通信基础和自己的网络观察联系起来。不要求编程、复杂协议分析或通信电路设计。</p>
+<p>最终只提交 <strong>1 份 PDF 报告</strong>，命名为 <code>学号_姓名_通信工程专业导论大作业.pdf</code>。首页写明课程名称、学号、姓名和完成日期；报告中按本任务书的题号呈现计算过程、流程图、表格、实测截图与分析。建议先完成实验记录，再撰写解释和总结。</p>
+<p><strong>统一约定：</strong> 1 Byte = 8 bit；1 KB = 1000 Byte，1 MB = 1000 KB；1 Mbit = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup></mrow><annotation encoding="application/x-tex">10^6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span></span></span></span> bit。容量与链路速率均按十进制计算；若补充使用 1024 进制，应写成 KiB、MiB。只计算题目给出的原始数据，不计文件头、压缩、协议开销及重传，除非题目特别要求讨论。</p>
+<h2 id="二-第一部分信息怎样变成数据30-分"><a class="markdownIt-Anchor" href="#二-第一部分信息怎样变成数据30-分"></a> 二、第一部分：信息怎样变成数据（30 分）</h2>
+<h3 id="1-进制与字符编码10-分"><a class="markdownIt-Anchor" href="#1-进制与字符编码10-分"></a> 1. 进制与字符编码（10 分）</h3>
+<p>取本人学号最后三位组成的十进制整数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span>（例如末三位为 <code>007</code>，则 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>7</mn></mrow><annotation encoding="application/x-tex">N=7</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">7</span></span></span></span>），完成：</p>
+<ol>
+<li>将 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span> 转换成二进制和十六进制，写出至少一种转换过程。</li>
+<li>将 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1101011</mn><msub><mn>0</mn><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">11010110_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.79444em;vertical-align:-0.15em;"></span><span class="mord">1</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">1</span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 转换成十进制和十六进制。</li>
+<li>取本人姓名拼音的<strong>首字母大写形式</strong>（例如张三取 <code>ZS</code>），写出每个字母的 ASCII 十进制、8 位二进制和十六进制编码；解释字符 <code>&quot;1&quot;</code> 的编码与整数 <code>1</code> 的数值表示为什么不能混为一谈。</li>
+</ol>
+<blockquote>
+<p>本题不要求原码、反码、补码或完整 ASCII 表。</p>
+</blockquote>
+<h3 id="2-数据量与传输速率10-分"><a class="markdownIt-Anchor" href="#2-数据量与传输速率10-分"></a> 2. 数据量与传输速率（10 分）</h3>
+<ol>
+<li>写出 bit、Byte、KB、MB 和 Mbit/s 的含义及本任务采用的换算关系。</li>
+<li>某宽带标称速率为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>100</mn><mtext> </mtext><mrow><mi mathvariant="normal">M</mi><mi mathvariant="normal">b</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">/</mi><mi mathvariant="normal">s</mi></mrow></mrow><annotation encoding="application/x-tex">100\,\mathrm{Mbit/s}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathrm">M</span><span class="mord mathrm">b</span><span class="mord mathrm">i</span><span class="mord mathrm">t</span><span class="mord mathrm">/</span><span class="mord mathrm">s</span></span></span></span></span>，按位与字节换算，理论最高下载速率是多少 MB/s？简述为什么实际下载速度通常低于该理论值。</li>
+<li>一幅未压缩灰度图像分辨率为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>640</mn><mo>×</mo><mn>480</mn></mrow><annotation encoding="application/x-tex">640\times480</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">6</span><span class="mord">4</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span><span class="mord">8</span><span class="mord">0</span></span></span></span>，每个像素占 8 bit。求像素总数、原始数据量（bit、Byte、KB），以及在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mtext> </mtext><mrow><mi mathvariant="normal">M</mi><mi mathvariant="normal">b</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">/</mi><mi mathvariant="normal">s</mi></mrow></mrow><annotation encoding="application/x-tex">1\,\mathrm{Mbit/s}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathrm">M</span><span class="mord mathrm">b</span><span class="mord mathrm">i</span><span class="mord mathrm">t</span><span class="mord mathrm">/</span><span class="mord mathrm">s</span></span></span></span></span> 链路上的理论最短传输时间。写出计算式与单位。</li>
+</ol>
+<h3 id="3-语音数字数据计算10-分"><a class="markdownIt-Anchor" href="#3-语音数字数据计算10-分"></a> 3. 语音数字数据计算（10 分）</h3>
+<p>一段单声道语音采用 8 kHz 采样率、每个样本 8 bit，持续 10 s，且不压缩。</p>
+<ol>
+<li>求每秒产生的样本数及原始数据速率（bit/s、kbit/s）。</li>
+<li>求 10 s 产生的原始数据量（bit、Byte、KB）。</li>
+<li>若要边采集边传送，在不考虑额外开销时，链路的理论最低速率是多少？说明这个结果与第 2 题的图像数据量有何不同：一个是<strong>速率</strong>，一个是<strong>总量</strong>。</li>
+</ol>
+<h2 id="三-第二部分信息怎样经过通信系统35-分"><a class="markdownIt-Anchor" href="#三-第二部分信息怎样经过通信系统35-分"></a> 三、第二部分：信息怎样经过通信系统（35 分）</h2>
+<h3 id="1-基本通信系统与干扰8-分"><a class="markdownIt-Anchor" href="#1-基本通信系统与干扰8-分"></a> 1. 基本通信系统与干扰（8 分）</h3>
+<p>画出并标注下列<strong>简化模型</strong>：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">信息源 → 发送设备 → 信道 → 接收设备 → 受信者</span><br><span class="line">                    ↑</span><br><span class="line">                噪声或干扰</span><br></pre></td></tr></table></figure>
+<p>任选手机通信、Wi-Fi、蓝牙耳机或光纤上网中的一个生活场景，说明图中各部分对应什么，并举一个噪声或干扰可能影响接收结果的例子。不要求分析具体电路。</p>
+<h3 id="2-速率-时延与误码率8-分"><a class="markdownIt-Anchor" href="#2-速率-时延与误码率8-分"></a> 2. 速率、时延与误码率（8 分）</h3>
+<ol>
+<li>用自己的话解释数据传输速率、时延、误码率分别描述什么，写明常见单位。</li>
+<li>5 s 传输 10 Mbit 数据，求平均数据速率；传输 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mtext> </mtext><mn>000</mn><mtext> </mtext><mn>000</mn></mrow><annotation encoding="application/x-tex">1\,000\,000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span></span></span></span> bit 时有 50 bit 出错，求误码率。列出计算式。</li>
+<li>说明为什么视频通话比下载文件更在意时延；误码率低是否意味着时延一定低？简述理由。</li>
+</ol>
+<h3 id="3-从声音到二进制数据7-分"><a class="markdownIt-Anchor" href="#3-从声音到二进制数据7-分"></a> 3. 从声音到二进制数据（7 分）</h3>
+<p>根据“声音 → 采样 → 量化 → 编码 → 二进制数据”，分别用一句话解释采样、量化和编码在做什么；结合第一部分的语音题，指出“8 kHz”和“每样本 8 bit”分别对应哪个环节。不要求公式推导。</p>
+<h3 id="4-一条文字消息的通信过程12-分"><a class="markdownIt-Anchor" href="#4-一条文字消息的通信过程12-分"></a> 4. 一条文字消息的通信过程（12 分）</h3>
+<p>以“发送者用手机给另一位同学发送一条文字消息”为例，画出<strong>一张示意流程图</strong>，至少包含：文字变成数字数据、手机无线通信、Wi-Fi 或蜂窝网络接入、网络传输、服务端转发、接收者手机恢复并显示文字。流程图表示一般过程即可，<strong>不要求猜测某个应用的真实服务器位置或固定路由</strong>。</p>
+<p>在图旁简要说明：</p>
+<ol>
+<li>文字为什么需要转换成数字数据；手机中的无线通信模块和天线分别起什么作用。</li>
+<li>手机经 Wi-Fi 与经 4G/5G 接入网络的主要区别。两者都使用无线电波与天线，不要把“是否有天线”作为区别。</li>
+<li>如果消息送达明显变慢，可能与速率、时延、信道干扰或网络拥塞中的哪些因素有关？举出一种合理情况，并说明自己的判断。</li>
+</ol>
+<h2 id="四-第三部分观察自己使用的网络25-分"><a class="markdownIt-Anchor" href="#四-第三部分观察自己使用的网络25-分"></a> 四、第三部分：观察自己使用的网络（25 分）</h2>
+<p><strong>优先使用校园网</strong>（宿舍、教学楼均可）。无法使用校园网时，可使用家中宽带或手机热点，并在报告中如实写明网络环境。只记录本人有权使用的设备和网络；选择当前实际用于上网的网卡，不要把 VPN 或已断开的虚拟网卡误当成实际接入网卡。</p>
+<p>实测结果允许与其他同学不同。截图应保留完整的命令和相关结果，并在图注写明学号、姓名、测试日期及网络环境；可遮挡 MAC 地址、设备名称等无关信息，但用于核对分析的 IPv4 地址、子网掩码和网关应清晰可见。<strong>失败结果也是真实结果，不得修改或伪造截图。</strong></p>
+<h3 id="1-查看本机网络信息8-分"><a class="markdownIt-Anchor" href="#1-查看本机网络信息8-分"></a> 1. 查看本机网络信息（8 分）</h3>
+<p>根据自己的系统选择命令：</p>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>查看地址与掩码</th>
+<th>查看默认网关</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td><code>ipconfig</code></td>
+<td><code>ipconfig</code></td>
+</tr>
+<tr>
+<td>macOS</td>
+<td><code>ifconfig</code></td>
+<td><code>route -n get default</code></td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><code>ip -4 addr</code></td>
+<td><code>ip route</code></td>
+</tr>
+</tbody>
+</table>
+<p>记录当前接入网卡的结果：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>本人的实际结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>网络环境（校园网/家中宽带/手机热点）</td>
+<td></td>
+</tr>
+<tr>
+<td>连接方式（Wi-Fi/有线等）</td>
+<td></td>
+</tr>
+<tr>
+<td>IPv4 地址</td>
+<td></td>
+</tr>
+<tr>
+<td>子网掩码</td>
+<td></td>
+</tr>
+<tr>
+<td>默认网关</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>报告中放入至少 <strong>1 张本人实际操作截图</strong>。若系统界面把掩码显示为 <code>/24</code> 等前缀长度，可同时写出对应的点分十进制掩码；如网关信息无法取得，应记录现象及尝试过的命令。</p>
+<h3 id="2-分析-ipv4-地址7-分"><a class="markdownIt-Anchor" href="#2-分析-ipv4-地址7-分"></a> 2. 分析 IPv4 地址（7 分）</h3>
+<ol>
+<li>将第 1 题中选定网卡的 IPv4 地址逐段转换成完整的 32 位二进制，每段补足 8 位。</li>
+<li>判断该地址是否属于以下任一私有 IPv4 地址范围，并写出判断依据：</li>
+</ol>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">10.0.0.0 ～ 10.255.255.255</span><br><span class="line">172.16.0.0 ～ 172.31.255.255</span><br><span class="line">192.168.0.0 ～ 192.168.255.255</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>简述“设备上的 IPv4 地址”与“访问互联网时对外使用的地址”为什么可能不同。若自己的地址不在上述范围内，如实说明即可，不要求据此断言它一定是公网地址。</li>
+</ol>
+<h3 id="3-用-ping-观察连通性10-分"><a class="markdownIt-Anchor" href="#3-用-ping-观察连通性10-分"></a> 3. 用 Ping 观察连通性（10 分）</h3>
+<p>分别测试第 1 题记录的<strong>默认网关</strong>与<strong>一个网站域名</strong>（如 <code>www.baidu.com</code>）。Windows 可用 <code>ping 目标</code>，macOS/Linux 可用 <code>ping -c 4 目标</code>；每个目标尽量测试 4 次。命令中的“目标”替换成实际网关地址或所选域名。</p>
+<table>
+<thead>
+<tr>
+<th>测试目标</th>
+<th>实际输入的目标</th>
+<th>是否收到回复</th>
+<th style="text-align:right">平均往返时间/ms</th>
+<th style="text-align:right">丢包率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>默认网关</td>
+<td></td>
+<td></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>网站域名</td>
+<td></td>
+<td></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+</tbody>
+</table>
+<p>报告中放入至少 <strong>2 张本人实际操作截图</strong>，每个测试目标各一张。根据真实结果解释 Ping 能观察什么、什么是往返时间和丢包；若两次均收到回复，比较时延差异。若网关或网站不响应，保留失败截图，在表中将无法测得的数值写为“—”，说明可能原因；网站域名不响应时可另选一个域名复测。<strong>Ping 不通不直接等于网页无法访问，也不因如实记录失败而扣“测试成功”分。</strong></p>
+<h2 id="五-第四部分学习总结与报告规范10-分"><a class="markdownIt-Anchor" href="#五-第四部分学习总结与报告规范10-分"></a> 五、第四部分：学习总结与报告规范（10 分）</h2>
+<h3 id="1-学习总结6-分"><a class="markdownIt-Anchor" href="#1-学习总结6-分"></a> 1. 学习总结（6 分）</h3>
+<p>用 <strong>300～500 字</strong>结合本人计算和实测结果，说明：</p>
+<ol>
+<li>一条文字或语音信息从“原始信息”到“二进制数据”、经网络传输、再被接收者理解，经历了哪些主要步骤？</li>
+<li>本次实测帮助你理解了什么？至少引用一个自己的实际观察结果。</li>
+<li>你现在如何理解通信工程与计算机知识的联系？指出一个仍想进一步了解的问题。</li>
+</ol>
+<h3 id="2-报告与资料规范4-分"><a class="markdownIt-Anchor" href="#2-报告与资料规范4-分"></a> 2. 报告与资料规范（4 分）</h3>
+<ol>
+<li>按题号组织报告，计算写明公式、数值和单位；流程图可手绘后拍照插入，也可用绘图软件制作，但必须清晰可读。</li>
+<li>在第二部分的解释中引用至少 <strong>2 条可靠资料</strong>，正文对应位置标出引用编号，文末写明作者或机构、资料名称、出版信息或网址、访问日期。可使用教材、课程讲义或机构官方网站；不要求检索学术论文。不得列出未实际阅读或无法核实的资料。</li>
+<li>三张网络实测截图应清晰可辨，按第三部分要求注明信息；首页、文件名及下述 AI 使用说明齐全。</li>
+</ol>
+<h2 id="六-生成式人工智能使用说明"><a class="markdownIt-Anchor" href="#六-生成式人工智能使用说明"></a> 六、生成式人工智能使用说明</h2>
+<p>允许使用 AI 工具辅助理解概念、检查计算、查找检索关键词和修改文字表达。计算过程、网络观察、流程图的关键判断与学习总结须由本人核实并能解释。不得提交直接生成且未经核实的整篇报告，不得伪造测试结果、截图或参考资料。</p>
+<p>在报告末尾填写使用情况；未使用 AI 也需写“未使用”。</p>
+<table>
+<thead>
+<tr>
+<th>AI 工具（或未使用）</th>
+<th>用于哪道题</th>
+<th>具体用途</th>
+<th>本人如何核实</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="七-评分细则"><a class="markdownIt-Anchor" href="#七-评分细则"></a> 七、评分细则</h2>
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>题目与评分要点</th>
+<th style="text-align:right">分值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>信息怎样变成数据</td>
+<td>进制与编码：个人数据转换 4、给定二进制转换 2、ASCII 与解释 4</td>
+<td style="text-align:right">10</td>
+</tr>
+<tr>
+<td>信息怎样变成数据</td>
+<td>数据量与速率：单位 2、宽带换算及解释 2、图像计算 6</td>
+<td style="text-align:right">10</td>
+</tr>
+<tr>
+<td>信息怎样变成数据</td>
+<td>语音：样本与速率 4、总量 4、最低速率与概念区分 2</td>
+<td style="text-align:right">10</td>
+</tr>
+<tr>
+<td>信息怎样经过通信系统</td>
+<td>系统框图 4、生活例子 2、干扰说明 2</td>
+<td style="text-align:right">8</td>
+</tr>
+<tr>
+<td>信息怎样经过通信系统</td>
+<td>三项指标 3、两个计算 4、时延分析 1</td>
+<td style="text-align:right">8</td>
+</tr>
+<tr>
+<td>信息怎样经过通信系统</td>
+<td>采样、量化、编码各 2；与题目参数对应 1</td>
+<td style="text-align:right">7</td>
+</tr>
+<tr>
+<td>信息怎样经过通信系统</td>
+<td>消息流程图 4、数字数据与无线设备 3、两种接入方式 2、变慢原因分析 3</td>
+<td style="text-align:right">12</td>
+</tr>
+<tr>
+<td>观察自己使用的网络</td>
+<td>环境及四项网络信息 5、可核对的截图 3</td>
+<td style="text-align:right">8</td>
+</tr>
+<tr>
+<td>观察自己使用的网络</td>
+<td>32 位转换 3、私有地址判断 2、地址区别说明 2</td>
+<td style="text-align:right">7</td>
+</tr>
+<tr>
+<td>观察自己使用的网络</td>
+<td>两个目标的真实记录 4、各一张截图 2、结果解释 4</td>
+<td style="text-align:right">10</td>
+</tr>
+<tr>
+<td>学习总结与报告规范</td>
+<td>信息传递过程 3、本人实测体会 1、专业认识与问题 2</td>
+<td style="text-align:right">6</td>
+</tr>
+<tr>
+<td>学习总结与报告规范</td>
+<td>计算和版式清晰 1、正文引用与文末资料 1、截图规范 1、封面文件名及 AI 使用说明 1</td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td></td>
+<td style="text-align:right"><strong>100</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>评分说明：</strong> 第三部分根据操作过程、真实记录和合理解释评分，不以 Ping 是否成功、测得的时延大小或是否使用校园网作为得分条件。数值计算若结果有误但步骤正确，可按相应评分点给过程分。</p>
+<h2 id="八-最终提交前检查"><a class="markdownIt-Anchor" href="#八-最终提交前检查"></a> 八、最终提交前检查</h2>
+<ul>
+<li>[ ] 报告首页有本人学号、姓名、完成日期；文件名为 <code>学号_姓名_通信工程专业导论大作业.pdf</code>。</li>
+<li>[ ] 各部分题目均已作答，计算写明过程和单位；通信过程有一张示意流程图。</li>
+<li>[ ] 至少三张真实网络操作截图已放入同一 PDF，分别对应查看网络信息、Ping 网关、Ping 网站域名；截图有图注。</li>
+<li>[ ] 第二部分正文有引用编号，文末有至少两条实际使用的资料；AI 使用情况已填写。</li>
+<li>[ ] 总结结合本人实测结果，全文检查后导出并打开 PDF 确认内容完整。</li>
+</ul>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%80%9A%E4%BF%A1%E5%B7%A5%E7%A8%8B/">通信工程</a><a class="post-meta__tags" href="/tags/%E4%B8%93%E4%B8%9A%E5%AF%BC%E8%AE%BA/">专业导论</a><a class="post-meta__tags" href="/tags/%E8%AF%BE%E7%A8%8B%E5%A4%A7%E4%BD%9C%E4%B8%9A/">课程大作业</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/1769ec6e/" title="数据结构第 1—9 章 LeetCode 简单题单"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">数据结构第 1—9 章 LeetCode 简单题单</div></div><div class="info-2"><div class="info-item-1">本题单按第 1—9 章编排，共 28 道 LeetCode 简单题，由基础到巩固排列。题号可用于站内搜索。建议先手工走一遍示例，再用 C 语言完成练习，并说明所用数据结构与时间复杂度。  第 1 章 绪论：数据、算法与复杂度  1480. 一维数组的动态和 — 数组遍历、循环不变量。 想清楚处理到下标 i 时，已得到的前缀结果表示什么；比较一次扫描与反复求和的操作次数。 1929. 数组串联 — 数组下标、数据规模与空间。 明确原数组长度 n、结果长度 2n，检查第二段元素应写到什么下标。 1672. 最富有客户的资产总量 — 二维数组与两重循环。 先逐行求和，再维护最大值；分别分析行数、列数对操作次数的影响。   第 2 章 线性表：单链表与指针  83. 删除排序链表中的重复元素 — 删除结点、维护后继。 利用有序性只比较相邻结点；删除前先保留需要继续访问的链接。 206. 反转链表 — 链接方向与边界。 画出 前驱—当前—后继 三个指针，逐次改变 next；检查空链与单结点链。 21. 合并两个有序链表 — 带头结点思路与有序合并。 每次接入较小的当前结点；某一条链先到尾时...</div></div></div></a><a class="pagination-related" href="/posts/e2fec5f4/" title="数据结构课程大作业选题：基础、综合与提高类"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">数据结构课程大作业选题：基础、综合与提高类</div></div><div class="info-2"><div class="info-item-1">本课程期末采用个人大作业考查。下面共有 11 个备选题目：基础类 4 题、综合类 3 题、提高类 4 题。每人选择 1 题，完成该题的必做要求；不需要完成全部题目。所有题目均使用 C 语言编写终端程序，不要求图形界面、数据库、联网服务或真实硬件。 选题围绕本学期的 算法性能分析、单链表、顺序栈、顺序串、二叉树遍历、图的存储、查找 和 插入排序 8 次实验设计。综合类、提高类会增加少量新算法，题目中已标明范围。  一、选题总览    类别 编号 题目 主要对应实验 核心结构或算法     基础 1 学生成绩管理系统 1、7、8 结构体数组、查找、插入排序   基础 2 通讯录管理系统 2、4、7 单链表、字符串比较、查找   基础 3 图书借阅管理系统 2、7、8 记录管理、查找、排序   基础 4 排序性能分析器 1、8 直接插入排序、折半插入排序、计数与计时   综合 5 四则表达式求值器 3、4 顺序栈、字符串扫描   综合 6 模拟文件目录树 5、7 树的二叉链式表示、遍历、查找   综合 7 哈夫曼编码与解码器 5、8 二叉树、最小权值结点选择   提高 8 校园导航系统...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/posts/e2fec5f4/" title="数据结构课程大作业选题：基础、综合与提高类"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">数据结构课程大作业选题：基础、综合与提高类</div></div><div class="info-2"><div class="info-item-1">本课程期末采用个人大作业考查。下面共有 11 个备选题目：基础类 4 题、综合类 3 题、提高类 4 题。每人选择 1 题，完成该题的必做要求；不需要完成全部题目。所有题目均使用 C 语言编写终端程序，不要求图形界面、数据库、联网服务或真实硬件。 选题围绕本学期的 算法性能分析、单链表、顺序栈、顺序串、二叉树遍历、图的存储、查找 和 插入排序 8 次实验设计。综合类、提高类会增加少量新算法，题目中已标明范围。  一、选题总览    类别 编号 题目 主要对应实验 核心结构或算法     基础 1 学生成绩管理系统 1、7、8 结构体数组、查找、插入排序   基础 2 通讯录管理系统 2、4、7 单链表、字符串比较、查找   基础 3 图书借阅管理系统 2、7、8 记录管理、查找、排序   基础 4 排序性能分析器 1、8 直接插入排序、折半插入排序、计数与计时   综合 5 四则表达式求值器 3、4 顺序栈、字符串扫描   综合 6 模拟文件目录树 5、7 树的二叉链式表示、遍历、查找   综合 7 哈夫曼编码与解码器 5、8 二叉树、最小权值结点选择   提高 8 校园导航系统...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">zsl</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">31</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">69</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">5</div></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E4%BB%BB%E5%8A%A1%E8%AF%B4%E6%98%8E"><span class="toc-number">1.</span> <span class="toc-text"> 一、任务说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%E4%BF%A1%E6%81%AF%E6%80%8E%E6%A0%B7%E5%8F%98%E6%88%90%E6%95%B0%E6%8D%AE30-%E5%88%86"><span class="toc-number">2.</span> <span class="toc-text"> 二、第一部分：信息怎样变成数据（30 分）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%BF%9B%E5%88%B6%E4%B8%8E%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%8110-%E5%88%86"><span class="toc-number">2.1.</span> <span class="toc-text"> 1. 进制与字符编码（10 分）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E9%87%8F%E4%B8%8E%E4%BC%A0%E8%BE%93%E9%80%9F%E7%8E%8710-%E5%88%86"><span class="toc-number">2.2.</span> <span class="toc-text"> 2. 数据量与传输速率（10 分）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%AF%AD%E9%9F%B3%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%9710-%E5%88%86"><span class="toc-number">2.3.</span> <span class="toc-text"> 3. 语音数字数据计算（10 分）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%E4%BF%A1%E6%81%AF%E6%80%8E%E6%A0%B7%E7%BB%8F%E8%BF%87%E9%80%9A%E4%BF%A1%E7%B3%BB%E7%BB%9F35-%E5%88%86"><span class="toc-number">3.</span> <span class="toc-text"> 三、第二部分：信息怎样经过通信系统（35 分）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E9%80%9A%E4%BF%A1%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%B9%B2%E6%89%B08-%E5%88%86"><span class="toc-number">3.1.</span> <span class="toc-text"> 1. 基本通信系统与干扰（8 分）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%80%9F%E7%8E%87-%E6%97%B6%E5%BB%B6%E4%B8%8E%E8%AF%AF%E7%A0%81%E7%8E%878-%E5%88%86"><span class="toc-number">3.2.</span> <span class="toc-text"> 2. 速率、时延与误码率（8 分）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BB%8E%E5%A3%B0%E9%9F%B3%E5%88%B0%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%95%B0%E6%8D%AE7-%E5%88%86"><span class="toc-number">3.3.</span> <span class="toc-text"> 3. 从声音到二进制数据（7 分）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%B8%80%E6%9D%A1%E6%96%87%E5%AD%97%E6%B6%88%E6%81%AF%E7%9A%84%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B12-%E5%88%86"><span class="toc-number">3.4.</span> <span class="toc-text"> 4. 一条文字消息的通信过程（12 分）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86%E8%A7%82%E5%AF%9F%E8%87%AA%E5%B7%B1%E4%BD%BF%E7%94%A8%E7%9A%84%E7%BD%91%E7%BB%9C25-%E5%88%86"><span class="toc-number">4.</span> <span class="toc-text"> 四、第三部分：观察自己使用的网络（25 分）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%9F%A5%E7%9C%8B%E6%9C%AC%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BF%A1%E6%81%AF8-%E5%88%86"><span class="toc-number">4.1.</span> <span class="toc-text"> 1. 查看本机网络信息（8 分）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%86%E6%9E%90-ipv4-%E5%9C%B0%E5%9D%807-%E5%88%86"><span class="toc-number">4.2.</span> <span class="toc-text"> 2. 分析 IPv4 地址（7 分）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%94%A8-ping-%E8%A7%82%E5%AF%9F%E8%BF%9E%E9%80%9A%E6%80%A710-%E5%88%86"><span class="toc-number">4.3.</span> <span class="toc-text"> 3. 用 Ping 观察连通性（10 分）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E7%AC%AC%E5%9B%9B%E9%83%A8%E5%88%86%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%E4%B8%8E%E6%8A%A5%E5%91%8A%E8%A7%84%E8%8C%8310-%E5%88%86"><span class="toc-number">5.</span> <span class="toc-text"> 五、第四部分：学习总结与报告规范（10 分）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%936-%E5%88%86"><span class="toc-number">5.1.</span> <span class="toc-text"> 1. 学习总结（6 分）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%8A%A5%E5%91%8A%E4%B8%8E%E8%B5%84%E6%96%99%E8%A7%84%E8%8C%834-%E5%88%86"><span class="toc-number">5.2.</span> <span class="toc-text"> 2. 报告与资料规范（4 分）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD-%E7%94%9F%E6%88%90%E5%BC%8F%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="toc-number">6.</span> <span class="toc-text"> 六、生成式人工智能使用说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83-%E8%AF%84%E5%88%86%E7%BB%86%E5%88%99"><span class="toc-number">7.</span> <span class="toc-text"> 七、评分细则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB-%E6%9C%80%E7%BB%88%E6%8F%90%E4%BA%A4%E5%89%8D%E6%A3%80%E6%9F%A5"><span class="toc-number">8.</span> <span class="toc-text"> 八、最终提交前检查</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/1769ec6e/" title="数据结构第 1—9 章 LeetCode 简单题单">数据结构第 1—9 章 LeetCode 简单题单</a><time datetime="2026-10-08T16:00:00.000Z" title="Created 2026-10-09 00:00:00">2026-10-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/e3eb4e85/" title="通信工程专业导论课程大作业任务书（大一简化版）">通信工程专业导论课程大作业任务书（大一简化版）</a><time datetime="2026-10-07T09:16:46.000Z" title="Created 2026-10-07 17:16:46">2026-10-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/e2fec5f4/" title="数据结构课程大作业选题：基础、综合与提高类">数据结构课程大作业选题：基础、综合与提高类</a><time datetime="2026-10-07T05:00:00.000Z" title="Created 2026-10-07 13:00:00">2026-10-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/5866a81e/" title="01 算法性能分析实验">01 算法性能分析实验</a><time datetime="2026-10-06T16:00:00.000Z" title="Created 2026-10-07 00:00:00">2026-10-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/a80e397c/" title="02 单链表基本运算实验">02 单链表基本运算实验</a><time datetime="2026-10-06T16:00:00.000Z" title="Created 2026-10-07 00:00:00">2026-10-07</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By zsl</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/katex.min.css')
+    if (false) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const config = mermaidSrc.dataset.config ? JSON.parse(mermaidSrc.dataset.config) : {}
+      if (!config.theme) {
+        config.theme = theme
+      }
+      const mermaidThemeConfig = `%%{init: ${JSON.stringify(config)}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid@11.12.2/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

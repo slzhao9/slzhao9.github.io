@@ -1,0 +1,449 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>04 顺序串基本运算实验 | Blog</title><meta name="author" content="zsl"><meta name="copyright" content="zsl"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、实验目的  领会顺序串的存储结构。 掌握顺序串赋值、复制、比较、求长度、连接、求子串、插入、删除和替换等基本运算。 理解顺序串中字符位置和串长度的关系。 能够综合使用顺序串的基本运算完成实验程序。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="04 顺序串基本运算实验">
+<meta property="og:url" content="http://example.com/posts/6df3ae91/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="一、实验目的  领会顺序串的存储结构。 掌握顺序串赋值、复制、比较、求长度、连接、求子串、插入、删除和替换等基本运算。 理解顺序串中字符位置和串长度的关系。 能够综合使用顺序串的基本运算完成实验程序。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、C">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2026-10-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-10-07T08:05:04.799Z">
+<meta property="article:author" content="zsl">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="C">
+<meta property="article:tag" content="顺序串">
+<meta property="article:tag" content="字符串">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "04 顺序串基本运算实验",
+  "url": "http://example.com/posts/6df3ae91/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2026-10-06T16:00:00.000Z",
+  "dateModified": "2026-10-07T08:05:04.799Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "zsl",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/butterfly-icon.png"><link rel="canonical" href="http://example.com/posts/6df3ae91/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '04 顺序串基本运算实验',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">04 顺序串基本运算实验</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">04 顺序串基本运算实验</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-10-06T16:00:00.000Z" title="Created 2026-10-07 00:00:00">2026-10-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-10-07T08:05:04.799Z" title="Updated 2026-10-07 16:05:04">2026-10-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E9%AA%8C/">数据结构实验</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><h2 id="一-实验目的"><a class="markdownIt-Anchor" href="#一-实验目的"></a> 一、实验目的</h2>
+<ol>
+<li>领会顺序串的存储结构。</li>
+<li>掌握顺序串赋值、复制、比较、求长度、连接、求子串、插入、删除和替换等基本运算。</li>
+<li>理解顺序串中字符位置和串长度的关系。</li>
+<li>能够综合使用顺序串的基本运算完成实验程序。</li>
+</ol>
+<h2 id="二-实验环境"><a class="markdownIt-Anchor" href="#二-实验环境"></a> 二、实验环境</h2>
+<ul>
+<li>操作系统：Windows、macOS 或 Linux</li>
+<li>编程语言：C</li>
+<li>编译器：支持 C99 或 C11 标准的编译器</li>
+<li>开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等</li>
+</ul>
+<h3 id="提交与截图要求"><a class="markdownIt-Anchor" href="#提交与截图要求"></a> 提交与截图要求</h3>
+<ol>
+<li><strong>必须提交运行截图</strong>：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。</li>
+<li><strong>本次截图重点</strong>：原串、长度、子串 <code>bcdefghefg</code> 和删除结果 <code>aghefghijklmn</code>。完成提高或选做任务的同学，还应附相应结果截图。</li>
+<li><strong>必须提交带中文注释的 C 源码</strong>：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 <code>TODO</code> 提示不能代替自己完成的注释，也不能只交代码或只交截图。</li>
+</ol>
+<h2 id="三-实验内容"><a class="markdownIt-Anchor" href="#三-实验内容"></a> 三、实验内容</h2>
+<p>编写 <code>sqstring.c</code>，实现顺序串的各种基本运算。假设顺序串中的元素类型为 <code>char</code>。</p>
+<p>在此基础上设计 <code>exp4-1.c</code>，完成以下功能：</p>
+<ol>
+<li>建立串 <code>s = &quot;abcdefghefghijklmn&quot;</code> 和串 <code>s1 = &quot;xyz&quot;</code>。</li>
+<li>输出串 <code>s</code>。</li>
+<li>输出串 <code>s</code> 的长度。</li>
+<li>在串 <code>s</code> 的第 9 个字符位置插入串 <code>s1</code>，产生串 <code>s2</code>。</li>
+<li>输出串 <code>s2</code>。</li>
+<li>删除串 <code>s</code> 从第 2 个字符开始的 5 个字符，产生串 <code>s2</code>。</li>
+<li>输出串 <code>s2</code>。</li>
+<li>将串 <code>s</code> 从第 2 个字符开始的 5 个字符替换成串 <code>s1</code>，产生串 <code>s2</code>。</li>
+<li>输出串 <code>s2</code>。</li>
+<li>提取串 <code>s</code> 从第 2 个字符开始的 10 个字符，产生串 <code>s3</code>。</li>
+<li>输出串 <code>s3</code>。</li>
+<li>将串 <code>s1</code> 和串 <code>s2</code> 连接起来，产生串 <code>s4</code>。</li>
+<li>输出串 <code>s4</code>。</li>
+</ol>
+<p>本实验中的字符位置从 1 开始。插入操作表示将新串放在第 <code>i</code> 个字符之前。</p>
+<h3 id="80-分钟课堂完成范围"><a class="markdownIt-Anchor" href="#80-分钟课堂完成范围"></a> 80 分钟课堂完成范围</h3>
+<p>原题的 13 个步骤涉及 10 个函数，逐一完成会挤占调试时间。课堂必做只补全 <code>StrAssign</code>、<code>StrLength</code>、<code>DispStr</code>、<code>SubStr</code> 和 <code>DelStr</code>：建立原串，输出长度，提取从第 2 个字符开始的 10 个字符，并删除从第 2 个字符开始的 5 个字符。插入、替换、连接、复制和比较保留为提高任务。</p>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>课堂任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0～15 分钟</td>
+<td>理解 <code>length</code> 与“第 <code>i</code> 个字符对应 <code>data[i-1]</code>”</td>
+</tr>
+<tr>
+<td>15～40 分钟</td>
+<td>完成赋值、求长度和输出，核对原串长度为 <code>18</code></td>
+</tr>
+<tr>
+<td>40～65 分钟</td>
+<td>完成求子串和删除，检查移动范围与结果长度</td>
+</tr>
+<tr>
+<td>65～80 分钟</td>
+<td>核对 <code>bcdefghefg</code>、<code>aghefghijklmn</code>，再尝试插入</td>
+</tr>
+</tbody>
+</table>
+<p>课堂最低要求是原串、长度、子串和删除结果正确；其余运算可在课后逐步补齐。未完成提高任务时，不应取消相应调用的注释，以免使用尚未赋值的结果串。</p>
+<h2 id="四-实验原理"><a class="markdownIt-Anchor" href="#四-实验原理"></a> 四、实验原理</h2>
+<h3 id="1-顺序串存储结构"><a class="markdownIt-Anchor" href="#1-顺序串存储结构"></a> 1. 顺序串存储结构</h3>
+<p>顺序串使用字符数组保存串中的字符，并使用 <code>length</code> 记录当前串的长度。字符存储在 <code>data[0]</code> 到 <code>data[length - 1]</code> 中。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data：  a  b  c  d  e  f  g  h  e  f  g  h  i  j  k  l  m  n</span><br><span class="line">下标：  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17</span><br><span class="line">位置：  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18</span><br><span class="line">length = 18</span><br></pre></td></tr></table></figure>
+<p>顺序串和 C 语言中的字符数组不完全相同。字符数组通常依靠字符串结束符 <code>\0</code> 判断结束，而本实验使用 <code>length</code> 明确记录有效字符个数。因此输出顺序串时，应根据 <code>length</code> 输出 <code>data[0]</code> 到 <code>data[length - 1]</code>，不需要把 <code>data</code> 当作普通 C 字符串处理。</p>
+<p>顺序串的容量由 <code>MaxSize</code> 限制。任何会增加长度的操作都必须先检查新长度是否超过容量，否则复制、连接或插入时可能发生数组越界。</p>
+<p>本框架的返回类型 <code>SqString</code> 没有单独的成功标志。建议约定：合法的空串结果允许 <code>length=0</code>，非法位置或容量不足时也返回空串，但调用者不能仅凭空串区分这两种情况，必须在调用前检查参数，或在课后把接口改为“返回是否成功 + 输出参数”。无论采用哪种约定，返回的 <code>SqString</code> 都要先初始化，不能返回未赋值的结构体。</p>
+<h3 id="2-位置与下标转换"><a class="markdownIt-Anchor" href="#2-位置与下标转换"></a> 2. 位置与下标转换</h3>
+<p>实验中的字符位置从 1 开始，而 C 语言数组下标从 0 开始，因此第 <code>i</code> 个字符对应数组下标 <code>i - 1</code>。</p>
+<p>进行插入、删除和替换时，需要先检查位置和长度是否合法，避免数组越界。</p>
+<h3 id="3-各种串运算如何理解"><a class="markdownIt-Anchor" href="#3-各种串运算如何理解"></a> 3. 各种串运算如何理解</h3>
+<ul>
+<li><strong>赋值</strong>：把字符串常量中的字符依次放入顺序串，并设置 <code>length</code>。</li>
+<li><strong>复制</strong>：把一个顺序串的有效字符和长度复制到另一个顺序串。</li>
+<li><strong>连接</strong>：先放入第一个串，再从第一个串的末尾继续放入第二个串。</li>
+<li><strong>子串</strong>：从第 <code>i</code> 个字符开始，连续取 <code>j</code> 个字符。</li>
+<li><strong>插入</strong>：先把原串后半部分向后移动，再把新串放入空出的区域。</li>
+<li><strong>删除</strong>：把删除区域后面的字符向前移动，覆盖被删除的字符。</li>
+<li><strong>替换</strong>：先删除指定范围，再在相同位置插入新串。</li>
+</ul>
+<p>例如，串 <code>abcd</code> 在第 3 个位置插入 <code>XY</code>：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">原串：a b c d</span><br><span class="line">位置：1 2 3 4</span><br><span class="line"></span><br><span class="line">插入后：a b X Y c d</span><br></pre></td></tr></table></figure>
+<p>这里的“第 3 个位置”表示把新串放到原来第 3 个字符 <code>c</code> 之前。删除和替换也必须先统一位置定义，否则容易出现少删一个字符或多移动一个位置的问题。</p>
+<h3 id="4-函数说明"><a class="markdownIt-Anchor" href="#4-函数说明"></a> 4. 函数说明</h3>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>StrAssign</code></td>
+<td>根据字符串常量建立顺序串</td>
+</tr>
+<tr>
+<td><code>StrCopy</code></td>
+<td>将顺序串 <code>t</code> 复制到顺序串 <code>s</code></td>
+</tr>
+<tr>
+<td><code>StrEqual</code></td>
+<td>判断两个顺序串是否相同</td>
+</tr>
+<tr>
+<td><code>StrLength</code></td>
+<td>求顺序串长度</td>
+</tr>
+<tr>
+<td><code>Concat</code></td>
+<td>连接两个顺序串</td>
+</tr>
+<tr>
+<td><code>SubStr</code></td>
+<td>提取顺序串的子串</td>
+</tr>
+<tr>
+<td><code>InsStr</code></td>
+<td>在指定位置插入顺序串</td>
+</tr>
+<tr>
+<td><code>DelStr</code></td>
+<td>删除指定范围内的字符</td>
+</tr>
+<tr>
+<td><code>RepStr</code></td>
+<td>将指定范围替换为另一个顺序串</td>
+</tr>
+<tr>
+<td><code>DispStr</code></td>
+<td>输出顺序串中的所有字符</td>
+</tr>
+</tbody>
+</table>
+<h2 id="五-算法设计"><a class="markdownIt-Anchor" href="#五-算法设计"></a> 五、算法设计</h2>
+<h3 id="1-串赋值"><a class="markdownIt-Anchor" href="#1-串赋值"></a> 1. 串赋值</h3>
+<p>遍历字符串常量，将每个字符依次保存到顺序串的字符数组中，最后设置串长度。</p>
+<h3 id="2-求长度"><a class="markdownIt-Anchor" href="#2-求长度"></a> 2. 求长度</h3>
+<p>直接返回结构体中的 <code>length</code> 字段即可。</p>
+<h3 id="3-连接"><a class="markdownIt-Anchor" href="#3-连接"></a> 3. 连接</h3>
+<p>先将串 <code>s</code> 的字符复制到结果串，再从串 <code>t</code> 的第一个字符开始追加，最后更新结果串长度。</p>
+<h3 id="4-求子串"><a class="markdownIt-Anchor" href="#4-求子串"></a> 4. 求子串</h3>
+<p>从第 <code>i</code> 个字符开始，连续复制 <code>j</code> 个字符。第 <code>i</code> 个字符对应数组下标 <code>i - 1</code>。</p>
+<h3 id="5-插入"><a class="markdownIt-Anchor" href="#5-插入"></a> 5. 插入</h3>
+<p>从后向前移动原串中的字符，为待插入串腾出空间，再将待插入串复制到第 <code>i</code> 个位置之前。</p>
+<h3 id="6-删除"><a class="markdownIt-Anchor" href="#6-删除"></a> 6. 删除</h3>
+<p>将待删除区间之后的字符向前移动 <code>j</code> 个位置，再重新计算串长度。</p>
+<h3 id="7-替换"><a class="markdownIt-Anchor" href="#7-替换"></a> 7. 替换</h3>
+<p>可以先删除原串中指定的 <code>j</code> 个字符，再在相同位置插入替换串；也可以根据长度变化一次性移动字符。</p>
+<h2 id="六-实验代码框架"><a class="markdownIt-Anchor" href="#六-实验代码框架"></a> 六、实验代码框架</h2>
+<p>下面只保留程序框架和函数接口，具体算法由学生补充完成。</p>
+<h3 id="1-sqstringc"><a class="markdownIt-Anchor" href="#1-sqstringc"></a> 1. <code>sqstring.c</code></h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 顺序串最大容量</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MaxSize 1000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 顺序串结构体</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">char</span> data[MaxSize];</span><br><span class="line">    <span class="type">int</span> length;</span><br><span class="line">&#125; SqString;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 由字符串常量 cstr 创建顺序串 str</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">StrAssign</span><span class="params">(SqString *str, <span class="type">const</span> <span class="type">char</span> cstr[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> 将 cstr 中的字符复制到 str-&gt;data</span></span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> 设置 str-&gt;length</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将顺序串 t 复制到串 s</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">StrCopy</span><span class="params">(SqString *s, SqString t)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> 复制字符数组和 length</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断两个顺序串是否相同，相同返回 1，否则返回 0</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">StrEqual</span><span class="params">(SqString s, SqString t)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> 比较 length 和每个字符</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 求顺序串 s 的长度</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">StrLength</span><span class="params">(SqString s)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> 返回 s.length</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回将串 t 连接到串 s 后面形成的新串</span></span><br><span class="line">SqString <span class="title function_">Concat</span><span class="params">(SqString s, SqString t)</span></span><br><span class="line">&#123;</span><br><span class="line">    SqString result;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> 依次复制 s 和 t 的字符</span></span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> 设置 result.length</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回从串 s 的第 i 个字符开始的 j 个字符构成的子串</span></span><br><span class="line">SqString <span class="title function_">SubStr</span><span class="params">(SqString s, <span class="type">int</span> i, <span class="type">int</span> j)</span></span><br><span class="line">&#123;</span><br><span class="line">    SqString result;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> 检查 i、j 的合法性</span></span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> 复制指定范围内的字符</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回将串 s2 插入到串 s1 第 i 个位置之前形成的新串</span></span><br><span class="line">SqString <span class="title function_">InsStr</span><span class="params">(SqString s1, <span class="type">int</span> i, SqString s2)</span></span><br><span class="line">&#123;</span><br><span class="line">    SqString result;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> 检查插入位置和长度是否有效</span></span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> 移动 s1 中的字符，为 s2 腾出空间</span></span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> 复制 s2 并更新 result.length</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回删除串 s 从第 i 个字符开始的 j 个字符后形成的新串</span></span><br><span class="line">SqString <span class="title function_">DelStr</span><span class="params">(SqString s, <span class="type">int</span> i, <span class="type">int</span> j)</span></span><br><span class="line">&#123;</span><br><span class="line">    SqString result;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> 检查删除范围是否合法</span></span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> 将删除区间后面的字符向前移动</span></span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> 更新 result.length</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回将串 s 从第 i 个字符开始的 j 个字符替换为串 t 后形成的新串</span></span><br><span class="line">SqString <span class="title function_">RepStr</span><span class="params">(SqString s, <span class="type">int</span> i, <span class="type">int</span> j, SqString t)</span></span><br><span class="line">&#123;</span><br><span class="line">    SqString result;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> 可以先调用 DelStr，再调用 InsStr</span></span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> 处理替换后长度变化的情况</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出顺序串中的所有字符</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">DispStr</span><span class="params">(SqString s)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> 从 data[0] 输出到 data[length - 1]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-exp4-1c"><a class="markdownIt-Anchor" href="#2-exp4-1c"></a> 2. <code>exp4-1.c</code></h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;sqstring.c&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 课堂先完成赋值、输出、长度、删除和提取子串，其他运算作为提高任务</span></span><br><span class="line">    SqString s;</span><br><span class="line">    SqString s1;</span><br><span class="line">    SqString s2;</span><br><span class="line">    SqString s3;</span><br><span class="line">    SqString s4;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO 1：建立串 s 和串 s1</span></span><br><span class="line">    StrAssign(&amp;s, <span class="string">&quot;abcdefghefghijklmn&quot;</span>);</span><br><span class="line">    StrAssign(&amp;s1, <span class="string">&quot;xyz&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO 2：输出串 s</span></span><br><span class="line">    <span class="comment">// DispStr(s);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO 3：输出串 s 的长度</span></span><br><span class="line">    <span class="comment">// printf(&quot;串 s 的长度：%d\n&quot;, StrLength(s));</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO 4：在串 s 的第 9 个字符位置插入串 s1，产生串 s2</span></span><br><span class="line">    <span class="comment">// s2 = InsStr(s, 9, s1);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO 5：输出串 s2</span></span><br><span class="line">    <span class="comment">// DispStr(s2);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO 6：删除串 s 第 2 个字符开始的 5 个字符，产生串 s2</span></span><br><span class="line">    <span class="comment">// s2 = DelStr(s, 2, 5);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO 7：输出串 s2</span></span><br><span class="line">    <span class="comment">// DispStr(s2);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO 8：将串 s 第 2 个字符开始的 5 个字符替换成串 s1，产生串 s2</span></span><br><span class="line">    <span class="comment">// s2 = RepStr(s, 2, 5, s1);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO 9：输出串 s2</span></span><br><span class="line">    <span class="comment">// DispStr(s2);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO 10：提取串 s 第 2 个字符开始的 10 个字符，产生串 s3</span></span><br><span class="line">    <span class="comment">// s3 = SubStr(s, 2, 10);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO 11：输出串 s3</span></span><br><span class="line">    <span class="comment">// DispStr(s3);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO 12：连接串 s1 和串 s2，产生串 s4</span></span><br><span class="line">    <span class="comment">// s4 = Concat(s1, s2);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO 13：输出串 s4</span></span><br><span class="line">    <span class="comment">// DispStr(s4);</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;学号：________  姓名：________\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-编译运行"><a class="markdownIt-Anchor" href="#3-编译运行"></a> 3. 编译运行</h3>
+<p>将 <code>sqstring.c</code> 和 <code>exp4-1.c</code> 放在同一目录中。框架为了便于课堂演示，直接在 <code>exp4-1.c</code> 中包含 <code>sqstring.c</code>；实际项目可以进一步拆分出头文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -std=c11 exp4-1.c -o exp4-1</span><br><span class="line">./exp4-1</span><br></pre></td></tr></table></figure>
+<h2 id="七-运行结果参考"><a class="markdownIt-Anchor" href="#七-运行结果参考"></a> 七、运行结果参考</h2>
+<p>按照“第 <code>i</code> 个字符从 1 开始”的约定，课堂必做需要核对原串、长度、删除结果和提取结果；其余结果供提高任务核对：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原串 <code>s</code></td>
+<td><code>abcdefghefghijklmn</code></td>
+</tr>
+<tr>
+<td><code>StrLength(s)</code></td>
+<td><code>18</code></td>
+</tr>
+<tr>
+<td>在第 9 个位置插入 <code>xyz</code></td>
+<td><code>abcdefghxyzefghijklmn</code></td>
+</tr>
+<tr>
+<td>删除第 2 个开始的 5 个字符</td>
+<td><code>aghefghijklmn</code></td>
+</tr>
+<tr>
+<td>替换第 2 个开始的 5 个字符</td>
+<td><code>axyzghefghijklmn</code></td>
+</tr>
+<tr>
+<td>提取第 2 个开始的 10 个字符</td>
+<td><code>bcdefghefg</code></td>
+</tr>
+<tr>
+<td>连接 <code>s1</code> 和替换后的 <code>s2</code></td>
+<td><code>xyzaxyzghefghijklmn</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="运行截图必交"><a class="markdownIt-Anchor" href="#运行截图必交"></a> 运行截图（必交）</h3>
+<p>在此插入至少一张本人程序的运行截图。截图须清晰显示<strong>本人真实学号、姓名</strong>和上文规定的<strong>课堂必做结果</strong>；完成提高或选做任务时，另附相应结果截图。</p>
+<h2 id="八-问题分析"><a class="markdownIt-Anchor" href="#八-问题分析"></a> 八、问题分析</h2>
+<h3 id="1-为什么字符位置从-1-开始而数组下标从-0-开始"><a class="markdownIt-Anchor" href="#1-为什么字符位置从-1-开始而数组下标从-0-开始"></a> 1. 为什么字符位置从 1 开始而数组下标从 0 开始</h3>
+<p>实验描述通常使用从 1 开始的字符位置，更符合人们的阅读习惯；C 语言数组从 0 开始，因此访问第 <code>i</code> 个字符时需要使用下标 <code>i - 1</code>。</p>
+<h3 id="2-插入-删除和替换时为什么需要移动字符"><a class="markdownIt-Anchor" href="#2-插入-删除和替换时为什么需要移动字符"></a> 2. 插入、删除和替换时为什么需要移动字符</h3>
+<p>顺序串使用连续数组存储字符。插入字符时需要向后移动部分字符，删除字符时需要向前移动后续字符，替换操作也可能引起串长度变化，因此需要重新调整字符位置。</p>
+<h3 id="3-顺序串基本运算的时间复杂度是多少"><a class="markdownIt-Anchor" href="#3-顺序串基本运算的时间复杂度是多少"></a> 3. 顺序串基本运算的时间复杂度是多少</h3>
+<p>赋值、复制、比较、连接、求子串、插入、删除和替换通常需要遍历或移动字符，时间复杂度一般为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>；取长度只读取 <code>length</code> 字段，时间复杂度为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>。</p>
+<h2 id="九-实验总结"><a class="markdownIt-Anchor" href="#九-实验总结"></a> 九、实验总结</h2>
+<p>本实验要求使用 C 语言完成顺序串基本运算的程序框架，重点理解字符数组、串长度和字符位置之间的关系。完成各个 <code>TODO</code> 后，可以掌握顺序串的赋值、复制、连接、截取、插入、删除和替换等操作。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><a class="post-meta__tags" href="/tags/C/">C</a><a class="post-meta__tags" href="/tags/%E9%A1%BA%E5%BA%8F%E4%B8%B2/">顺序串</a><a class="post-meta__tags" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/e2fec5f4/" title="数据结构课程大作业选题：基础、综合与提高类"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">数据结构课程大作业选题：基础、综合与提高类</div></div><div class="info-2"><div class="info-item-1">本课程期末采用个人大作业考查。下面共有 11 个备选题目：基础类 4 题、综合类 3 题、提高类 4 题。每人选择 1 题，完成该题的必做要求；不需要完成全部题目。所有题目均使用 C 语言编写终端程序，不要求图形界面、数据库、联网服务或真实硬件。 选题围绕本学期的 算法性能分析、单链表、顺序栈、顺序串、二叉树遍历、图的存储、查找 和 插入排序 8 次实验设计。综合类、提高类会增加少量新算法，题目中已标明范围。  一、选题总览    类别 编号 题目 主要对应实验 核心结构或算法     基础 1 学生成绩管理系统 1、7、8 结构体数组、查找、插入排序   基础 2 通讯录管理系统 2、4、7 单链表、字符串比较、查找   基础 3 图书借阅管理系统 2、7、8 记录管理、查找、排序   基础 4 排序性能分析器 1、8 直接插入排序、折半插入排序、计数与计时   综合 5 四则表达式求值器 3、4 顺序栈、字符串扫描   综合 6 模拟文件目录树 5、7 树的二叉链式表示、遍历、查找   综合 7 哈夫曼编码与解码器 5、8 二叉树、最小权值结点选择   提高 8 校园导航系统...</div></div></div></a><a class="pagination-related" href="/posts/7ab0fcd8/" title="05 二叉树遍历算法实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">05 二叉树遍历算法实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  领会二叉树的存储结构。 理解先序、中序、后序和层次遍历的访问顺序。 掌握二叉树三种递归遍历算法的设计方法。 掌握利用栈实现先序、中序和后序非递归遍历的方法。 掌握利用队列实现二叉树层次遍历的方法。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等   提交与截图要求  必须提交运行截图：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。 本次截图重点：先序、中序、后序三种递归遍历结果。完成提高或选做任务的同学，还应附相应结果截图。 必须提交带中文注释的 C 源码：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 TODO 提示不能代替自己完成的注释，也不能只交代码或只交截图。   三、实验内容 编写 C 语言程序 exp5-1.c，实现二叉树的先序、中序、后序和层次遍历算法。其中，先序、中序和后序遍历分别...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/posts/7ab0fcd8/" title="05 二叉树遍历算法实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">05 二叉树遍历算法实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  领会二叉树的存储结构。 理解先序、中序、后序和层次遍历的访问顺序。 掌握二叉树三种递归遍历算法的设计方法。 掌握利用栈实现先序、中序和后序非递归遍历的方法。 掌握利用队列实现二叉树层次遍历的方法。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等   提交与截图要求  必须提交运行截图：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。 本次截图重点：先序、中序、后序三种递归遍历结果。完成提高或选做任务的同学，还应附相应结果截图。 必须提交带中文注释的 C 源码：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 TODO 提示不能代替自己完成的注释，也不能只交代码或只交截图。   三、实验内容 编写 C 语言程序 exp5-1.c，实现二叉树的先序、中序、后序和层次遍历算法。其中，先序、中序和后序遍历分别...</div></div></div></a><a class="pagination-related" href="/posts/5866a81e/" title="01 算法性能分析实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">01 算法性能分析实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  掌握程序执行时间的基本测试方法。 理解问题规模变化对算法运行时间的影响。 观察常见时间函数随问题规模增长的变化规律。 通过比较不同算法，体会算法设计对程序性能的影响。   二、实验环境  编程语言：C 开发环境：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等 本实验包含 1 个课堂必做任务 + 1 个提高任务 + 1 个选做任务。   计时方法参考  C 1234567891011121314#include &lt;time.h&gt;clock_t start, end;double elapsed;void measure(void)&#123;    start = clock();    /* 调用待测试算法 */    end = clock();    elapsed = (double)(end - start) / CLOCKS_PER_SEC;&#125; 如果单次执行时间过短，可以重复执行多次后取平均值。不同计算机和运行环境的实际运行时间可能不同，本实验重点观察同一环境下算法性能随问题规模变化的...</div></div></div></a><a class="pagination-related" href="/posts/ce601833/" title="08 直接插入排序和折半插入排序实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">08 直接插入排序和折半插入排序实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  理解插入排序的基本思想。 掌握直接插入排序算法的设计方法。 掌握折半插入排序算法的设计方法。 理解折半查找在插入排序中的应用。 比较直接插入排序和折半插入排序的查找与移动过程。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等   提交与截图要求  必须提交运行截图：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。 本次截图重点：原始序列，以及直接插入排序和折半插入排序的升序结果。完成提高或选做任务的同学，还应附相应结果截图。 必须提交带中文注释的 C 源码：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 TODO 提示不能代替自己完成的注释，也不能只交代码或只交截图。   三、实验内容 编写程序 exp8-1.c，实现直接插入排序算法和折半插入排序算法，并完成以下功能：  建立一个待排序的整数序列。...</div></div></div></a><a class="pagination-related" href="/posts/1769ec6e/" title="数据结构第 1—9 章 LeetCode 简单题单"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-09</div><div class="info-item-2">数据结构第 1—9 章 LeetCode 简单题单</div></div><div class="info-2"><div class="info-item-1">本题单按第 1—9 章编排，共 28 道 LeetCode 简单题，由基础到巩固排列。题号可用于站内搜索。建议先手工走一遍示例，再用 C 语言完成练习，并说明所用数据结构与时间复杂度。  第 1 章 绪论：数据、算法与复杂度  1480. 一维数组的动态和 — 数组遍历、循环不变量。 想清楚处理到下标 i 时，已得到的前缀结果表示什么；比较一次扫描与反复求和的操作次数。 1929. 数组串联 — 数组下标、数据规模与空间。 明确原数组长度 n、结果长度 2n，检查第二段元素应写到什么下标。 1672. 最富有客户的资产总量 — 二维数组与两重循环。 先逐行求和，再维护最大值；分别分析行数、列数对操作次数的影响。   第 2 章 线性表：单链表与指针  83. 删除排序链表中的重复元素 — 删除结点、维护后继。 利用有序性只比较相邻结点；删除前先保留需要继续访问的链接。 206. 反转链表 — 链接方向与边界。 画出 前驱—当前—后继 三个指针，逐次改变 next；检查空链与单结点链。 21. 合并两个有序链表 — 带头结点思路与有序合并。 每次接入较小的当前结点；某一条链先到尾时...</div></div></div></a><a class="pagination-related" href="/posts/23c7198c/" title="06 图的邻接矩阵和邻接表存储实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">06 图的邻接矩阵和邻接表存储实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  领会图的邻接矩阵和邻接表两种主要存储结构。 掌握带权有向图邻接矩阵的创建和输出方法。 掌握带权有向图邻接表的创建和输出方法。 理解邻接矩阵与邻接表在空间使用和访问方式上的差异。 掌握动态申请和释放邻接表边结点的方法。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等   提交与截图要求  必须提交运行截图：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。 本次截图重点：图的 5×5 邻接矩阵；五个顶点的出边链表另在报告中写出。完成提高或选做任务的同学，还应附相应结果截图。 必须提交带中文注释的 C 源码：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 TODO 提示不能代替自己完成的注释，也不能只交代码或只交截图。   三、实验内容 编写 graph.c，实现带权有向图的邻接矩阵和邻接表的创建、输出与...</div></div></div></a><a class="pagination-related" href="/posts/510741dd/" title="07 顺序查找和折半查找实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">07 顺序查找和折半查找实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  理解查找表和关键字的基本概念。 掌握顺序查找算法的设计方法。 掌握折半查找算法的设计方法。 理解折半查找对数据有序性的要求。 比较顺序查找和折半查找的时间复杂度及适用场景。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等   提交与截图要求  必须提交运行截图：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。 本次截图重点：关键字 29 的成功结果和关键字 30 的失败结果（两种算法均需显示）。完成提高或选做任务的同学，还应附相应结果截图。 必须提交带中文注释的 C 源码：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 TODO 提示不能代替自己完成的注释，也不能只交代码或只交截图。   三、实验内容 编写程序 exp7-1.c，实现顺序查找算法和折半查找算法，并完成以下功能：  建立一个按关键字升...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">zsl</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">31</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">69</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">5</div></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84"><span class="toc-number">1.</span> <span class="toc-text"> 一、实验目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text"> 二、实验环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E4%B8%8E%E6%88%AA%E5%9B%BE%E8%A6%81%E6%B1%82"><span class="toc-number">2.1.</span> <span class="toc-text"> 提交与截图要求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9"><span class="toc-number">3.</span> <span class="toc-text"> 三、实验内容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#80-%E5%88%86%E9%92%9F%E8%AF%BE%E5%A0%82%E5%AE%8C%E6%88%90%E8%8C%83%E5%9B%B4"><span class="toc-number">3.1.</span> <span class="toc-text"> 80 分钟课堂完成范围</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E5%AE%9E%E9%AA%8C%E5%8E%9F%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text"> 四、实验原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%A1%BA%E5%BA%8F%E4%B8%B2%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-number">4.1.</span> <span class="toc-text"> 1. 顺序串存储结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BD%8D%E7%BD%AE%E4%B8%8E%E4%B8%8B%E6%A0%87%E8%BD%AC%E6%8D%A2"><span class="toc-number">4.2.</span> <span class="toc-text"> 2. 位置与下标转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%90%84%E7%A7%8D%E4%B8%B2%E8%BF%90%E7%AE%97%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3"><span class="toc-number">4.3.</span> <span class="toc-text"> 3. 各种串运算如何理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-number">4.4.</span> <span class="toc-text"> 4. 函数说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1"><span class="toc-number">5.</span> <span class="toc-text"> 五、算法设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%B2%E8%B5%8B%E5%80%BC"><span class="toc-number">5.1.</span> <span class="toc-text"> 1. 串赋值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%B1%82%E9%95%BF%E5%BA%A6"><span class="toc-number">5.2.</span> <span class="toc-text"> 2. 求长度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%BF%9E%E6%8E%A5"><span class="toc-number">5.3.</span> <span class="toc-text"> 3. 连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%B1%82%E5%AD%90%E4%B8%B2"><span class="toc-number">5.4.</span> <span class="toc-text"> 4. 求子串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%8F%92%E5%85%A5"><span class="toc-number">5.5.</span> <span class="toc-text"> 5. 插入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%88%A0%E9%99%A4"><span class="toc-number">5.6.</span> <span class="toc-text"> 6. 删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E6%9B%BF%E6%8D%A2"><span class="toc-number">5.7.</span> <span class="toc-text"> 7. 替换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD-%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81%E6%A1%86%E6%9E%B6"><span class="toc-number">6.</span> <span class="toc-text"> 六、实验代码框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-sqstringc"><span class="toc-number">6.1.</span> <span class="toc-text"> 1. sqstring.c</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-exp4-1c"><span class="toc-number">6.2.</span> <span class="toc-text"> 2. exp4-1.c</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C"><span class="toc-number">6.3.</span> <span class="toc-text"> 3. 编译运行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83-%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C%E5%8F%82%E8%80%83"><span class="toc-number">7.</span> <span class="toc-text"> 七、运行结果参考</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%88%AA%E5%9B%BE%E5%BF%85%E4%BA%A4"><span class="toc-number">7.1.</span> <span class="toc-text"> 运行截图（必交）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB-%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90"><span class="toc-number">8.</span> <span class="toc-text"> 八、问题分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AD%97%E7%AC%A6%E4%BD%8D%E7%BD%AE%E4%BB%8E-1-%E5%BC%80%E5%A7%8B%E8%80%8C%E6%95%B0%E7%BB%84%E4%B8%8B%E6%A0%87%E4%BB%8E-0-%E5%BC%80%E5%A7%8B"><span class="toc-number">8.1.</span> <span class="toc-text"> 1. 为什么字符位置从 1 开始而数组下标从 0 开始</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%8F%92%E5%85%A5-%E5%88%A0%E9%99%A4%E5%92%8C%E6%9B%BF%E6%8D%A2%E6%97%B6%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E7%A7%BB%E5%8A%A8%E5%AD%97%E7%AC%A6"><span class="toc-number">8.2.</span> <span class="toc-text"> 2. 插入、删除和替换时为什么需要移动字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%A1%BA%E5%BA%8F%E4%B8%B2%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%98%AF%E5%A4%9A%E5%B0%91"><span class="toc-number">8.3.</span> <span class="toc-text"> 3. 顺序串基本运算的时间复杂度是多少</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%9D-%E5%AE%9E%E9%AA%8C%E6%80%BB%E7%BB%93"><span class="toc-number">9.</span> <span class="toc-text"> 九、实验总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/1769ec6e/" title="数据结构第 1—9 章 LeetCode 简单题单">数据结构第 1—9 章 LeetCode 简单题单</a><time datetime="2026-10-08T16:00:00.000Z" title="Created 2026-10-09 00:00:00">2026-10-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/e3eb4e85/" title="通信工程专业导论课程大作业任务书（大一简化版）">通信工程专业导论课程大作业任务书（大一简化版）</a><time datetime="2026-10-07T09:16:46.000Z" title="Created 2026-10-07 17:16:46">2026-10-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/e2fec5f4/" title="数据结构课程大作业选题：基础、综合与提高类">数据结构课程大作业选题：基础、综合与提高类</a><time datetime="2026-10-07T05:00:00.000Z" title="Created 2026-10-07 13:00:00">2026-10-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/5866a81e/" title="01 算法性能分析实验">01 算法性能分析实验</a><time datetime="2026-10-06T16:00:00.000Z" title="Created 2026-10-07 00:00:00">2026-10-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/a80e397c/" title="02 单链表基本运算实验">02 单链表基本运算实验</a><time datetime="2026-10-06T16:00:00.000Z" title="Created 2026-10-07 00:00:00">2026-10-07</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By zsl</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/katex.min.css')
+    if (false) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const config = mermaidSrc.dataset.config ? JSON.parse(mermaidSrc.dataset.config) : {}
+      if (!config.theme) {
+        config.theme = theme
+      }
+      const mermaidThemeConfig = `%%{init: ${JSON.stringify(config)}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid@11.12.2/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

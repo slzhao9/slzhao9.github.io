@@ -176,7 +176,7 @@
                 <option value="3">Mode 3: 9位 UART (Variable Baud)</option>
             </select>
             <div id="mode-desc" style="font-size: 0.8rem; color: #aaa; margin-top:5px;">
-                TXD输出数据，RXD输出同步时钟。
+                RXD（P3.0）传输数据，TXD（P3.1）输出同步移位时钟。
             </div>
         </div>
 
@@ -226,7 +226,7 @@
 <footer class="footer-notes">
     <div class="note-card" id="note-mode0">
         <h4>方式 0: 同步移位寄存器</h4>
-        <p><strong>原理：</strong> 数据从 TXD (P3.1) 串行输出/输入，RXD (P3.0) 输出同步时钟脉冲。常用于扩展 I/O 口。<br>
+        <p><strong>原理：</strong> 数据通过 RXD (P3.0) 串行输入或输出，TXD (P3.1) 输出同步移位时钟脉冲。常用于扩展 I/O 口。<br>
            <strong>波特率：</strong> 固定为 Fosc / 12。<br>
            <strong>帧格式：</strong> 8位数据，无起始/停止位。</p>
     </div>
@@ -331,7 +331,7 @@
     function updateUI() {
         // 更新描述
         const descs = [
-            "TXD输出数据 (8位)，RXD输出同步移位脉冲。波特率固定。",
+            "RXD传输数据 (8位)，TXD输出同步移位脉冲。波特率固定。",
             "TXD发送，RXD接收。10位帧 (Start + 8 Data + Stop)。波特率可变。",
             "TXD发送，RXD接收。11位帧 (Start + 8 Data + TB8 + Stop)。波特率固定。",
             "TXD发送，RXD接收。11位帧 (Start + 8 Data + TB8 + Stop)。波特率可变。"
@@ -369,8 +369,7 @@
 
         // 辅助函数
         function addBit(bitVal, pinType, color, label) {
-            // pinType: 'data' (TXD) or 'clock' (RXD in Mode 0)
-            // Mode 0 特殊处理：TXD 输出数据，RXD 输出时钟
+            // Mode 0：RXD 传输数据，TXD 输出时钟
             // Mode 1/2/3：TXD 输出数据，RXD 保持高 (模拟空闲)
             
             for(let i=0; i<stepsPerBit; i++) {
@@ -379,10 +378,9 @@
 
                 // 逻辑：如果是 Mode 0
                 if (state.mode === 0) {
-                    txdVal = bitVal; 
-                    // 模拟 Mode 0 时钟：通常数据有效期间时钟为低，或者边沿触发
-                    // 这里简单模拟：前半周期低，后半周期高 (Shift clock)
-                    rxdVal = (i < stepsPerBit/2) ? 0 : 1; 
+                    rxdVal = bitVal;
+                    // 用方波示意同步移位时钟，前半周期低、后半周期高
+                    txdVal = (i < stepsPerBit/2) ? 0 : 1;
                 } else {
                     // Mode 1/2/3
                     txdVal = bitVal;
@@ -487,11 +485,11 @@
         const txY = h * 0.3;
         const rxY = h * 0.7;
 
-        ctx.fillText("TXD (P3.1) - Output", 10, txY - 40);
-        
         if (state.mode === 0) {
-             ctx.fillText("RXD (P3.0) - Shift Clock", 10, rxY - 40);
+             ctx.fillText("TXD (P3.1) - Shift Clock", 10, txY - 40);
+             ctx.fillText("RXD (P3.0) - Data", 10, rxY - 40);
         } else {
+             ctx.fillText("TXD (P3.1) - Output", 10, txY - 40);
              ctx.fillText("RXD (P3.0) - Idle", 10, rxY - 40);
         }
         
@@ -542,11 +540,9 @@
                 const prevY = centerY + (prevVal === 0 ? amp : -amp);
 
                 ctx.beginPath();
-                // 颜色逻辑：如果是 TXD，根据状态上色；如果是 RXD(Clock)，统一黄色
-                if (channel === 'tx') ctx.strokeStyle = (val === 0 && pt.color !== COLORS.START) ? COLORS.DATA_0 : pt.color; 
-                // 特殊处理：低电平为了看清，用灰色或者保留颜色？保留颜色更好看帧结构
+                // Mode 0 的 TXD 时钟使用黄色，其余数据按帧类型着色
                 ctx.strokeStyle = pt.color;
-                if(channel === 'rx' && state.mode === 0) ctx.strokeStyle = COLORS.CLOCK;
+                if(channel === 'tx' && state.mode === 0) ctx.strokeStyle = COLORS.CLOCK;
                 if(channel === 'rx' && state.mode !== 0) ctx.strokeStyle = '#555'; // RXD Idle
 
                 // 绘制垂直跳变

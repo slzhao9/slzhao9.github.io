@@ -1,0 +1,290 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>数据结构第 1—9 章 LeetCode 简单题单 | Blog</title><meta name="author" content="zsl"><meta name="copyright" content="zsl"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本题单按第 1—9 章编排，共 28 道 LeetCode 简单题，由基础到巩固排列。题号可用于站内搜索。建议先手工走一遍示例，再用 C 语言完成练习，并说明所用数据结构与时间复杂度。  第 1 章 绪论：数据、算法与复杂度  1480. 一维数组的动态和 — 数组遍历、循环不变量。 想清楚处理到下标 i 时，已得到的前缀结果表示什么；比较一次扫描与反复求和的操作次数。 1929. 数组串联 —">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构第 1—9 章 LeetCode 简单题单">
+<meta property="og:url" content="http://example.com/posts/1769ec6e/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="本题单按第 1—9 章编排，共 28 道 LeetCode 简单题，由基础到巩固排列。题号可用于站内搜索。建议先手工走一遍示例，再用 C 语言完成练习，并说明所用数据结构与时间复杂度。  第 1 章 绪论：数据、算法与复杂度  1480. 一维数组的动态和 — 数组遍历、循环不变量。 想清楚处理到下标 i 时，已得到的前缀结果表示什么；比较一次扫描与反复求和的操作次数。 1929. 数组串联 —">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2026-10-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-10-09T02:28:37.958Z">
+<meta property="article:author" content="zsl">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="LeetCode">
+<meta property="article:tag" content="C">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "数据结构第 1—9 章 LeetCode 简单题单",
+  "url": "http://example.com/posts/1769ec6e/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2026-10-08T16:00:00.000Z",
+  "dateModified": "2026-10-09T02:28:37.958Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "zsl",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/butterfly-icon.png"><link rel="canonical" href="http://example.com/posts/1769ec6e/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '数据结构第 1—9 章 LeetCode 简单题单',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">数据结构第 1—9 章 LeetCode 简单题单</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">数据结构第 1—9 章 LeetCode 简单题单</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-10-08T16:00:00.000Z" title="Created 2026-10-09 00:00:00">2026-10-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-10-09T02:28:37.958Z" title="Updated 2026-10-09 10:28:37">2026-10-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%99%84%E5%8A%A0%E7%BB%83%E4%B9%A0/">数据结构附加练习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>本题单按第 1—9 章编排，共 28 道 LeetCode 简单题，由基础到巩固排列。题号可用于站内搜索。建议先手工走一遍示例，再用 C 语言完成练习，并说明所用数据结构与时间复杂度。</p>
+<h2 id="第-1-章-绪论数据-算法与复杂度"><a class="markdownIt-Anchor" href="#第-1-章-绪论数据-算法与复杂度"></a> 第 1 章 绪论：数据、算法与复杂度</h2>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/running-sum-of-1d-array/">1480. 一维数组的动态和</a> — <strong>数组遍历、循环不变量。</strong> 想清楚处理到下标 <code>i</code> 时，已得到的前缀结果表示什么；比较一次扫描与反复求和的操作次数。</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/concatenation-of-array/">1929. 数组串联</a> — <strong>数组下标、数据规模与空间。</strong> 明确原数组长度 <code>n</code>、结果长度 <code>2n</code>，检查第二段元素应写到什么下标。</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/richest-customer-wealth/">1672. 最富有客户的资产总量</a> — <strong>二维数组与两重循环。</strong> 先逐行求和，再维护最大值；分别分析行数、列数对操作次数的影响。</li>
+</ol>
+<h2 id="第-2-章-线性表单链表与指针"><a class="markdownIt-Anchor" href="#第-2-章-线性表单链表与指针"></a> 第 2 章 线性表：单链表与指针</h2>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-duplicates-from-sorted-list/">83. 删除排序链表中的重复元素</a> — <strong>删除结点、维护后继。</strong> 利用有序性只比较相邻结点；删除前先保留需要继续访问的链接。</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/">206. 反转链表</a> — <strong>链接方向与边界。</strong> 画出 <code>前驱—当前—后继</code> 三个指针，逐次改变 <code>next</code>；检查空链与单结点链。</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-two-sorted-lists/">21. 合并两个有序链表</a> — <strong>带头结点思路与有序合并。</strong> 每次接入较小的当前结点；某一条链先到尾时，如何处理剩余结点？</li>
+</ol>
+<h2 id="第-3-章-栈和队列"><a class="markdownIt-Anchor" href="#第-3-章-栈和队列"></a> 第 3 章 栈和队列</h2>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-parentheses/description/">20. 有效的括号</a> — <strong>栈的后进先出。</strong> 遇左括号入栈，遇右括号检查栈顶；特别检查“右括号出现时栈已空”和“扫描完栈不空”。</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/implement-queue-using-stacks/">232. 用栈实现队列</a> — <strong>两种进出顺序的转换。</strong> 画出元素从输入栈转移到输出栈后，先后次序怎样改变。</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/implement-stack-using-queues/">225. 用队列实现栈</a> — <strong>队列先进先出与栈后进先出。</strong> 每次 <code>push</code> 后思考怎样让最新元素在下一次 <code>pop</code> 时先被取出。</li>
+</ol>
+<h2 id="第-4-章-串字符序列与模式匹配"><a class="markdownIt-Anchor" href="#第-4-章-串字符序列与模式匹配"></a> 第 4 章 串：字符序列与模式匹配</h2>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-string/">344. 反转字符串</a> — <strong>字符数组和双指针。</strong> 从两端向中间交换；检查奇数长度时中间字符是否需要移动。</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/">28. 找出字符串中第一个匹配项的下标</a> — <strong>BF 模式匹配。</strong> 先按课件的朴素匹配逐个起点尝试，失配后明确主串和模式串各回到哪里；返回值是 0 基下标。</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-palindrome/">125. 验证回文串</a> — <strong>字符筛选与串比较。</strong> 题目要求忽略非字母数字字符并忽略大小写；不要直接比较原字符串两端。</li>
+</ol>
+<h2 id="第-5-章-数组和广义表二维数组与矩阵"><a class="markdownIt-Anchor" href="#第-5-章-数组和广义表二维数组与矩阵"></a> 第 5 章 数组和广义表：二维数组与矩阵</h2>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/matrix-diagonal-sum/">1572. 矩阵对角线元素的和</a> — <strong>行列下标关系。</strong> 主对角线满足 <code>i=j</code>，副对角线满足 <code>i+j=n−1</code>；奇数阶矩阵的中心格不能重复计数。</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/transpose-matrix/">867. 转置矩阵</a> — <strong>矩阵转置。</strong> 若原矩阵有 <code>m</code> 行 <code>n</code> 列，结果应先准备多少行、多少列？将 <code>(i,j)</code> 放到 <code>(j,i)</code>。</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reshape-the-matrix/">566. 重塑矩阵</a> — <strong>行优先顺序与下标换算。</strong> 先判断元素总数能否保持一致；不一致时返回原矩阵，能重塑时按原矩阵的行遍历顺序填入新矩阵。</li>
+</ol>
+<p>本章的<strong>对称矩阵压缩、稀疏矩阵三元组和广义表 Head/Tail</strong>仍以课件中的手算练习为主；上面三题只覆盖与它们相邻的二维数组知识，不把矩阵转置误当作三元组转置算法。</p>
+<h2 id="第-6-章-树和二叉树"><a class="markdownIt-Anchor" href="#第-6-章-树和二叉树"></a> 第 6 章 树和二叉树</h2>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/">104. 二叉树的最大深度</a> — <strong>树的递归定义与高度。</strong> 空树深度为 0；非空树取左右子树较大深度再加 1。区分层数与路径边数。</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-inorder-traversal/">94. 二叉树的中序遍历</a> — <strong>左—根—右。</strong> 先手写每个子树的访问顺序，再写递归程序；迭代写法可暂不要求。</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/invert-binary-tree/">226. 翻转二叉树</a> — <strong>左、右孩子与递归。</strong> 每个结点交换左右子树后，还要继续处理两棵子树；检查空树与只有一个孩子的结点。</li>
+</ol>
+<p>哈夫曼编码没有放入本章题单：本单限定力扣“简单”题，以上三题更适合巩固课堂的树形结构与遍历。</p>
+<h2 id="第-7-章-图方向-度与遍历"><a class="markdownIt-Anchor" href="#第-7-章-图方向-度与遍历"></a> 第 7 章 图：方向、度与遍历</h2>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-town-judge/">997. 找到小镇的法官</a> — <strong>有向图的入度、出度。</strong> 把“信任”画成有向弧；候选点应满足怎样的入度和出度条件？</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-if-path-exists-in-graph/">1971. 寻找图中是否存在路径</a> — <strong>无向图存储与 DFS/BFS。</strong> 每条无向边要记录两个方向；访问时及时标记，避免在回路中反复进入同一顶点。</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/flood-fill/">733. 图像渲染</a> — <strong>二维网格上的连通区域。</strong> 将颜色相同且上下左右相邻的格子看成连边的顶点；新颜色等于原颜色时如何避免无效遍历？</li>
+</ol>
+<p><strong>最小生成树、Dijkstra 最短路和拓扑排序</strong>保留为课件中的小图手算题；这里不以不贴合的“简单”题替代这些算法。</p>
+<h2 id="第-8-章-查找折半-bst-与哈希"><a class="markdownIt-Anchor" href="#第-8-章-查找折半-bst-与哈希"></a> 第 8 章 查找：折半、BST 与哈希</h2>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/">704. 二分查找</a> — <strong>有序表折半。</strong> 每轮写出闭区间 <code>[low,high]</code> 与中点；目标不存在时以什么条件结束？</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-insert-position/">35. 搜索插入位置</a> — <strong>二分失败后的边界。</strong> 找不到目标时，确定它保持有序所需的插入下标；对表头、表尾两端分别测试。</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-in-a-binary-search-tree/">700. 二叉搜索树中的搜索</a> — <strong>BST 左小右大。</strong> 每次比较后只进入一侧子树；走到空指针即失败。</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/two-sum/">1. 两数之和</a> — <strong>哈希查找应用。</strong> 先尝试顺序枚举，再思考如何用哈希表查询“目标值减当前值”是否出现过；同一元素不能用两次。</li>
+</ol>
+<h2 id="第-9-章-排序有序结果与记录位置"><a class="markdownIt-Anchor" href="#第-9-章-排序有序结果与记录位置"></a> 第 9 章 排序：有序结果与记录位置</h2>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/height-checker/">1051. 高度检查器</a> — <strong>排序前后对照。</strong> 复制原数组并排序，再逐下标比较；可先用直接插入或简单选择实现辅助排序。</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-sorted-array/">88. 合并两个有序数组</a> — <strong>归并的核心动作。</strong> 两段各自有序；本题要写回第一个数组，可从两段末端向前填入较大值，避免覆盖尚未比较的元素。</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/relative-ranks/">506. 相对名次</a> — <strong>按关键字排序后恢复原记录位置。</strong> 排名按得分确定，但答案要写回每位运动员原来的下标，排序时不能丢掉“分数—原位置”的对应关系。</li>
+</ol>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><a class="post-meta__tags" href="/tags/LeetCode/">LeetCode</a><a class="post-meta__tags" href="/tags/C/">C</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/posts/e3eb4e85/" title="通信工程专业导论课程大作业任务书（大一简化版）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">通信工程专业导论课程大作业任务书（大一简化版）</div></div><div class="info-2"><div class="info-item-1"> 一、任务说明 本次大作业满分 100 分，所有学生完成同一套题目，独立完成。请以“一条信息如何表示、发送、传输、接收”为主线，把计算机基础、通信基础和自己的网络观察联系起来。不要求编程、复杂协议分析或通信电路设计。 最终只提交 1 份 PDF 报告，命名为 学号_姓名_通信工程专业导论大作业.pdf。首页写明课程名称、学号、姓名和完成日期；报告中按本任务书的题号呈现计算过程、流程图、表格、实测截图与分析。建议先完成实验记录，再撰写解释和总结。 统一约定： 1 Byte = 8 bit；1 KB = 1000 Byte，1 MB = 1000 KB；1 Mbit = 10610^6106 bit。容量与链路速率均按十进制计算；若补充使用 1024 进制，应写成 KiB、MiB。只计算题目给出的原始数据，不计文件头、压缩、协议开销及重传，除非题目特别要求讨论。  二、第一部分：信息怎样变成数据（30 分）  1. 进制与字符编码（10 分） 取本人学号最后三位组成的十进制整数 NNN（例如末三位为 007，则 N=7N=7N=7），完成：  将 NNN 转换成二进制和十六进制，写出...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/posts/23c7198c/" title="06 图的邻接矩阵和邻接表存储实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">06 图的邻接矩阵和邻接表存储实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  领会图的邻接矩阵和邻接表两种主要存储结构。 掌握带权有向图邻接矩阵的创建和输出方法。 掌握带权有向图邻接表的创建和输出方法。 理解邻接矩阵与邻接表在空间使用和访问方式上的差异。 掌握动态申请和释放邻接表边结点的方法。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等   提交与截图要求  必须提交运行截图：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。 本次截图重点：图的 5×5 邻接矩阵；五个顶点的出边链表另在报告中写出。完成提高或选做任务的同学，还应附相应结果截图。 必须提交带中文注释的 C 源码：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 TODO 提示不能代替自己完成的注释，也不能只交代码或只交截图。   三、实验内容 编写 graph.c，实现带权有向图的邻接矩阵和邻接表的创建、输出与...</div></div></div></a><a class="pagination-related" href="/posts/7ab0fcd8/" title="05 二叉树遍历算法实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">05 二叉树遍历算法实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  领会二叉树的存储结构。 理解先序、中序、后序和层次遍历的访问顺序。 掌握二叉树三种递归遍历算法的设计方法。 掌握利用栈实现先序、中序和后序非递归遍历的方法。 掌握利用队列实现二叉树层次遍历的方法。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等   提交与截图要求  必须提交运行截图：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。 本次截图重点：先序、中序、后序三种递归遍历结果。完成提高或选做任务的同学，还应附相应结果截图。 必须提交带中文注释的 C 源码：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 TODO 提示不能代替自己完成的注释，也不能只交代码或只交截图。   三、实验内容 编写 C 语言程序 exp5-1.c，实现二叉树的先序、中序、后序和层次遍历算法。其中，先序、中序和后序遍历分别...</div></div></div></a><a class="pagination-related" href="/posts/510741dd/" title="07 顺序查找和折半查找实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">07 顺序查找和折半查找实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  理解查找表和关键字的基本概念。 掌握顺序查找算法的设计方法。 掌握折半查找算法的设计方法。 理解折半查找对数据有序性的要求。 比较顺序查找和折半查找的时间复杂度及适用场景。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等   提交与截图要求  必须提交运行截图：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。 本次截图重点：关键字 29 的成功结果和关键字 30 的失败结果（两种算法均需显示）。完成提高或选做任务的同学，还应附相应结果截图。 必须提交带中文注释的 C 源码：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 TODO 提示不能代替自己完成的注释，也不能只交代码或只交截图。   三、实验内容 编写程序 exp7-1.c，实现顺序查找算法和折半查找算法，并完成以下功能：  建立一个按关键字升...</div></div></div></a><a class="pagination-related" href="/posts/6df3ae91/" title="04 顺序串基本运算实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">04 顺序串基本运算实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  领会顺序串的存储结构。 掌握顺序串赋值、复制、比较、求长度、连接、求子串、插入、删除和替换等基本运算。 理解顺序串中字符位置和串长度的关系。 能够综合使用顺序串的基本运算完成实验程序。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等   提交与截图要求  必须提交运行截图：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。 本次截图重点：原串、长度、子串 bcdefghefg 和删除结果 aghefghijklmn。完成提高或选做任务的同学，还应附相应结果截图。 必须提交带中文注释的 C 源码：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 TODO 提示不能代替自己完成的注释，也不能只交代码或只交截图。   三、实验内容 编写 sqstring.c，实现顺序串的各种基本运算。假设顺序串中的元素类型为...</div></div></div></a><a class="pagination-related" href="/posts/5866a81e/" title="01 算法性能分析实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">01 算法性能分析实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  掌握程序执行时间的基本测试方法。 理解问题规模变化对算法运行时间的影响。 观察常见时间函数随问题规模增长的变化规律。 通过比较不同算法，体会算法设计对程序性能的影响。   二、实验环境  编程语言：C 开发环境：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等 本实验包含 1 个课堂必做任务 + 1 个提高任务 + 1 个选做任务。   计时方法参考  C 1234567891011121314#include &lt;time.h&gt;clock_t start, end;double elapsed;void measure(void)&#123;    start = clock();    /* 调用待测试算法 */    end = clock();    elapsed = (double)(end - start) / CLOCKS_PER_SEC;&#125; 如果单次执行时间过短，可以重复执行多次后取平均值。不同计算机和运行环境的实际运行时间可能不同，本实验重点观察同一环境下算法性能随问题规模变化的...</div></div></div></a><a class="pagination-related" href="/posts/4e9f8dac/" title="03 顺序栈基本运算实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">03 顺序栈基本运算实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  领会顺序栈的存储结构。 掌握顺序栈初始化、进栈、出栈、取栈顶元素、判空和销毁等基本运算。 理解栈的“后进先出”（LIFO）特点。 能够综合使用顺序栈的基本运算完成实验程序。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等   提交与截图要求  必须提交运行截图：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。 本次截图重点：初始化、入栈后、全部出栈后的判空结果及 e d c b a 出栈序列。完成提高或选做任务的同学，还应附相应结果截图。 必须提交带中文注释的 C 源码：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 TODO 提示不能代替自己完成的注释，也不能只交代码或只交截图。   三、实验内容 编写 sqstack.c，实现顺序栈的各种基本运算。假设栈中元素类型 ElemType 为 char...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">zsl</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">31</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">69</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">5</div></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-1-%E7%AB%A0-%E7%BB%AA%E8%AE%BA%E6%95%B0%E6%8D%AE-%E7%AE%97%E6%B3%95%E4%B8%8E%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">1.</span> <span class="toc-text"> 第 1 章 绪论：数据、算法与复杂度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-2-%E7%AB%A0-%E7%BA%BF%E6%80%A7%E8%A1%A8%E5%8D%95%E9%93%BE%E8%A1%A8%E4%B8%8E%E6%8C%87%E9%92%88"><span class="toc-number">2.</span> <span class="toc-text"> 第 2 章 线性表：单链表与指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-3-%E7%AB%A0-%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97"><span class="toc-number">3.</span> <span class="toc-text"> 第 3 章 栈和队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-4-%E7%AB%A0-%E4%B8%B2%E5%AD%97%E7%AC%A6%E5%BA%8F%E5%88%97%E4%B8%8E%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D"><span class="toc-number">4.</span> <span class="toc-text"> 第 4 章 串：字符序列与模式匹配</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-5-%E7%AB%A0-%E6%95%B0%E7%BB%84%E5%92%8C%E5%B9%BF%E4%B9%89%E8%A1%A8%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%8E%E7%9F%A9%E9%98%B5"><span class="toc-number">5.</span> <span class="toc-text"> 第 5 章 数组和广义表：二维数组与矩阵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-6-%E7%AB%A0-%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">6.</span> <span class="toc-text"> 第 6 章 树和二叉树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-7-%E7%AB%A0-%E5%9B%BE%E6%96%B9%E5%90%91-%E5%BA%A6%E4%B8%8E%E9%81%8D%E5%8E%86"><span class="toc-number">7.</span> <span class="toc-text"> 第 7 章 图：方向、度与遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-8-%E7%AB%A0-%E6%9F%A5%E6%89%BE%E6%8A%98%E5%8D%8A-bst-%E4%B8%8E%E5%93%88%E5%B8%8C"><span class="toc-number">8.</span> <span class="toc-text"> 第 8 章 查找：折半、BST 与哈希</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC-9-%E7%AB%A0-%E6%8E%92%E5%BA%8F%E6%9C%89%E5%BA%8F%E7%BB%93%E6%9E%9C%E4%B8%8E%E8%AE%B0%E5%BD%95%E4%BD%8D%E7%BD%AE"><span class="toc-number">9.</span> <span class="toc-text"> 第 9 章 排序：有序结果与记录位置</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/1769ec6e/" title="数据结构第 1—9 章 LeetCode 简单题单">数据结构第 1—9 章 LeetCode 简单题单</a><time datetime="2026-10-08T16:00:00.000Z" title="Created 2026-10-09 00:00:00">2026-10-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/e3eb4e85/" title="通信工程专业导论课程大作业任务书（大一简化版）">通信工程专业导论课程大作业任务书（大一简化版）</a><time datetime="2026-10-07T09:16:46.000Z" title="Created 2026-10-07 17:16:46">2026-10-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/e2fec5f4/" title="数据结构课程大作业选题：基础、综合与提高类">数据结构课程大作业选题：基础、综合与提高类</a><time datetime="2026-10-07T05:00:00.000Z" title="Created 2026-10-07 13:00:00">2026-10-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/5866a81e/" title="01 算法性能分析实验">01 算法性能分析实验</a><time datetime="2026-10-06T16:00:00.000Z" title="Created 2026-10-07 00:00:00">2026-10-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/a80e397c/" title="02 单链表基本运算实验">02 单链表基本运算实验</a><time datetime="2026-10-06T16:00:00.000Z" title="Created 2026-10-07 00:00:00">2026-10-07</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By zsl</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/katex.min.css')
+    if (false) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const config = mermaidSrc.dataset.config ? JSON.parse(mermaidSrc.dataset.config) : {}
+      if (!config.theme) {
+        config.theme = theme
+      }
+      const mermaidThemeConfig = `%%{init: ${JSON.stringify(config)}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid@11.12.2/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

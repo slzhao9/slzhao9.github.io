@@ -175,9 +175,10 @@
         <div class="control-group" style="border-color: var(--current-accent);">
             <h3 style="color: var(--current-accent);">1. 中断源选择</h3>
             <select id="int-select">
-                <option value="0">INT0 (P3.2) - 优先级高</option>
-                <option value="1">INT1 (P3.3) - 优先级低</option>
+                <option value="0">INT0 (P3.2)</option>
+                <option value="1">INT1 (P3.3)</option>
             </select>
+            <div style="font-size: 0.8rem; color: #aaa; margin-top: 5px;">未修改 IP 寄存器时，两者处于同一优先级；同级同时请求时，INT0 先于 INT1 被查询。</div>
         </div>
 
         <div class="control-group">

@@ -1,0 +1,544 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>01 算法性能分析实验 | Blog</title><meta name="author" content="zsl"><meta name="copyright" content="zsl"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、实验目的  掌握程序执行时间的基本测试方法。 理解问题规模变化对算法运行时间的影响。 观察常见时间函数随问题规模增长的变化规律。 通过比较不同算法，体会算法设计对程序性能的影响。   二、实验环境  编程语言：C 开发环境：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等 本实验包含 1 个课堂必做任务 + 1 个提高任务 + 1 个选做任务。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="01 算法性能分析实验">
+<meta property="og:url" content="http://example.com/posts/5866a81e/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="一、实验目的  掌握程序执行时间的基本测试方法。 理解问题规模变化对算法运行时间的影响。 观察常见时间函数随问题规模增长的变化规律。 通过比较不同算法，体会算法设计对程序性能的影响。   二、实验环境  编程语言：C 开发环境：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等 本实验包含 1 个课堂必做任务 + 1 个提高任务 + 1 个选做任务。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2026-10-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-10-07T08:07:57.055Z">
+<meta property="article:author" content="zsl">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="C">
+<meta property="article:tag" content="算法分析">
+<meta property="article:tag" content="时间复杂度">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "01 算法性能分析实验",
+  "url": "http://example.com/posts/5866a81e/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2026-10-06T16:00:00.000Z",
+  "dateModified": "2026-10-07T08:07:57.055Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "zsl",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/butterfly-icon.png"><link rel="canonical" href="http://example.com/posts/5866a81e/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '01 算法性能分析实验',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">01 算法性能分析实验</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">01 算法性能分析实验</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-10-06T16:00:00.000Z" title="Created 2026-10-07 00:00:00">2026-10-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-10-07T08:07:57.055Z" title="Updated 2026-10-07 16:07:57">2026-10-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E9%AA%8C/">数据结构实验</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><h2 id="一-实验目的"><a class="markdownIt-Anchor" href="#一-实验目的"></a> 一、实验目的</h2>
+<ol>
+<li>掌握程序执行时间的基本测试方法。</li>
+<li>理解问题规模变化对算法运行时间的影响。</li>
+<li>观察常见时间函数随问题规模增长的变化规律。</li>
+<li>通过比较不同算法，体会算法设计对程序性能的影响。</li>
+</ol>
+<h2 id="二-实验环境"><a class="markdownIt-Anchor" href="#二-实验环境"></a> 二、实验环境</h2>
+<ul>
+<li>编程语言：<strong>C</strong></li>
+<li>开发环境：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等</li>
+<li>本实验包含 <strong>1 个课堂必做任务 + 1 个提高任务 + 1 个选做任务</strong>。</li>
+</ul>
+<h3 id="计时方法参考"><a class="markdownIt-Anchor" href="#计时方法参考"></a> 计时方法参考</h3>
+<h4 id="c"><a class="markdownIt-Anchor" href="#c"></a> C</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">clock_t</span> start, end;</span><br><span class="line"><span class="type">double</span> elapsed;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">measure</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    start = clock();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 调用待测试算法 */</span></span><br><span class="line"></span><br><span class="line">    end = clock();</span><br><span class="line">    elapsed = (<span class="type">double</span>)(end - start) / CLOCKS_PER_SEC;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note info flat"><p>如果单次执行时间过短，可以重复执行多次后取平均值。不同计算机和运行环境的实际运行时间可能不同，本实验重点观察同一环境下算法性能随问题规模变化的趋势。</p>
+</div>
+<h3 id="提交与截图要求"><a class="markdownIt-Anchor" href="#提交与截图要求"></a> 提交与截图要求</h3>
+<ol>
+<li><strong>必须提交运行截图</strong>：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。</li>
+<li><strong>本次截图重点</strong>：四组标准规模及个性化参数的求和结果与耗时。完成提高或选做任务的同学，还应附相应结果截图。</li>
+<li><strong>必须提交带中文注释的 C 源码</strong>：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 <code>TODO</code> 提示不能代替自己完成的注释，也不能只交代码或只交截图。</li>
+</ol>
+<h2 id="三-实验原理"><a class="markdownIt-Anchor" href="#三-实验原理"></a> 三、实验原理</h2>
+<p>算法性能通常与问题规模 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span> 有关。本实验通过“理论分析 + 实际测试”的方式观察算法效率。</p>
+<p>本次实验包含一个课堂必做任务、一个提高任务和一个选做任务：</p>
+<ol>
+<li><strong>必做任务1</strong>：比较两种求和算法的运行效率；</li>
+<li><strong>提高任务2</strong>：观察常见时间函数的增长趋势；</li>
+<li><strong>选做任务3</strong>：比较两种素数判断方法的运行效率。</li>
+</ol>
+<h3 id="初学者理解算法性能到底比较什么"><a class="markdownIt-Anchor" href="#初学者理解算法性能到底比较什么"></a> 初学者理解：算法性能到底比较什么</h3>
+<p>同一个问题可以有不同的解决方法。算法性能主要观察两件事：完成任务需要多少计算步骤，以及程序需要多少额外存储空间。本实验重点观察前者，也就是时间复杂度。</p>
+<p>这里的 <code>n</code> 表示问题规模。例如，求 <code>1</code> 到 <code>n</code> 的和时，<code>n</code> 越大，需要处理的数字越多；统计 <code>1</code> 到 <code>n</code> 中的素数时，<code>n</code> 越大，需要检查的数字也越多。</p>
+<p>实际运行时间会受到计算机、编译器和当前系统负载影响，所以不能只比较某一次测得的秒数。更可靠的做法是：在同一台计算机上使用相同的编译方式，逐渐增大 <code>n</code>，观察运行时间的增长趋势。</p>
+<h3 id="初学者理解为什么要分析增长趋势"><a class="markdownIt-Anchor" href="#初学者理解为什么要分析增长趋势"></a> 初学者理解：为什么要分析增长趋势</h3>
+<p>假设一种方法需要执行大约 <code>n</code> 次操作，另一种方法只需要固定几次操作。当 <code>n</code> 很小时，两者可能都很快；当 <code>n</code> 变大时，前一种方法的运行时间会随着 <code>n</code> 增长，而后一种方法变化很小。</p>
+<p>因此，时间复杂度不是精确的秒数，而是描述问题规模变大后，算法执行步骤如何增长：</p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>：操作次数基本不随 <code>n</code> 改变；</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>：<code>n</code> 增大一倍，操作次数大致也增大一倍；</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>：<code>n</code> 增大一倍，操作次数大致增大四倍。</li>
+</ul>
+<p>实验中应同时记录计算结果和运行时间。只有结果正确，时间比较才有意义；如果只测时间而不检查结果，可能是在比较两个错误程序。</p>
+<h2 id="四-数据结构设计"><a class="markdownIt-Anchor" href="#四-数据结构设计"></a> 四、数据结构设计</h2>
+<p>本实验主要处理整数型数据，不涉及复杂数据结构。</p>
+<h2 id="五-算法设计"><a class="markdownIt-Anchor" href="#五-算法设计"></a> 五、算法设计</h2>
+<h3 id="任务1两种求和算法的性能比较"><a class="markdownIt-Anchor" href="#任务1两种求和算法的性能比较"></a> 任务1：两种求和算法的性能比较</h3>
+<p>对于给定正整数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span>，计算：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>1</mn><mo>+</mo><mn>2</mn><mo>+</mo><mo>⋯</mo><mo>+</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">1+2+\cdots+n
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span></span></p>
+<p>分别采用：</p>
+<ul>
+<li>方法1：逐项累加；</li>
+<li>方法2：利用求和公式直接计算。</li>
+</ul>
+<p>建议测试：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn><msup><mn>0</mn><mn>4</mn></msup><mo separator="true">,</mo><mtext> </mtext><mn>1</mn><msup><mn>0</mn><mn>5</mn></msup><mo separator="true">,</mo><mtext> </mtext><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup><mo separator="true">,</mo><mtext> </mtext><mn>1</mn><msup><mn>0</mn><mn>7</mn></msup></mrow><annotation encoding="application/x-tex">n=10^4,\ 10^5,\ 10^6,\ 10^7
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.0585479999999998em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">5</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">7</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p>另做一组个性化测试：令 <code>k</code> 为本人学号末两位组成的整数（末两位为 <code>07</code> 时 <code>k=7</code>），取 <code>n=10001+k</code>。截图中同时显示学号、姓名、<code>k</code>、该组 <code>n</code> 和两种求和结果。</p>
+<p>要求：</p>
+<ol>
+<li>分别实现两种方法；</li>
+<li>记录两种方法的计算结果和运行时间；</li>
+<li>检查两种方法的计算结果是否一致；</li>
+</ol>
+<p>方法 1 会从 <code>1</code> 开始逐项累加到 <code>n</code>，循环执行次数与 <code>n</code> 直接相关，因此属于线性增长。方法 2 使用公式 <code>n(n+1)/2</code>，无论 <code>n</code> 多大都只需要有限次算术运算，因此属于常数级增长。两种方法的结果必须相同，区别在于获得结果所需的步骤数量不同。</p>
+<h3 id="提高任务2常见时间函数的增长趋势"><a class="markdownIt-Anchor" href="#提高任务2常见时间函数的增长趋势"></a> 提高任务2：常见时间函数的增长趋势</h3>
+<p>对于：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">n=1,2,\ldots,10
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span></span></span></span></span></p>
+<p>分别计算：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo><mi>log</mi><mo>⁡</mo></mo><mn>2</mn></msub><mi>n</mi><mo separator="true">,</mo><mspace width="1em"/><msqrt><mi>n</mi></msqrt><mo separator="true">,</mo><mspace width="1em"/><mi>n</mi><mo separator="true">,</mo><mspace width="1em"/><mi>n</mi><msub><mo><mi>log</mi><mo>⁡</mo></mo><mn>2</mn></msub><mi>n</mi><mo separator="true">,</mo><mspace width="1em"/><msup><mi>n</mi><mn>2</mn></msup><mo separator="true">,</mo><mspace width="1em"/><msup><mi>n</mi><mn>3</mn></msup><mo separator="true">,</mo><mspace width="1em"/><msup><mn>2</mn><mi>n</mi></msup><mo separator="true">,</mo><mspace width="1em"/><mi>n</mi><mo stretchy="false">!</mo></mrow><annotation encoding="application/x-tex">\log_2n,\quad
+\sqrt n,\quad
+n,\quad
+n\log_2n,\quad
+n^2,\quad
+n^3,\quad
+2^n,\quad
+n!
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.108248em;vertical-align:-0.24414em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.20696799999999996em;"><span style="top:-2.4558600000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24414em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8491550000000001em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="padding-left:0.833em;">n</span></span><span style="top:-2.809155em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.190845em;"><span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.20696799999999996em;"><span style="top:-2.4558600000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24414em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7143919999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">n</span><span class="mclose">!</span></span></span></span></span></p>
+<p>要求：</p>
+<ol>
+<li>使用循环依次处理 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn><mo>∼</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">n=1\sim10</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span></span></span></span>；</li>
+<li>自行编写阶乘函数；</li>
+<li>程序直接按统一格式输出各函数值；</li>
+<li>本任务不要求手工抄写完整数据表，以运行结果截图为准。</li>
+</ol>
+<p>这些函数的增长速度不同。<code>log₂n</code> 增长最慢，<code>n</code> 是线性增长，<code>n²</code> 和 <code>n³</code> 增长更快，<code>2ⁿ</code> 和 <code>n!</code> 在 <code>n</code> 较大时会迅速增长。循环中的每个 <code>n</code> 都要单独计算，不能把上一次循环的结果误认为当前结果。</p>
+<h3 id="选做任务3求-1-到-n-中的素数个数"><a class="markdownIt-Anchor" href="#选做任务3求-1-到-n-中的素数个数"></a> 选做任务3：求 1 到 n 中的素数个数</h3>
+<div class="note warning flat"><p>本任务为<strong>选做题</strong>。完成任务1后仍有余力的学生可继续完成，不作为本次实验的基本完成要求。</p>
+</div>
+<p>分别使用两种方法判断一个整数是否为素数，并统计 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span> 中素数的个数。</p>
+<ul>
+<li>方法1：从较小整数开始逐个试除；</li>
+<li>方法2：在方法1基础上缩小不必要的试除范围。</li>
+</ul>
+<p>建议测试：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1000</mn><mo separator="true">,</mo><mtext> </mtext><mn>5000</mn><mo separator="true">,</mo><mtext> </mtext><mn>10000</mn><mo separator="true">,</mo><mtext> </mtext><mn>50000</mn></mrow><annotation encoding="application/x-tex">n=1000,\ 5000,\ 10000,\ 50000
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">5</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">5</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span></span></span></span></span></p>
+<p>若完成选做任务，再增加个性化测试 <code>n=1001+k</code>；<code>k</code> 与任务 1 的定义相同。</p>
+<p>要求：</p>
+<ol>
+<li>分别编写两个素数判断函数；</li>
+<li>分别统计素数个数并计时；</li>
+<li>检查两种方法统计结果是否一致；</li>
+</ol>
+<p>判断素数时，先排除小于 <code>2</code> 的数，因为素数必须是大于 <code>1</code> 的正整数。基础方法可以尝试多个除数；改进方法只需要尝试到平方根，因为如果一个数存在大于平方根的因数，那么它一定同时存在一个小于平方根的因数。统计时应遍历每个候选数，并在判断函数返回真时增加计数。</p>
+<hr />
+<h2 id="六-实验代码"><a class="markdownIt-Anchor" href="#六-实验代码"></a> 六、实验代码</h2>
+<div class="note primary flat"><ol>
+<li>实验代码必须以<strong>文本代码块</strong>形式粘贴，不得使用截图代替。</li>
+<li>对关键变量、核心循环、主要判断和计时过程添加必要注释。</li>
+<li>程序运行时应输出本人<strong>学号、姓名</strong>，便于截图验证。</li>
+</ol>
+</div>
+<h3 id="任务1代码"><a class="markdownIt-Anchor" href="#任务1代码"></a> 任务1代码</h3>
+<h4 id="c-程序框架"><a class="markdownIt-Anchor" href="#c-程序框架"></a> C 程序框架</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> <span class="title function_">sum1</span><span class="params">(<span class="type">long</span> <span class="type">long</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO：完成逐项累加</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> <span class="title function_">sum2</span><span class="params">(<span class="type">long</span> <span class="type">long</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// TODO：完成公式计算</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> n;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> result1, result2;</span><br><span class="line">    <span class="type">clock_t</span> start, end;</span><br><span class="line">    <span class="type">double</span> time1, time2;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;学号：________  姓名：________\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO：依次测试指定的 n</span></span><br><span class="line">    <span class="comment">// TODO：记录两种方法的结果和运行时间</span></span><br><span class="line">    <span class="comment">// TODO：计算并输出本人学号对应的 k，增加 n=10001+k 的测试</span></span><br><span class="line">    <span class="comment">// TODO：输出测试结果</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>学生完整代码：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">【在此粘贴任务1完整代码】</span><br></pre></td></tr></table></figure>
+<p>任务 1 可使用以下命令编译：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -std=c11 exp1-1.c -o exp1-1</span><br><span class="line">./exp1-1</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="提高任务2代码"><a class="markdownIt-Anchor" href="#提高任务2代码"></a> 提高任务2代码</h3>
+<h4 id="c-程序框架-2"><a class="markdownIt-Anchor" href="#c-程序框架-2"></a> C 程序框架</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> <span class="title function_">factorial</span><span class="params">(<span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> result = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO：完成阶乘计算</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;学号：________  姓名：________\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> n = <span class="number">1</span>; n &lt;= <span class="number">10</span>; n++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// TODO：计算各时间函数值</span></span><br><span class="line">        <span class="comment">// TODO：按统一格式输出</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>学生完整代码：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">【在此粘贴任务2完整代码】</span><br></pre></td></tr></table></figure>
+<p>任务 2 使用了 <code>log2</code>、<code>sqrt</code> 等数学函数，GCC 编译时需要链接数学库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -std=c11 exp1-2.c -lm -o exp1-2</span><br><span class="line">./exp1-2</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="选做任务3代码"><a class="markdownIt-Anchor" href="#选做任务3代码"></a> 选做任务3代码</h3>
+<blockquote>
+<p>完成选做任务的学生在本节粘贴完整代码；未完成选做任务可保留本节为空。</p>
+</blockquote>
+<h4 id="c-程序框架-3"><a class="markdownIt-Anchor" href="#c-程序框架-3"></a> C 程序框架</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">prime1</span><span class="params">(<span class="type">int</span> x)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (x &lt; <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO：完成方法1的素数判断</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">prime2</span><span class="params">(<span class="type">int</span> x)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (x &lt; <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO：完成改进后的素数判断</span></span><br><span class="line">    <span class="comment">// 添加必要注释说明循环范围</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">countPrime1</span><span class="params">(<span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO：调用 prime1() 统计素数个数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">countPrime2</span><span class="params">(<span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO：调用 prime2() 统计素数个数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="type">int</span> count1, count2;</span><br><span class="line">    <span class="type">clock_t</span> start, end;</span><br><span class="line">    <span class="type">double</span> time1, time2;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;学号：________  姓名：________\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO：依次测试指定的 n</span></span><br><span class="line">    <span class="comment">// TODO：分别统计素数个数并计时</span></span><br><span class="line">    <span class="comment">// TODO：若完成选做任务，增加 n=1001+k 的测试并输出 k</span></span><br><span class="line">    <span class="comment">// TODO：输出测试结果</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>学生完整代码：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">【在此粘贴任务3完整代码】</span><br></pre></td></tr></table></figure>
+<p>任务 3 可使用以下命令编译：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -std=c11 exp1-3.c -o exp1-3</span><br><span class="line">./exp1-3</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="七-运行结果"><a class="markdownIt-Anchor" href="#七-运行结果"></a> 七、运行结果</h2>
+<div class="note primary flat"><p>所有运行截图必须清晰显示：</p>
+<ul>
+<li>学号；</li>
+<li>姓名；</li>
+<li>测试参数；</li>
+<li>主要运行结果。</li>
+</ul>
+</div>
+<h3 id="任务1运行结果"><a class="markdownIt-Anchor" href="#任务1运行结果"></a> 任务1运行结果</h3>
+<p>填写实验数据：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">n</th>
+<th style="text-align:center">方法1结果</th>
+<th>方法1时间</th>
+<th style="text-align:center">方法2结果</th>
+<th style="text-align:center">方法2时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">10<sup>4</sup></td>
+<td style="text-align:center"></td>
+<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">10<sup>5</sup></td>
+<td style="text-align:center"></td>
+<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">10<sup>6</sup></td>
+<td style="text-align:center"></td>
+<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">10<sup>7</sup></td>
+<td style="text-align:center"></td>
+<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p><strong>截图1：任务1运行结果</strong></p>
+<p>截图中应同时包含标准测试结果和1个个性化参数测试结果。</p>
+<hr />
+<h3 id="提高任务2运行结果"><a class="markdownIt-Anchor" href="#提高任务2运行结果"></a> 提高任务2运行结果</h3>
+<p>程序直接输出 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn><mo>∼</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">n=1\sim10</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span></span></span></span> 时各时间函数的计算结果，不要求手工填写数据表。</p>
+<p><strong>截图2：任务2运行结果</strong></p>
+<hr />
+<h3 id="选做任务3运行结果"><a class="markdownIt-Anchor" href="#选做任务3运行结果"></a> 选做任务3运行结果</h3>
+<blockquote>
+<p>完成选做任务的学生填写以下数据并插入截图；未完成选做任务无需填写。</p>
+</blockquote>
+<p>填写实验数据：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">n</th>
+<th style="text-align:right">方法1素数个数</th>
+<th style="text-align:right">方法1时间</th>
+<th style="text-align:right">方法2素数个数</th>
+<th style="text-align:right">方法2时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1000</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:right">5000</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:right">10000</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:right">50000</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+</tr>
+</tbody>
+</table>
+<p><strong>截图3：标准测试结果</strong></p>
+<p><strong>截图4：个性化参数验证</strong></p>
+<p>另选一个不同于表中数据的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span> 值进行测试，并在截图中显示该参数。</p>
+<hr />
+<h2 id="八-问题分析"><a class="markdownIt-Anchor" href="#八-问题分析"></a> 八、问题分析</h2>
+<div class="note info flat"><p>结合本人实际运行结果，简要回答即可，每题建议2～3句话。</p>
+</div>
+<h3 id="1-求和算法性能比较"><a class="markdownIt-Anchor" href="#1-求和算法性能比较"></a> 1. 求和算法性能比较</h3>
+<p>根据任务1实验数据，说明两种方法的运行时间随 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span> 增大时有何不同。</p>
+<p><strong>分析：</strong></p>
+<hr />
+<h3 id="2-选做素数判断算法性能比较"><a class="markdownIt-Anchor" href="#2-选做素数判断算法性能比较"></a> 2. 选做：素数判断算法性能比较</h3>
+<p>完成选做任务3的学生，根据实验数据简要说明两种方法在运行效率上的差异。</p>
+<p><strong>分析：</strong></p>
+<hr />
+<h2 id="九-实验总结"><a class="markdownIt-Anchor" href="#九-实验总结"></a> 九、实验总结</h2>
+<blockquote>
+<p>简要总结本次实验的主要收获，建议 <strong>50～100字</strong>。</p>
+</blockquote>
+<p><strong>实验总结：</strong></p>
+<hr />
+<h2 id="十-课堂完成要求"><a class="markdownIt-Anchor" href="#十-课堂完成要求"></a> 十、课堂完成要求</h2>
+<p>80 分钟课堂内建议按以下节奏完成：</p>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>课堂任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0～15 分钟</td>
+<td>理解计时方法，确认两种求和方法返回相同结果</td>
+</tr>
+<tr>
+<td>15～55 分钟</td>
+<td>补全求和函数和测试循环，先完成 <code>10^4</code>、<code>10^5</code> 两组数据</td>
+</tr>
+<tr>
+<td>55～70 分钟</td>
+<td>再测试 <code>10^6</code>、<code>10^7</code>，记录结果并讨论增长趋势</td>
+</tr>
+<tr>
+<td>70～80 分钟</td>
+<td>检查结果一致性，保存代码和一张包含测试参数的运行截图</td>
+</tr>
+</tbody>
+</table>
+<p><strong>课堂必做只包含任务1。</strong> 对 <code>n=1～10</code> 的时间函数表，可以由教师演示或由完成较快的学生继续完成任务2；素数统计为进一步练习。分析文字和实验总结可在课后整理。</p>
+<div class="note warning flat"><p>课堂内以完成任务1并正确记录测试数据为基本要求。任务2和任务3不计入课堂最低完成要求。</p>
+</div>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><a class="post-meta__tags" href="/tags/C/">C</a><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/">算法分析</a><a class="post-meta__tags" href="/tags/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">时间复杂度</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/a80e397c/" title="02 单链表基本运算实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">02 单链表基本运算实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  领会单链表的存储结构。 掌握单链表初始化、插入、删除、查找、输出和销毁等基本运算。 掌握采用尾插法建立单链表的算法。 综合使用单链表的基本运算完成实验程序。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等   提交与截图要求  必须提交运行截图：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。 本次截图重点：单链表 a b c d e、长度 5 和释放提示。完成提高或选做任务的同学，还应附相应结果截图。 必须提交带中文注释的 C 源码：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 TODO 提示不能代替自己完成的注释，也不能只交代码或只交截图。   三、实验内容 编写 linklist.c，实现单链表的各种基本运算和整体建表算法。假设单链表的元素类型 ElemType 为 char。 在此基础上设...</div></div></div></a><a class="pagination-related" href="/posts/78d1cc7/" title="09 AT24C02读写实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">09 AT24C02读写实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  熟悉 Keil C51 软件的使用方法 掌握 I2C 接口的软硬件设计方法 掌握 AT24C02 读写功能的实现方法   二、实验设备  PC机一台，单片机实验箱   三、实验内容 将自己学号的后8位依次写入 AT24C02，从 00H 单元开始存放，然后再读出送数码管显示。  四、实验原理 I2C 总线全称：Inter-Integrated Circuit，是由飞利浦公司开发出来的一种串行总线协议，它是一种多主机的总线，当发生主机竞争时，有总线仲裁机制。   I2C 总线传输数据过程 I2C 总线传输数据过程中涉及以下基本信号：    信号 说明     起始信号 SCL 为高时，SDA 从高变低   停止信号 SCL 为高时，SDA 从低变高   写/发送数据 主机向从机发送一个字节（地址和数据），高位先发   读/接收数据 主机从从机接收一个字节   等待应答 传输过程中，接收方在第 9 个时钟周期将 SDA 拉低   发送应答 读取或写入最后一个字节数据后，发送应答或非应答    应答信号（ACK）规则：  主机发送（写数据）：应答信号由接收方在数据开始...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/posts/e2fec5f4/" title="数据结构课程大作业选题：基础、综合与提高类"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">数据结构课程大作业选题：基础、综合与提高类</div></div><div class="info-2"><div class="info-item-1">本课程期末采用个人大作业考查。下面共有 11 个备选题目：基础类 4 题、综合类 3 题、提高类 4 题。每人选择 1 题，完成该题的必做要求；不需要完成全部题目。所有题目均使用 C 语言编写终端程序，不要求图形界面、数据库、联网服务或真实硬件。 选题围绕本学期的 算法性能分析、单链表、顺序栈、顺序串、二叉树遍历、图的存储、查找 和 插入排序 8 次实验设计。综合类、提高类会增加少量新算法，题目中已标明范围。  一、选题总览    类别 编号 题目 主要对应实验 核心结构或算法     基础 1 学生成绩管理系统 1、7、8 结构体数组、查找、插入排序   基础 2 通讯录管理系统 2、4、7 单链表、字符串比较、查找   基础 3 图书借阅管理系统 2、7、8 记录管理、查找、排序   基础 4 排序性能分析器 1、8 直接插入排序、折半插入排序、计数与计时   综合 5 四则表达式求值器 3、4 顺序栈、字符串扫描   综合 6 模拟文件目录树 5、7 树的二叉链式表示、遍历、查找   综合 7 哈夫曼编码与解码器 5、8 二叉树、最小权值结点选择   提高 8 校园导航系统...</div></div></div></a><a class="pagination-related" href="/posts/7ab0fcd8/" title="05 二叉树遍历算法实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">05 二叉树遍历算法实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  领会二叉树的存储结构。 理解先序、中序、后序和层次遍历的访问顺序。 掌握二叉树三种递归遍历算法的设计方法。 掌握利用栈实现先序、中序和后序非递归遍历的方法。 掌握利用队列实现二叉树层次遍历的方法。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等   提交与截图要求  必须提交运行截图：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。 本次截图重点：先序、中序、后序三种递归遍历结果。完成提高或选做任务的同学，还应附相应结果截图。 必须提交带中文注释的 C 源码：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 TODO 提示不能代替自己完成的注释，也不能只交代码或只交截图。   三、实验内容 编写 C 语言程序 exp5-1.c，实现二叉树的先序、中序、后序和层次遍历算法。其中，先序、中序和后序遍历分别...</div></div></div></a><a class="pagination-related" href="/posts/a80e397c/" title="02 单链表基本运算实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">02 单链表基本运算实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  领会单链表的存储结构。 掌握单链表初始化、插入、删除、查找、输出和销毁等基本运算。 掌握采用尾插法建立单链表的算法。 综合使用单链表的基本运算完成实验程序。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等   提交与截图要求  必须提交运行截图：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。 本次截图重点：单链表 a b c d e、长度 5 和释放提示。完成提高或选做任务的同学，还应附相应结果截图。 必须提交带中文注释的 C 源码：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 TODO 提示不能代替自己完成的注释，也不能只交代码或只交截图。   三、实验内容 编写 linklist.c，实现单链表的各种基本运算和整体建表算法。假设单链表的元素类型 ElemType 为 char。 在此基础上设...</div></div></div></a><a class="pagination-related" href="/posts/510741dd/" title="07 顺序查找和折半查找实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">07 顺序查找和折半查找实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  理解查找表和关键字的基本概念。 掌握顺序查找算法的设计方法。 掌握折半查找算法的设计方法。 理解折半查找对数据有序性的要求。 比较顺序查找和折半查找的时间复杂度及适用场景。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等   提交与截图要求  必须提交运行截图：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。 本次截图重点：关键字 29 的成功结果和关键字 30 的失败结果（两种算法均需显示）。完成提高或选做任务的同学，还应附相应结果截图。 必须提交带中文注释的 C 源码：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 TODO 提示不能代替自己完成的注释，也不能只交代码或只交截图。   三、实验内容 编写程序 exp7-1.c，实现顺序查找算法和折半查找算法，并完成以下功能：  建立一个按关键字升...</div></div></div></a><a class="pagination-related" href="/posts/6df3ae91/" title="04 顺序串基本运算实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-07</div><div class="info-item-2">04 顺序串基本运算实验</div></div><div class="info-2"><div class="info-item-1"> 一、实验目的  领会顺序串的存储结构。 掌握顺序串赋值、复制、比较、求长度、连接、求子串、插入、删除和替换等基本运算。 理解顺序串中字符位置和串长度的关系。 能够综合使用顺序串的基本运算完成实验程序。   二、实验环境  操作系统：Windows、macOS 或 Linux 编程语言：C 编译器：支持 C99 或 C11 标准的编译器 开发工具：GCC、Clang、Visual Studio、Code::Blocks、VS Code 等   提交与截图要求  必须提交运行截图：至少一张，截图中须清晰、同时显示本人真实学号、姓名和课堂必做任务的运行结果；不要保留代码框架中的身份占位符。 本次截图重点：原串、长度、子串 bcdefghefg 和删除结果 aghefghijklmn。完成提高或选做任务的同学，还应附相应结果截图。 必须提交带中文注释的 C 源码：对关键变量、核心循环、条件判断及边界处理添加必要注释。框架中的 TODO 提示不能代替自己完成的注释，也不能只交代码或只交截图。   三、实验内容 编写 sqstring.c，实现顺序串的各种基本运算。假设顺序串中的元素类型为...</div></div></div></a><a class="pagination-related" href="/posts/1769ec6e/" title="数据结构第 1—9 章 LeetCode 简单题单"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-09</div><div class="info-item-2">数据结构第 1—9 章 LeetCode 简单题单</div></div><div class="info-2"><div class="info-item-1">本题单按第 1—9 章编排，共 28 道 LeetCode 简单题，由基础到巩固排列。题号可用于站内搜索。建议先手工走一遍示例，再用 C 语言完成练习，并说明所用数据结构与时间复杂度。  第 1 章 绪论：数据、算法与复杂度  1480. 一维数组的动态和 — 数组遍历、循环不变量。 想清楚处理到下标 i 时，已得到的前缀结果表示什么；比较一次扫描与反复求和的操作次数。 1929. 数组串联 — 数组下标、数据规模与空间。 明确原数组长度 n、结果长度 2n，检查第二段元素应写到什么下标。 1672. 最富有客户的资产总量 — 二维数组与两重循环。 先逐行求和，再维护最大值；分别分析行数、列数对操作次数的影响。   第 2 章 线性表：单链表与指针  83. 删除排序链表中的重复元素 — 删除结点、维护后继。 利用有序性只比较相邻结点；删除前先保留需要继续访问的链接。 206. 反转链表 — 链接方向与边界。 画出 前驱—当前—后继 三个指针，逐次改变 next；检查空链与单结点链。 21. 合并两个有序链表 — 带头结点思路与有序合并。 每次接入较小的当前结点；某一条链先到尾时...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">zsl</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">31</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">69</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">5</div></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84"><span class="toc-number">1.</span> <span class="toc-text"> 一、实验目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text"> 二、实验环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E6%97%B6%E6%96%B9%E6%B3%95%E5%8F%82%E8%80%83"><span class="toc-number">2.1.</span> <span class="toc-text"> 计时方法参考</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#c"><span class="toc-number">2.1.1.</span> <span class="toc-text"> C</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E4%B8%8E%E6%88%AA%E5%9B%BE%E8%A6%81%E6%B1%82"><span class="toc-number">2.2.</span> <span class="toc-text"> 提交与截图要求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E5%AE%9E%E9%AA%8C%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text"> 三、实验原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%AD%A6%E8%80%85%E7%90%86%E8%A7%A3%E7%AE%97%E6%B3%95%E6%80%A7%E8%83%BD%E5%88%B0%E5%BA%95%E6%AF%94%E8%BE%83%E4%BB%80%E4%B9%88"><span class="toc-number">3.1.</span> <span class="toc-text"> 初学者理解：算法性能到底比较什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%AD%A6%E8%80%85%E7%90%86%E8%A7%A3%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%88%86%E6%9E%90%E5%A2%9E%E9%95%BF%E8%B6%8B%E5%8A%BF"><span class="toc-number">3.2.</span> <span class="toc-text"> 初学者理解：为什么要分析增长趋势</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">4.</span> <span class="toc-text"> 四、数据结构设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1"><span class="toc-number">5.</span> <span class="toc-text"> 五、算法设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A11%E4%B8%A4%E7%A7%8D%E6%B1%82%E5%92%8C%E7%AE%97%E6%B3%95%E7%9A%84%E6%80%A7%E8%83%BD%E6%AF%94%E8%BE%83"><span class="toc-number">5.1.</span> <span class="toc-text"> 任务1：两种求和算法的性能比较</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E9%AB%98%E4%BB%BB%E5%8A%A12%E5%B8%B8%E8%A7%81%E6%97%B6%E9%97%B4%E5%87%BD%E6%95%B0%E7%9A%84%E5%A2%9E%E9%95%BF%E8%B6%8B%E5%8A%BF"><span class="toc-number">5.2.</span> <span class="toc-text"> 提高任务2：常见时间函数的增长趋势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E5%81%9A%E4%BB%BB%E5%8A%A13%E6%B1%82-1-%E5%88%B0-n-%E4%B8%AD%E7%9A%84%E7%B4%A0%E6%95%B0%E4%B8%AA%E6%95%B0"><span class="toc-number">5.3.</span> <span class="toc-text"> 选做任务3：求 1 到 n 中的素数个数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD-%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81"><span class="toc-number">6.</span> <span class="toc-text"> 六、实验代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A11%E4%BB%A3%E7%A0%81"><span class="toc-number">6.1.</span> <span class="toc-text"> 任务1代码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#c-%E7%A8%8B%E5%BA%8F%E6%A1%86%E6%9E%B6"><span class="toc-number">6.1.1.</span> <span class="toc-text"> C 程序框架</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E9%AB%98%E4%BB%BB%E5%8A%A12%E4%BB%A3%E7%A0%81"><span class="toc-number">6.2.</span> <span class="toc-text"> 提高任务2代码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#c-%E7%A8%8B%E5%BA%8F%E6%A1%86%E6%9E%B6-2"><span class="toc-number">6.2.1.</span> <span class="toc-text"> C 程序框架</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E5%81%9A%E4%BB%BB%E5%8A%A13%E4%BB%A3%E7%A0%81"><span class="toc-number">6.3.</span> <span class="toc-text"> 选做任务3代码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#c-%E7%A8%8B%E5%BA%8F%E6%A1%86%E6%9E%B6-3"><span class="toc-number">6.3.1.</span> <span class="toc-text"> C 程序框架</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83-%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="toc-number">7.</span> <span class="toc-text"> 七、运行结果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A11%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="toc-number">7.1.</span> <span class="toc-text"> 任务1运行结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E9%AB%98%E4%BB%BB%E5%8A%A12%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="toc-number">7.2.</span> <span class="toc-text"> 提高任务2运行结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E5%81%9A%E4%BB%BB%E5%8A%A13%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="toc-number">7.3.</span> <span class="toc-text"> 选做任务3运行结果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB-%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90"><span class="toc-number">8.</span> <span class="toc-text"> 八、问题分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%B1%82%E5%92%8C%E7%AE%97%E6%B3%95%E6%80%A7%E8%83%BD%E6%AF%94%E8%BE%83"><span class="toc-number">8.1.</span> <span class="toc-text"> 1. 求和算法性能比较</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%80%89%E5%81%9A%E7%B4%A0%E6%95%B0%E5%88%A4%E6%96%AD%E7%AE%97%E6%B3%95%E6%80%A7%E8%83%BD%E6%AF%94%E8%BE%83"><span class="toc-number">8.2.</span> <span class="toc-text"> 2. 选做：素数判断算法性能比较</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%9D-%E5%AE%9E%E9%AA%8C%E6%80%BB%E7%BB%93"><span class="toc-number">9.</span> <span class="toc-text"> 九、实验总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81-%E8%AF%BE%E5%A0%82%E5%AE%8C%E6%88%90%E8%A6%81%E6%B1%82"><span class="toc-number">10.</span> <span class="toc-text"> 十、课堂完成要求</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/1769ec6e/" title="数据结构第 1—9 章 LeetCode 简单题单">数据结构第 1—9 章 LeetCode 简单题单</a><time datetime="2026-10-08T16:00:00.000Z" title="Created 2026-10-09 00:00:00">2026-10-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/e3eb4e85/" title="通信工程专业导论课程大作业任务书（大一简化版）">通信工程专业导论课程大作业任务书（大一简化版）</a><time datetime="2026-10-07T09:16:46.000Z" title="Created 2026-10-07 17:16:46">2026-10-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/e2fec5f4/" title="数据结构课程大作业选题：基础、综合与提高类">数据结构课程大作业选题：基础、综合与提高类</a><time datetime="2026-10-07T05:00:00.000Z" title="Created 2026-10-07 13:00:00">2026-10-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/5866a81e/" title="01 算法性能分析实验">01 算法性能分析实验</a><time datetime="2026-10-06T16:00:00.000Z" title="Created 2026-10-07 00:00:00">2026-10-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/a80e397c/" title="02 单链表基本运算实验">02 单链表基本运算实验</a><time datetime="2026-10-06T16:00:00.000Z" title="Created 2026-10-07 00:00:00">2026-10-07</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By zsl</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/katex.min.css')
+    if (false) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const config = mermaidSrc.dataset.config ? JSON.parse(mermaidSrc.dataset.config) : {}
+      if (!config.theme) {
+        config.theme = theme
+      }
+      const mermaidThemeConfig = `%%{init: ${JSON.stringify(config)}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid@11.12.2/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
