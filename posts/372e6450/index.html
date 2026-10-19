@@ -1,0 +1,770 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>数据结构大作业任务书 | Blog</title><meta name="author" content="zsl"><meta name="copyright" content="zsl"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="《数据结构》课程大作业任务书   通用硬性要求  0.1 工程结构  必须采用多文件结构，至少包含：main.c + 每个数据结构的 .c &#x2F; .h 文件（如 list.h &#x2F; list.c）。 必须提供 Makefile 或 README.md 中的编译运行命令（如 gcc -std&#x3D;c99 -Wall *.c -o app）。 编译必须零警告（-Wall 下），有警告每项扣 1 分。   0.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构大作业任务书">
+<meta property="og:url" content="http://example.com/posts/372e6450/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="《数据结构》课程大作业任务书   通用硬性要求  0.1 工程结构  必须采用多文件结构，至少包含：main.c + 每个数据结构的 .c &#x2F; .h 文件（如 list.h &#x2F; list.c）。 必须提供 Makefile 或 README.md 中的编译运行命令（如 gcc -std&#x3D;c99 -Wall *.c -o app）。 编译必须零警告（-Wall 下），有警告每项扣 1 分。   0.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2026-10-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-10-19T03:12:50.302Z">
+<meta property="article:author" content="zsl">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="C">
+<meta property="article:tag" content="大作业">
+<meta property="article:tag" content="任务书">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "数据结构大作业任务书",
+  "url": "http://example.com/posts/372e6450/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2026-10-18T16:00:00.000Z",
+  "dateModified": "2026-10-19T03:12:50.302Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "zsl",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/butterfly-icon.png"><link rel="canonical" href="http://example.com/posts/372e6450/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '数据结构大作业任务书',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">数据结构大作业任务书</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">数据结构大作业任务书</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-10-18T16:00:00.000Z" title="Created 2026-10-19 00:00:00">2026-10-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-10-19T03:12:50.302Z" title="Updated 2026-10-19 11:12:50">2026-10-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E9%AA%8C/">数据结构实验</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>《数据结构》课程大作业任务书</p>
+<hr />
+<h2 id="通用硬性要求"><a class="markdownIt-Anchor" href="#通用硬性要求"></a> 通用硬性要求</h2>
+<h3 id="01-工程结构"><a class="markdownIt-Anchor" href="#01-工程结构"></a> 0.1 工程结构</h3>
+<ul>
+<li>必须采用<strong>多文件结构</strong>，至少包含：<code>main.c</code> + 每个数据结构的 <code>.c</code> / <code>.h</code> 文件（如 <code>list.h</code> / <code>list.c</code>）。</li>
+<li>必须提供 <code>Makefile</code> 或 <code>README.md</code> 中的<strong>编译运行命令</strong>（如 <code>gcc -std=c99 -Wall *.c -o app</code>）。</li>
+<li>编译必须<strong>零警告</strong>（<code>-Wall</code> 下），有警告每项扣 1 分。</li>
+</ul>
+<h3 id="02-内存与健壮性重点考察项"><a class="markdownIt-Anchor" href="#02-内存与健壮性重点考察项"></a> 0.2 内存与健壮性（重点考察项）</h3>
+<ul>
+<li>所有动态内存必须 <code>malloc</code> 分配，分配后<strong>必须判空</strong>。</li>
+<li><code>free</code> 之后指针<strong>置 NULL</strong>，避免野指针。</li>
+<li>程序退出前释放所有已分配内存（验收时会用 <code>valgrind</code> 或目测检查 <code>free</code> 配对情况）。</li>
+<li><strong>不允许</strong>用&quot;足够大的全局数组&quot;代替指定的数据结构。这是本题最核心的考察点，一经发现该项（25 分）直接记 0 分。</li>
+<li>程序须能连续交互运行不崩溃：空表删除、满表插入、非法输入（字母输入数字项、超长字符串、负数）均需给出提示并回到菜单。</li>
+</ul>
+<h3 id="03-交互与输出"><a class="markdownIt-Anchor" href="#03-交互与输出"></a> 0.3 交互与输出</h3>
+<ul>
+<li>
+<p>数字驱动的循环菜单，形如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">====== 学生成绩管理系统 ======</span><br><span class="line"> 1. 录入学生信息     2. 显示所有学生</span><br><span class="line"> 3. 查询学生         4. 修改信息</span><br><span class="line"> 5. 删除学生         6. 成绩统计</span><br><span class="line"> 7. 排序             8. 保存并退出</span><br><span class="line">------------------------------</span><br><span class="line">请选择[1-8]:</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>列表输出必须<strong>表格化</strong>（含表头、对齐的列宽），不得直接打印结构体裸数据。</p>
+</li>
+<li>
+<p>所有关键操作给出明确的成功/失败反馈。</p>
+</li>
+</ul>
+<h3 id="04-代码规范"><a class="markdownIt-Anchor" href="#04-代码规范"></a> 0.4 代码规范</h3>
+<ul>
+<li>关键函数必须有注释，格式为：<code>/* 功能 / 参数 / 返回值 / 注意事项 */</code>。</li>
+<li>命名统一（推荐 <code>下划线风格</code> 或 <code>小驼峰</code>，全项目保持一致）。</li>
+<li>注释率不低于 20%。</li>
+</ul>
+<h3 id="05-交付清单缺项不予验收"><a class="markdownIt-Anchor" href="#05-交付清单缺项不予验收"></a> 0.5 交付清单（缺项不予验收）</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>交付物</th>
+<th>要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>源码</td>
+<td>全部 <code>.c</code> / <code>.h</code> 文件 + 编译脚本</td>
+</tr>
+<tr>
+<td>2</td>
+<td>测试数据</td>
+<td>至少 3 组：<strong>正常数据</strong>（≥50 条）、<strong>空数据</strong>、<strong>非法/边界数据</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>设计报告</td>
+<td>≥2000 字，格式见 §五</td>
+</tr>
+<tr>
+<td>4</td>
+<td>演示材料</td>
+<td>运行截图 ≥8 张 或 录屏 ≤3 分钟</td>
+</tr>
+<tr>
+<td>5</td>
+<td>README</td>
+<td>编译、运行、菜单说明</td>
+</tr>
+<tr>
+<td>6</td>
+<td>开发日志</td>
+<td>git 提交记录 或 手写开发日志</td>
+</tr>
+<tr>
+<td>7</td>
+<td>AI 使用记录</td>
+<td><strong>见 §六，必须逐条贴出完整原始 prompt，缺失者不予验收</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="题目一学生成绩管理与分析系统学号-3-0"><a class="markdownIt-Anchor" href="#题目一学生成绩管理与分析系统学号-3-0"></a> 题目一：学生成绩管理与分析系统（学号 % 3 == 0）</h2>
+<h3 id="1-覆盖知识点"><a class="markdownIt-Anchor" href="#1-覆盖知识点"></a> 1. 覆盖知识点</h3>
+<p>线性表（链表/顺序表）· 排序算法 · 查找算法 · 文件持久化 · 简单统计分析</p>
+<h3 id="2-数据定义"><a class="markdownIt-Anchor" href="#2-数据定义"></a> 2. 数据定义</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> id[<span class="number">12</span>];        <span class="comment">/* 学号 */</span></span><br><span class="line">    <span class="type">char</span> name[<span class="number">20</span>];      <span class="comment">/* 姓名 */</span></span><br><span class="line">    <span class="type">char</span> gender[<span class="number">4</span>];     <span class="comment">/* 性别 */</span></span><br><span class="line">    <span class="type">float</span> score[<span class="number">5</span>];     <span class="comment">/* 5 门课程成绩 */</span></span><br><span class="line">    <span class="type">float</span> total;        <span class="comment">/* 总分 */</span></span><br><span class="line">    <span class="type">float</span> average;      <span class="comment">/* 平均分 */</span></span><br><span class="line">    <span class="type">int</span>  rank;          <span class="comment">/* 排名 */</span></span><br><span class="line">&#125; Student;</span><br></pre></td></tr></table></figure>
+<h3 id="3-存储要求"><a class="markdownIt-Anchor" href="#3-存储要求"></a> 3. 存储要求</h3>
+<ul>
+<li><strong>主存储必须使用带头结点的单向链表</strong>，所有增、删、改、查均在链表上完成。</li>
+<li>允许在排序时使用临时数组，但<strong>不允许</strong>用数组作为主存储。</li>
+<li>链表节点必须使用 <code>malloc</code> 动态申请。</li>
+</ul>
+<h3 id="4-必做功能"><a class="markdownIt-Anchor" href="#4-必做功能"></a> 4. 必做功能</h3>
+<p><strong>4.1 基本信息管理</strong></p>
+<ul>
+<li>(1) 批量录入：从键盘或文件一次性录入 ≥50 条学生记录，自动计算总分与平均分。</li>
+<li>(2) 插入：支持&quot;在指定位置插入&quot;与&quot;按学号有序插入&quot;两种模式。</li>
+<li>(3) 删除：按学号删除，删除前二次确认。</li>
+<li>(4) 修改：按学号定位后修改任意字段，并<strong>自动重算</strong>总分、平均分。</li>
+<li>(5) 查询：按学号精确查询；按姓名查询（<strong>必须支持重名，返回所有匹配项</strong>）。</li>
+<li>(6) 浏览：表格化显示全部学生，含表头与名次。</li>
+</ul>
+<p><strong>4.2 统计分析</strong></p>
+<ul>
+<li>
+<p>(7) 每门课的最高分、最低分、平均分、及格率（≥60）、优秀率（≥85）。</p>
+</li>
+<li>
+<p>(8) 分数段分布：0-59 / 60-69 / 70-79 / 80-89 / 90-100，用<strong>字符柱状图</strong>打印，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">90-100 | ************  12人</span><br><span class="line">80-89  | ******************  20人</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>(9) 按总分生成名次（相同分数名次并列，后续名次跳号，如 1,2,2,4）。</p>
+</li>
+</ul>
+<p><strong>4.3 排序（核心考察点）</strong></p>
+<ul>
+<li>(10) 分别实现 <strong>冒泡排序、直接插入排序、快速排序</strong>（三选三，均按总分降序）。</li>
+<li>(11) 每种排序算法必须统计并输出：<strong>比较次数、移动（交换）次数、运行耗时（ms）</strong>。</li>
+<li>(12) 输出三种算法的横向对比表，并在报告中给出复杂度分析。</li>
+</ul>
+<p><strong>4.4 查找（核心考察点）</strong></p>
+<ul>
+<li>(13) 对<strong>已排序</strong>的链表实现二分查找（按学号或按总分二选一，需在报告中说明实现方式）。</li>
+<li>(14) 实现顺序查找，输出比较次数。</li>
+<li>(15) 输出&quot;顺序查找 vs 二分查找&quot;在<strong>不同数据规模</strong>（50 / 200 / 1000 条）下的平均比较次数对比表。</li>
+</ul>
+<p><strong>4.5 持久化</strong></p>
+<ul>
+<li>(16) 启动时自动从 <code>students.dat</code> 加载数据，文件不存在时给出提示并进入空表状态（<strong>不得崩溃</strong>）。</li>
+<li>(17) 提供手动保存与退出自动保存。</li>
+<li>(18) 文件格式（文本或二进制）必须在报告与 README 中说明；能识别并跳过格式错误的记录行。</li>
+</ul>
+<h3 id="5-选做加分项每项-2~5-分总分上限-100"><a class="markdownIt-Anchor" href="#5-选做加分项每项-2~5-分总分上限-100"></a> 5. 选做加分项（每项 +2~5 分，总分上限 100）</h3>
+<ul>
+<li>[ ] 追加一个&quot;顺序表版本&quot;，与链表版本做插入/删除效率对比实验，写入报告</li>
+<li>[ ] 导出 CSV 文件，可直接用 Excel 打开</li>
+<li>[ ] 撤销功能：用栈保存最近 5 次删除的记录，支持撤销删除</li>
+<li>[ ] 分页浏览：每页 10 条，支持翻页</li>
+<li>[ ] 中文姓名按拼音排序（可选简化：仅比较首字）</li>
+</ul>
+<hr />
+<h2 id="题目二停车场管理系统学号-3-1"><a class="markdownIt-Anchor" href="#题目二停车场管理系统学号-3-1"></a> 题目二：停车场管理系统（学号 % 3 == 1）</h2>
+<h3 id="1-覆盖知识点-2"><a class="markdownIt-Anchor" href="#1-覆盖知识点-2"></a> 1. 覆盖知识点</h3>
+<p>顺序栈 · 链队列 · 栈与队列的协作 · 模拟时钟 · 文件事件驱动 · 异常处理</p>
+<h3 id="2-场景描述"><a class="markdownIt-Anchor" href="#2-场景描述"></a> 2. 场景描述</h3>
+<p>一个<strong>狭长</strong>的停车场（只有唯一一个出入口），容量为 N（N 由运行参数或配置文件指定，默认 3）。<br />
+停车场外有一条<strong>无限长</strong>的便道，供满位时等待的车辆排队。<br />
+若某辆车要离场，停在它**后面（更靠内）**的车必须先全部退出场为其让路，该车离场后，这些车再按原顺序倒回。</p>
+<h3 id="3-数据结构要求硬性"><a class="markdownIt-Anchor" href="#3-数据结构要求硬性"></a> 3. 数据结构要求（硬性）</h3>
+<table>
+<thead>
+<tr>
+<th>对象</th>
+<th>必须使用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>停车场</td>
+<td><strong>顺序栈</strong> <code>Parking</code></td>
+<td>栈顶 = 出入口，容量 N</td>
+</tr>
+<tr>
+<td>便道</td>
+<td><strong>链队列</strong> <code>Sidewalk</code></td>
+<td>队首 = 最先等待的车</td>
+</tr>
+<tr>
+<td>让路暂存</td>
+<td><strong>顺序栈</strong> <code>Temp</code></td>
+<td>容量 N，用于临时倒出车辆</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>三个结构均需独立封装为 <code>.c</code> / <code>.h</code>，提供 <code>Init / Push / Pop / IsFull / IsEmpty / EnQueue / DeQueue</code> 等标准操作。</li>
+</ul>
+<h3 id="4-必做功能-2"><a class="markdownIt-Anchor" href="#4-必做功能-2"></a> 4. 必做功能</h3>
+<p><strong>4.1 事件输入</strong></p>
+<ul>
+<li>
+<p>(1) 支持<strong>键盘交互</strong>：手动输入单条事件并立即看到结果。</p>
+</li>
+<li>
+<p>(2) 支持<strong>文件批量</strong>读取事件序列 <code>events.txt</code>，每行一条，格式为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A 京A12345 08:30     # A = 到达(arrive)</span><br><span class="line">D 京A12345 10:15     # D = 离开(depart)</span><br><span class="line">E                    # E = 结束</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>(3) 程序必须校验事件时间的<strong>单调递增</strong>，出现时间倒流时报错并跳过该事件。</p>
+</li>
+</ul>
+<p><strong>4.2 核心处理逻辑</strong></p>
+<ul>
+<li>(4) <strong>到达</strong>：停车场未满 → 入栈，记录入场时间；已满 → 入便道队列，记录便道入场时间，并提示&quot;停车场已满，请在便道等候，当前第 X 位&quot;。</li>
+<li>(5) <strong>离开</strong>：
+<ul>
+<li>在停车场中查找该车；若不在场内，提示&quot;车牌 XXX 不在停车场内&quot;，并检查便道队列（若车在便道，提示可直接离场，不入停车场）。</li>
+<li>找到后：将其上方所有车依次 <code>Pop</code> 到 <code>Temp</code> 栈，每倒出一辆打印一行提示（便于演示栈行为）。</li>
+<li>该车出栈并<strong>结算费用</strong>。</li>
+<li><code>Temp</code> 中的车依次倒回停车场（顺序不变）。</li>
+<li>若便道非空：<strong>队首车出队并入栈</strong>，入场时间 = 本次离开事件的时间。</li>
+</ul>
+</li>
+<li>(6) 每次事件处理后打印当前状态：停车场内车辆（按&quot;入口 → 内部&quot;顺序）、便道等待队列、剩余车位数。</li>
+</ul>
+<p><strong>4.3 计费</strong></p>
+<ul>
+<li>
+<p>(7) 费率可配置（默认：2 元/小时，不足 1 小时按 1 小时计，单车单日封顶 50 元）。</p>
+</li>
+<li>
+<p>(8) 输出结算单，形如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">车牌: 京A12345</span><br><span class="line">入场: 08:30   出场: 10:15</span><br><span class="line">停留: 1小时45分  → 计 2 小时</span><br><span class="line">应收: 4.00 元</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>(9) 便道等待<strong>免费</strong>（若自行设计为计费，需在报告中说明规则并由程序一致执行）。</p>
+</li>
+</ul>
+<p><strong>4.4 日志与统计</strong></p>
+<ul>
+<li>(10) 每次操作追加写入 <code>parking.log</code>，含：事件时间、操作类型、车牌、处理结果。</li>
+<li>(11) 程序结束时输出当日报表：入场总数、离场总数、收费总额、便道最长等待时长、平均停留时长。</li>
+</ul>
+<p><strong>4.5 健壮性</strong></p>
+<ul>
+<li>(12) 重复入场（同车牌未离场又到达）→ 提示并拒绝。</li>
+<li>(13) 未入场车辆离场 → 提示并拒绝。</li>
+<li>(14) 停车场为空时执行离场 → 提示。</li>
+<li>(15) 非法车牌（空串、超长）→ 提示。</li>
+</ul>
+<h3 id="5-选做加分项"><a class="markdownIt-Anchor" href="#5-选做加分项"></a> 5. 选做加分项</h3>
+<ul>
+<li>[ ] 便道等待超过 30 分钟自动离场（记录为&quot;放弃入场&quot;）</li>
+<li>[ ] 车型区分：大型车占 2 个连续车位（需处理不连续空位的情况）</li>
+<li>[ ] 用<strong>哈希表</strong>按车牌快速定位车辆在栈中的位置，并与顺序查找对比 ASL</li>
+<li>[ ] 支持多天连续模拟，按日生成报表</li>
+</ul>
+<hr />
+<h2 id="题目三表达式求值与计算器学号-3-2"><a class="markdownIt-Anchor" href="#题目三表达式求值与计算器学号-3-2"></a> 题目三：表达式求值与计算器（学号 % 3 == 2）</h2>
+<h3 id="1-覆盖知识点-3"><a class="markdownIt-Anchor" href="#1-覆盖知识点-3"></a> 1. 覆盖知识点</h3>
+<p>顺序栈（双栈）· 中缀表达式转后缀 · 字符串解析 · 运算符优先级 · 错误处理 · 文件批量测试</p>
+<h3 id="2-场景描述-2"><a class="markdownIt-Anchor" href="#2-场景描述-2"></a> 2. 场景描述</h3>
+<p>从键盘或文件读入一行中缀算术表达式（如 <code>3 + 4 * ( 2 - 1 ) / 2</code>），程序完成两件事：</p>
+<ol>
+<li>用<strong>运算符栈</strong>把中缀式转换成后缀式（逆波兰式）</li>
+<li>用<strong>操作数栈</strong>对后缀式求值</li>
+</ol>
+<p>要求每一步都打印出两个栈的内容——这是理解&quot;栈如何消解运算符优先级&quot;最直观的方式。</p>
+<h3 id="3-数据定义"><a class="markdownIt-Anchor" href="#3-数据定义"></a> 3. 数据定义</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_LEN 256</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 单词（Token）类型 */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span> &#123;</span></span><br><span class="line">    T_NUM, T_ADD, T_SUB, T_MUL, T_DIV, T_MOD, T_POW, T_LP, T_RP</span><br><span class="line">&#125; TokenType;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    TokenType type;</span><br><span class="line">    <span class="type">double</span>    value;        <span class="comment">/* type == T_NUM 时有效 */</span></span><br><span class="line">&#125; Token;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 双栈求值器 */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">double</span> numStack[MAX_LEN];   <span class="comment">/* 操作数栈 */</span></span><br><span class="line">    <span class="type">int</span>    numTop;</span><br><span class="line">    <span class="type">char</span>   opStack[MAX_LEN];    <span class="comment">/* 运算符栈 */</span></span><br><span class="line">    <span class="type">int</span>    opTop;</span><br><span class="line">&#125; Evaluator;</span><br></pre></td></tr></table></figure>
+<h3 id="4-存储与算法要求硬性"><a class="markdownIt-Anchor" href="#4-存储与算法要求硬性"></a> 4. 存储与算法要求（硬性）</h3>
+<table>
+<thead>
+<tr>
+<th>对象</th>
+<th>必须使用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>表达式分解</td>
+<td>字符串扫描 → <code>Token</code> 数组</td>
+<td>必须支持多位数、小数、一元负号</td>
+</tr>
+<tr>
+<td>中缀 → 后缀</td>
+<td><strong>顺序栈</strong>（运算符栈）</td>
+<td>必须输出每一步的栈状态</td>
+</tr>
+<tr>
+<td>后缀求值</td>
+<td><strong>顺序栈</strong>（操作数栈）</td>
+<td>必须输出每一步的栈状态</td>
+</tr>
+<tr>
+<td>历史记录</td>
+<td>顺序表 或 文件</td>
+<td>支持回看</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>两个栈需独立封装为 <code>.c</code> / <code>.h</code>，提供 <code>Init / Push / Pop / GetTop / IsEmpty / IsFull</code>。</li>
+</ul>
+<h3 id="5-必做功能"><a class="markdownIt-Anchor" href="#5-必做功能"></a> 5. 必做功能</h3>
+<p><strong>5.1 输入与词法分解</strong></p>
+<ul>
+<li>(1) 支持键盘输入一行中缀表达式（允许带空格），如 <code>3 + 4 * ( 2 - 1 ) / 2</code>。</li>
+<li>(2) 词法分解：把字符串切成 <code>Token</code> 数组，识别数字（含多位数、小数）、运算符 <code>+ - * / % ^</code>、括号 <code>( )</code>。</li>
+<li>(3) 支持<strong>一元负号</strong>：如 <code>-3 + 5</code>、<code>2 * (-4)</code> 需正确处理（需在报告中说明你的判别规则）。</li>
+<li>(4) 支持<strong>变量</strong>：形如 <code>a = 3 + 4</code> 存入变量表，之后可用 <code>a * 2</code> 参与计算（变量表用顺序表实现）。</li>
+<li>(5) 支持从文件 <code>expressions.txt</code> 批量读取表达式（每行一条），逐条求解并汇总输出。</li>
+</ul>
+<p><strong>5.2 中缀转后缀（核心考察点）</strong></p>
+<ul>
+<li>
+<p>(6) 用<strong>运算符栈</strong>实现转换，输出后缀表达式（各元素以空格分隔）。</p>
+</li>
+<li>
+<p>(7) 必须支持分步打印，形如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">读入: 3    输出队列: 3                运算符栈: (空)</span><br><span class="line">读入: +    输出队列: 3                运算符栈: +</span><br><span class="line">读入: 4    输出队列: 3 4              运算符栈: +</span><br><span class="line">读入: *    输出队列: 3 4              运算符栈: + *</span><br><span class="line">读入: (    输出队列: 3 4              运算符栈: + * (</span><br><span class="line">...</span><br><span class="line">最终后缀表达式: 3 4 2 1 - * 2 / +</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>(8) 运算符优先级：<code>(</code> &lt; <code>+ -</code> &lt; <code>* / %</code> &lt; <code>^</code>；其中 <code>^</code> 为<strong>右结合</strong>（需在报告中说明处理方式）。</p>
+</li>
+<li>
+<p>(9) 转换结束后若运算符栈中仍有 <code>(</code> → 报&quot;括号不匹配&quot;。</p>
+</li>
+</ul>
+<p><strong>5.3 后缀求值（核心考察点）</strong></p>
+<ul>
+<li>
+<p>(10) 用<strong>操作数栈</strong>求值，逐步打印入栈 / 出栈过程与中间结果，形如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">遇到 3     → 入栈      操作数栈: 3</span><br><span class="line">遇到 4     → 入栈      操作数栈: 3 4</span><br><span class="line">遇到 2     → 入栈      操作数栈: 3 4 2</span><br><span class="line">遇到 1     → 入栈      操作数栈: 3 4 2 1</span><br><span class="line">遇到 -     → 弹 1,2   计算 2-1=1     操作数栈: 3 4 1</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>(11) 统计并输出：Token 总数、操作数入栈次数、运算符弹出次数、总执行步数。</p>
+</li>
+</ul>
+<p><strong>5.4 错误处理（必做）</strong></p>
+<ul>
+<li>(12) 括号不匹配（多余左括号 / 多余右括号）→ 报错并指出<strong>第几个字符</strong></li>
+<li>(13) 除数为 0 → 明确报错，<strong>不得</strong>输出 inf / NaN</li>
+<li>(14) 非法字符 → 报错并指出位置</li>
+<li>(15) 运算符连用（如 <code>3 + * 4</code>）、表达式以运算符结尾（如 <code>3 + </code>）→ 报错</li>
+<li>(16) 空表达式 → 提示</li>
+<li>(17) 所有错误均须给出<strong>位置 + 原因</strong>，并回到菜单，<strong>不得崩溃</strong></li>
+</ul>
+<p><strong>5.5 持久化与日志</strong></p>
+<ul>
+<li>(18) 把&quot;原始表达式 → 后缀式 → 结果 → 统计指标&quot;写入 <code>result.txt</code></li>
+<li>(19) 追加写入 <code>calc.log</code>：时间、原始表达式、后缀式、结果或错误信息</li>
+<li>(20) 支持查看历史计算记录（从 <code>calc.log</code> 读回并表格化显示）</li>
+</ul>
+<h3 id="6-选做加分项"><a class="markdownIt-Anchor" href="#6-选做加分项"></a> 6. 选做加分项</h3>
+<ul>
+<li>[ ] 支持数学函数 <code>sin cos tan sqrt log ln abs</code> 与常量 <code>pi e</code></li>
+<li>[ ] 支持科学计数法（如 <code>1.5e-3</code>）</li>
+<li>[ ] <strong>递归下降语法分析</strong>直接求值，与双栈版本对比优缺点，写入报告</li>
+<li>[ ] 变量表持久化（退出保存、启动自动加载）</li>
+<li>[ ] 交互式单步求值：按回车执行一步，每步打印双栈状态</li>
+<li>[ ] 表达式合法性预检：在求值前一次性报出所有错误位置</li>
+</ul>
+<hr />
+<h2 id="五-设计报告要求2000-字"><a class="markdownIt-Anchor" href="#五-设计报告要求2000-字"></a> 五、设计报告要求（≥2000 字）</h2>
+<ol>
+<li><strong>需求分析</strong>：功能清单、菜单结构、输入输出格式约定</li>
+<li><strong>总体设计</strong>：模块划分图、各模块职责、文件清单</li>
+<li><strong>数据结构设计</strong>：所选结构的 ADT 定义（数据对象、数据关系、基本操作），说明<strong>为什么选它</strong></li>
+<li><strong>核心算法设计</strong>：关键函数的流程图或伪代码（至少 3 个）</li>
+<li><strong>复杂度分析</strong>：每个核心操作的时空复杂度，用表格汇总</li>
+<li><strong>测试方案与结果</strong>：测试用例表（输入 / 预期输出 / 实际输出 / 是否通过），含边界与异常用例</li>
+<li><strong>运行截图</strong>：关键功能界面的截图或说明</li>
+<li><strong>AI 使用情况说明</strong>：见 §六，必须单独成章</li>
+<li><strong>问题与总结</strong>：遇到的困难、解决方式、未解决的遗留问题、收获</li>
+</ol>
+<h2 id="六-ai-使用情况说明必交缺失者不予验收"><a class="markdownIt-Anchor" href="#六-ai-使用情况说明必交缺失者不予验收"></a> 六、AI 使用情况说明（必交，缺失者不予验收）</h2>
+<h3 id="61-基本原则"><a class="markdownIt-Anchor" href="#61-基本原则"></a> 6.1 基本原则</h3>
+<ul>
+<li>本课程<strong>允许</strong>使用 AI 辅助学习，<strong>不允许</strong>让 AI 代写。二者的区别在于：你是否能讲清楚代码的每一行为什么这么写。</li>
+<li>AI 可以是&quot;助教&quot;（解释概念、排查报错、启发思路），但不能是&quot;枪手&quot;。</li>
+<li><strong>隐瞒使用属于学术不端</strong>；如实申报本身<strong>不会</strong>扣分。</li>
+</ul>
+<h3 id="62-报告中必须包含的内容缺一不可"><a class="markdownIt-Anchor" href="#62-报告中必须包含的内容缺一不可"></a> 6.2 报告中必须包含的内容（缺一不可）</h3>
+<p><strong>(1) AI 使用声明表</strong>——逐条列出每一次求助，一行一条，不得合并概括：</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>日期</th>
+<th>AI 工具</th>
+<th>用途类别</th>
+<th>我的原始提问（完整 prompt 原文）</th>
+<th>AI 给出的关键内容</th>
+<th>我如何验证/修改</th>
+<th>是否采纳</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>10-08</td>
+<td>ChatGPT</td>
+<td>C</td>
+<td>“我在 C 里用单链表删除节点，free 之后程序崩溃，这是我的代码：……”</td>
+<td>指出应先保存 next 指针再 free</td>
+<td>用 gdb 单步确认，改后正常</td>
+<td>采纳</td>
+</tr>
+</tbody>
+</table>
+<p><strong>(2) 完整原始 prompt（重点）</strong></p>
+<ul>
+<li>每一条求助都必须贴出<strong>你当时实际输入的完整原文</strong>，包括上下文说明、粘贴的代码片段、报错信息。</li>
+<li>形式不限：文字照抄，或<strong>聊天截图</strong>（截图必须能看清全文，长对话需分段截取）。</li>
+<li><strong>以下写法一律视为未申报，按 0 分处理</strong>：
+<ul>
+<li>“我问了 AI 链表的写法”</li>
+<li>“使用 AI 辅助完成了排序功能”</li>
+<li>只写关键词、只写主题、或事后重写的&quot;美化版&quot;提问</li>
+</ul>
+</li>
+<li>若提问经过多轮追问，<strong>每一轮都要列出</strong>，并把追问的完整 prompt 一并贴出。</li>
+</ul>
+<p><strong>(3) 用途分类标注</strong>——每条记录注明属于哪一类：</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>概念解释</td>
+<td>“解释快速排序的分区过程”</td>
+</tr>
+<tr>
+<td>B</td>
+<td>报错排查</td>
+<td>“为什么 malloc 后提示段错误”</td>
+</tr>
+<tr>
+<td>C</td>
+<td>代码生成</td>
+<td>“帮我写一个链表的按值删除函数”</td>
+</tr>
+<tr>
+<td>D</td>
+<td>调试优化</td>
+<td>“这段二分查找为什么死循环”</td>
+</tr>
+<tr>
+<td>E</td>
+<td>报告/文档润色</td>
+<td>“帮我润色这段设计说明”</td>
+</tr>
+</tbody>
+</table>
+<p><strong>(4) AI 生成代码占比自评</strong></p>
+<ul>
+<li>估算「AI 直接生成、且你基本未改动就保留的代码行数 ÷ 总代码行数」，给出百分比。</li>
+<li>列出<strong>采纳代码的具体位置</strong>：文件名 + 函数名 + 行号区间，例如 <code>list.c : list_delete() : L88-L112</code>。</li>
+</ul>
+<p><strong>(5) 验证与纠错记录</strong></p>
+<ul>
+<li>说明你是怎么验证 AI 给出的代码的（编译、构造测试数据、gdb 单步、对拍）。</li>
+<li>至少写出 <strong>1 处 AI 给错或不适用的地方</strong>，以及你如何改正。</li>
+</ul>
+<p><strong>(6) 使用反思</strong></p>
+<ul>
+<li>用了 AI 之后，哪些知识点你其实<strong>没有真正学会</strong>？列出 2~3 条。</li>
+</ul>
+<h3 id="63-与评分的挂钩方式"><a class="markdownIt-Anchor" href="#63-与评分的挂钩方式"></a> 6.3 与评分的挂钩方式</h3>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>如实、完整申报（含全部原始 prompt）</td>
+<td><strong>不扣分</strong>；正常评分</td>
+</tr>
+<tr>
+<td>申报了，但 C 类（直接生成代码）占比高</td>
+<td>功能分照给，但答辩时<strong>只针对 AI 生成部分提问</strong>；讲不清楚的代码段不计入功能分</td>
+</tr>
+<tr>
+<td>报告中写明&quot;AI 指出思路，我独立实现&quot;</td>
+<td>正常评分，且该部分在答辩中优先认可</td>
+</tr>
+<tr>
+<td>未申报，但经查实使用过 AI</td>
+<td>本节 0 分，且<strong>总分再扣 20 分</strong></td>
+</tr>
+<tr>
+<td>申报内容与代码实际风格明显不符（如声称手写，但命名/结构高度模板化、含 AI 典型注释风格）</td>
+<td>按学术不端处理，成绩记 0</td>
+</tr>
+<tr>
+<td>提交代码中残留 AI 生成但未清理的占位说明、TODO、无关注释</td>
+<td>每项扣 2 分</td>
+</tr>
+</tbody>
+</table>
+<h2 id="七-评分标准总分-100"><a class="markdownIt-Anchor" href="#七-评分标准总分-100"></a> 七、评分标准（总分 100）</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>分值</th>
+<th>评分要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>功能完整性</td>
+<td>20</td>
+<td>必做项逐条核对，缺一项按比例扣；有严重 bug 每项扣 3~5</td>
+</tr>
+<tr>
+<td>数据结构使用正确性</td>
+<td>20</td>
+<td><strong>是否真实使用了指定结构</strong>（数组代替 → 该项 0 分）；封装是否规范；有无内存泄漏</td>
+</tr>
+<tr>
+<td>代码质量</td>
+<td>10</td>
+<td>多文件、模块化、命名规范、注释充分、无编译警告</td>
+</tr>
+<tr>
+<td>实验报告</td>
+<td>40</td>
+<td>结构完整、分析有深度（不能只有截图）、复杂度分析正确</td>
+</tr>
+<tr>
+<td>AI 使用情况说明</td>
+<td>10</td>
+<td>是否逐条贴出<strong>完整原始 prompt</strong>；自评是否诚实；有无纠错记录与反思</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><a class="post-meta__tags" href="/tags/C/">C</a><a class="post-meta__tags" href="/tags/%E5%A4%A7%E4%BD%9C%E4%B8%9A/">大作业</a><a class="post-meta__tags" href="/tags/%E4%BB%BB%E5%8A%A1%E4%B9%A6/">任务书</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/a28f5e34/" title="01 顺序表实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">01 顺序表实验</div></div><div class="info-2"><div class="info-item-1"> 1. 实验目的 熟练掌握线性表的顺序存储结构。 熟练掌握顺序表的有关算法设计。 根据具体问题的需要，设计出合理的表示数据的顺序结构，并设计相关算法。  2. 实验要求  顺序表结构和运算定义，算法的实现以库文件方式实现，不得在测试主程序中直接实现；  比如存储、算法实现放入文件：seqList.h   实验程序有较好可读性，各运算和变量的命名直观易懂，符合软件工程要求； 程序有适当的注释。   3. 实验任务 编写算法实现下列问题的求解。  （1）求顺序表中第 i 个元素（函数） 若元素不存在，则报错。 测试数据基本要求  第一组：顺序表长度 n ≥ 10，i 分别为 5、n、0、n+1、n+2 第二组：顺序表长度 n = 0，i 分别为 0、2   （2）在第 i 个结点前插入值为 x 的结点 测试数据基本要求  第一组：顺序表长度 n ≥ 10，x = 100，i 分别为 5、n、n+1、0、1、n+2 第二组：顺序表长度 n = 0，x = 100，i = 5   （3）删除顺序表中第 i 个元素结点 测试数据基本要求  第一组：顺序表长度 n ≥ 10，i 分别为 5、...</div></div></div></a><a class="pagination-related" href="/posts/1769ec6e/" title="数据结构第 1—9 章 LeetCode 简单题单"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">数据结构第 1—9 章 LeetCode 简单题单</div></div><div class="info-2"><div class="info-item-1">本题单按第 1—9 章编排，共 28 道 LeetCode 简单题，由基础到巩固排列。题号可用于站内搜索。建议先手工走一遍示例，再用 C 语言完成练习，并说明所用数据结构与时间复杂度。  第 1 章 绪论：数据、算法与复杂度  1480. 一维数组的动态和 — 数组遍历、循环不变量。 想清楚处理到下标 i 时，已得到的前缀结果表示什么；比较一次扫描与反复求和的操作次数。 1929. 数组串联 — 数组下标、数据规模与空间。 明确原数组长度 n、结果长度 2n，检查第二段元素应写到什么下标。 1672. 最富有客户的资产总量 — 二维数组与两重循环。 先逐行求和，再维护最大值；分别分析行数、列数对操作次数的影响。   第 2 章 线性表：单链表与指针  83. 删除排序链表中的重复元素 — 删除结点、维护后继。 利用有序性只比较相邻结点；删除前先保留需要继续访问的链接。 206. 反转链表 — 链接方向与边界。 画出 前驱—当前—后继 三个指针，逐次改变 next；检查空链与单结点链。 21. 合并两个有序链表 — 带头结点思路与有序合并。 每次接入较小的当前结点；某一条链先到尾时...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/posts/fcf98ac2/" title="08 排序实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-19</div><div class="info-item-2">08 排序实验</div></div><div class="info-2"><div class="info-item-1"> 1. 实验目的  掌握直接插入排序、冒泡排序、二路归并排序三种内部排序算法； 理解上述排序算法的基本思想与实现方法，能通过记录比较、移动次数比较它们的性能； 了解数据初始特性对排序算法性能的影响，初步学会根据具体情况选择合适的排序算法。  排序是数据处理中最常用的运算。本实验的三个算法正好代表两个典型的复杂度量级：插入排序和冒泡排序是 O(n²)，二路归并排序是 O(n log n)。通过实测把这句话变成具体的数字，是本次实验的核心。  2. 实验要求  排序算法的结构定义和算法实现以库文件方式实现，不得在测试主程序中直接实现；  比如存储、算法实现放入文件：Sort.h   实验程序有较好可读性，各运算和变量的命名直观易懂，符合软件工程要求； 程序有适当的注释； 性能分析的要求：用计数器记录排序过程中的关键字比较次数和元素移动次数，填写统计表，并给出实事求是的结论； 实验数据的要求，分两类：  算法验证数据：取 15～25 个元素，逐趟输出排序过程，便于手工核对； 性能对比数据：取固定规模 n = 1000，分随机 / 正序 / 逆序三类； 随机数据用固定种子生成，保证每次运...</div></div></div></a><a class="pagination-related" href="/posts/84fc870f/" title="04 队列实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-19</div><div class="info-item-2">04 队列实验</div></div><div class="info-2"><div class="info-item-1"> 1. 实验目的 熟练掌握队列的顺序存储结构和链式存储结构。 熟练掌握队列的有关算法设计，并在循环顺序队列和链队列上实现。 根据具体给定的需求，合理设计并实现相关结构和算法。  2. 实验要求  2.1 循环顺序队列实验要求  循环顺序队列结构和运算定义，算法的实现以库文件方式实现，不得在测试主程序中直接实现； 实验程序有较好可读性，各运算和变量的命名直观易懂，符合软件工程要求； 程序有适当的注释。   2.2 链队列实验要求  本次实验中的链队列结构指不带头结点的单链表； 链队列结构和运算定义，算法的实现以库文件方式实现，不得在测试主程序中直接实现； 实验程序有较好可读性，各运算和变量的命名直观易懂，符合软件工程要求； 程序有适当的注释。   3. 实验任务  3.1 循环顺序队列实验任务 编写算法实现下列问题的求解。  （1）初始化一个队列  （2）判断是否队空  （3）判断是否队满 设队列最大长度 MaxLen = 100。 测试数据基本要求  第一组：入队 n 个元素，判断队满 第二组：用循环方式将 1 到 99 共 99 个元素入队，判断队满   （4）入队 测试数据基...</div></div></div></a><a class="pagination-related" href="/posts/b895ceb4/" title="02 单链表实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-19</div><div class="info-item-2">02 单链表实验</div></div><div class="info-2"><div class="info-item-1"> 1. 实验目的 熟练掌握线性表的链式存储结构。 熟练掌握单链表的有关算法设计。 根据具体问题的需要，设计出合理的表示数据的链式存储结构，并设计相关算法。  2. 实验要求  本次实验中的链表结构指带头结点的单链表； 单链表结构和运算定义，算法的实现以库文件方式实现，不得在测试主程序中直接实现；  比如存储、算法实现放入文件：linkedList.h   实验程序有较好可读性，各运算和变量的命名直观易懂，符合软件工程要求； 程序有适当的注释。   3. 实验任务 编写算法实现下列问题的求解。  （1）尾插法创建单链表 打印创建结果。  （2）头插法创建单链表 打印创建结果。  （3）销毁单链表  （4）求链表长度  （5）求单链表中第 i 个元素（函数） 若元素不存在，则报错。 测试数据基本要求  第一组：单链表长度 n ≥ 10，i 分别为 5、n、0、n+1、n+2 第二组：单链表长度 n = 0，i 分别为 0、2   （6）在第 i 个结点前插入值为 x 的结点 测试数据基本要求  第一组：单链表长度 n ≥ 10，x = 100，i 分别为 5、n、n+1、0、1、n+...</div></div></div></a><a class="pagination-related" href="/posts/82201af5/" title="03 栈的实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-19</div><div class="info-item-2">03 栈的实验</div></div><div class="info-2"><div class="info-item-1"> 1. 实验目的 熟练掌握栈的顺序存储结构和链式存储结构。 熟练掌握栈的有关算法设计，并在顺序栈和链栈上实现。 根据具体给定的需求，合理设计并实现相关结构和算法。  2. 实验要求  2.1 顺序栈实验要求  顺序栈结构和运算定义，算法的实现以库文件方式实现，不得在测试主程序中直接实现； 实验程序有较好可读性，各运算和变量的命名直观易懂，符合软件工程要求； 程序有适当的注释。   2.2 链栈实验要求  本次实验中的链栈结构指带头结点的单链表； 链栈结构和运算定义，算法的实现以库文件方式实现，不得在测试主程序中直接实现； 实验程序有较好可读性，各运算和变量的命名直观易懂，符合软件工程要求； 程序有适当的注释。   3. 实验任务  3.1 顺序栈实验任务 设计并实现一个顺序栈，编写算法实现下列问题的求解。  （1）利用顺序栈实现将 10 进制数转换为 16 进制数 测试数据基本要求  第一组：4 第二组：11 第三组：254 第四组：1357   （2）设计算法判断数学表达式中的各括号是否匹配 对一个合法的数学表达式来说，其中的各大小括号 &#123;、&#125;、[、]、( ...</div></div></div></a><a class="pagination-related" href="/posts/6e6b1a8f/" title="05 串实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-19</div><div class="info-item-2">05 串实验</div></div><div class="info-2"><div class="info-item-1"> 1. 实验目的 熟练掌握串的顺序存储结构。 熟练掌握串的基本运算及其算法设计。  2. 实验要求  本次实验中的串采用顺序存储结构（用字符数组表示），串的下标从 1 开始，第0 位存放串长； 串结构和运算定义，算法的实现以库文件方式实现，不得在测试主程序中直接实现；  比如存储、算法实现放入文件：String.h   实验程序有较好可读性，各运算和变量的命名直观易懂，符合软件工程要求； 程序有适当的注释。   3. 实验任务 设计并实现顺序存储的串，编写算法实现下列问题的求解。  （1）串的基本运算 实现下列基本运算，每项运算都要有对应的测试用例：  求串长 串接（把串 T接在串 S 后面） 求子串（从串 S 中截取从第 pos 个字符起、长度为 len 的子串） 串比较（相等返回 0，S 小于 T 返回负数，S 大于 T 返回正数） 求子串在串中第一次出现的位置（不存在时返回 0）  测试数据基本要求    运算 测试数据     求串长 abcdef、a、空串   串接 abc 接 def；1234 接空串   求子串 在 abcdef 中取第 3 个字符起、长度 2 的子...</div></div></div></a><a class="pagination-related" href="/posts/a28f5e34/" title="01 顺序表实验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-10-19</div><div class="info-item-2">01 顺序表实验</div></div><div class="info-2"><div class="info-item-1"> 1. 实验目的 熟练掌握线性表的顺序存储结构。 熟练掌握顺序表的有关算法设计。 根据具体问题的需要，设计出合理的表示数据的顺序结构，并设计相关算法。  2. 实验要求  顺序表结构和运算定义，算法的实现以库文件方式实现，不得在测试主程序中直接实现；  比如存储、算法实现放入文件：seqList.h   实验程序有较好可读性，各运算和变量的命名直观易懂，符合软件工程要求； 程序有适当的注释。   3. 实验任务 编写算法实现下列问题的求解。  （1）求顺序表中第 i 个元素（函数） 若元素不存在，则报错。 测试数据基本要求  第一组：顺序表长度 n ≥ 10，i 分别为 5、n、0、n+1、n+2 第二组：顺序表长度 n = 0，i 分别为 0、2   （2）在第 i 个结点前插入值为 x 的结点 测试数据基本要求  第一组：顺序表长度 n ≥ 10，x = 100，i 分别为 5、n、n+1、0、1、n+2 第二组：顺序表长度 n = 0，x = 100，i = 5   （3）删除顺序表中第 i 个元素结点 测试数据基本要求  第一组：顺序表长度 n ≥ 10，i 分别为 5、...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">zsl</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">30</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">59</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">4</div></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E7%A1%AC%E6%80%A7%E8%A6%81%E6%B1%82"><span class="toc-number">1.</span> <span class="toc-text"> 通用硬性要求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#01-%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text"> 0.1 工程结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#02-%E5%86%85%E5%AD%98%E4%B8%8E%E5%81%A5%E5%A3%AE%E6%80%A7%E9%87%8D%E7%82%B9%E8%80%83%E5%AF%9F%E9%A1%B9"><span class="toc-number">1.2.</span> <span class="toc-text"> 0.2 内存与健壮性（重点考察项）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-%E4%BA%A4%E4%BA%92%E4%B8%8E%E8%BE%93%E5%87%BA"><span class="toc-number">1.3.</span> <span class="toc-text"> 0.3 交互与输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#04-%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83"><span class="toc-number">1.4.</span> <span class="toc-text"> 0.4 代码规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#05-%E4%BA%A4%E4%BB%98%E6%B8%85%E5%8D%95%E7%BC%BA%E9%A1%B9%E4%B8%8D%E4%BA%88%E9%AA%8C%E6%94%B6"><span class="toc-number">1.5.</span> <span class="toc-text"> 0.5 交付清单（缺项不予验收）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E4%B8%80%E5%AD%A6%E7%94%9F%E6%88%90%E7%BB%A9%E7%AE%A1%E7%90%86%E4%B8%8E%E5%88%86%E6%9E%90%E7%B3%BB%E7%BB%9F%E5%AD%A6%E5%8F%B7-3-0"><span class="toc-number">2.</span> <span class="toc-text"> 题目一：学生成绩管理与分析系统（学号 % 3 &#x3D;&#x3D; 0）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%A6%86%E7%9B%96%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">2.1.</span> <span class="toc-text"> 1. 覆盖知识点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89"><span class="toc-number">2.2.</span> <span class="toc-text"> 2. 数据定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%AD%98%E5%82%A8%E8%A6%81%E6%B1%82"><span class="toc-number">2.3.</span> <span class="toc-text"> 3. 存储要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%BF%85%E5%81%9A%E5%8A%9F%E8%83%BD"><span class="toc-number">2.4.</span> <span class="toc-text"> 4. 必做功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E9%80%89%E5%81%9A%E5%8A%A0%E5%88%86%E9%A1%B9%E6%AF%8F%E9%A1%B9-2~5-%E5%88%86%E6%80%BB%E5%88%86%E4%B8%8A%E9%99%90-100"><span class="toc-number">2.5.</span> <span class="toc-text"> 5. 选做加分项（每项 +2~5 分，总分上限 100）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E4%BA%8C%E5%81%9C%E8%BD%A6%E5%9C%BA%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%AD%A6%E5%8F%B7-3-1"><span class="toc-number">3.</span> <span class="toc-text"> 题目二：停车场管理系统（学号 % 3 &#x3D;&#x3D; 1）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%A6%86%E7%9B%96%E7%9F%A5%E8%AF%86%E7%82%B9-2"><span class="toc-number">3.1.</span> <span class="toc-text"> 1. 覆盖知识点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%9C%BA%E6%99%AF%E6%8F%8F%E8%BF%B0"><span class="toc-number">3.2.</span> <span class="toc-text"> 2. 场景描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A6%81%E6%B1%82%E7%A1%AC%E6%80%A7"><span class="toc-number">3.3.</span> <span class="toc-text"> 3. 数据结构要求（硬性）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%BF%85%E5%81%9A%E5%8A%9F%E8%83%BD-2"><span class="toc-number">3.4.</span> <span class="toc-text"> 4. 必做功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E9%80%89%E5%81%9A%E5%8A%A0%E5%88%86%E9%A1%B9"><span class="toc-number">3.5.</span> <span class="toc-text"> 5. 选做加分项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E4%B8%89%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC%E4%B8%8E%E8%AE%A1%E7%AE%97%E5%99%A8%E5%AD%A6%E5%8F%B7-3-2"><span class="toc-number">4.</span> <span class="toc-text"> 题目三：表达式求值与计算器（学号 % 3 &#x3D;&#x3D; 2）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%A6%86%E7%9B%96%E7%9F%A5%E8%AF%86%E7%82%B9-3"><span class="toc-number">4.1.</span> <span class="toc-text"> 1. 覆盖知识点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%9C%BA%E6%99%AF%E6%8F%8F%E8%BF%B0-2"><span class="toc-number">4.2.</span> <span class="toc-text"> 2. 场景描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89"><span class="toc-number">4.3.</span> <span class="toc-text"> 3. 数据定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%AD%98%E5%82%A8%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A6%81%E6%B1%82%E7%A1%AC%E6%80%A7"><span class="toc-number">4.4.</span> <span class="toc-text"> 4. 存储与算法要求（硬性）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%BF%85%E5%81%9A%E5%8A%9F%E8%83%BD"><span class="toc-number">4.5.</span> <span class="toc-text"> 5. 必做功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E9%80%89%E5%81%9A%E5%8A%A0%E5%88%86%E9%A1%B9"><span class="toc-number">4.6.</span> <span class="toc-text"> 6. 选做加分项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A%E8%A6%81%E6%B1%822000-%E5%AD%97"><span class="toc-number">5.</span> <span class="toc-text"> 五、设计报告要求（≥2000 字）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD-ai-%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E%E5%BF%85%E4%BA%A4%E7%BC%BA%E5%A4%B1%E8%80%85%E4%B8%8D%E4%BA%88%E9%AA%8C%E6%94%B6"><span class="toc-number">6.</span> <span class="toc-text"> 六、AI 使用情况说明（必交，缺失者不予验收）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#61-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99"><span class="toc-number">6.1.</span> <span class="toc-text"> 6.1 基本原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#62-%E6%8A%A5%E5%91%8A%E4%B8%AD%E5%BF%85%E9%A1%BB%E5%8C%85%E5%90%AB%E7%9A%84%E5%86%85%E5%AE%B9%E7%BC%BA%E4%B8%80%E4%B8%8D%E5%8F%AF"><span class="toc-number">6.2.</span> <span class="toc-text"> 6.2 报告中必须包含的内容（缺一不可）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#63-%E4%B8%8E%E8%AF%84%E5%88%86%E7%9A%84%E6%8C%82%E9%92%A9%E6%96%B9%E5%BC%8F"><span class="toc-number">6.3.</span> <span class="toc-text"> 6.3 与评分的挂钩方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83-%E8%AF%84%E5%88%86%E6%A0%87%E5%87%86%E6%80%BB%E5%88%86-100"><span class="toc-number">7.</span> <span class="toc-text"> 七、评分标准（总分 100）</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/372e6450/" title="数据结构大作业任务书">数据结构大作业任务书</a><time datetime="2026-10-18T16:00:00.000Z" title="Created 2026-10-19 00:00:00">2026-10-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/a28f5e34/" title="01 顺序表实验">01 顺序表实验</a><time datetime="2026-10-18T16:00:00.000Z" title="Created 2026-10-19 00:00:00">2026-10-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/b895ceb4/" title="02 单链表实验">02 单链表实验</a><time datetime="2026-10-18T16:00:00.000Z" title="Created 2026-10-19 00:00:00">2026-10-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/82201af5/" title="03 栈的实验">03 栈的实验</a><time datetime="2026-10-18T16:00:00.000Z" title="Created 2026-10-19 00:00:00">2026-10-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/84fc870f/" title="04 队列实验">04 队列实验</a><time datetime="2026-10-18T16:00:00.000Z" title="Created 2026-10-19 00:00:00">2026-10-19</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By zsl</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/katex.min.css')
+    if (false) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const config = mermaidSrc.dataset.config ? JSON.parse(mermaidSrc.dataset.config) : {}
+      if (!config.theme) {
+        config.theme = theme
+      }
+      const mermaidThemeConfig = `%%{init: ${JSON.stringify(config)}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid@11.12.2/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
