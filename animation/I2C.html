@@ -213,6 +213,11 @@
             .sidebar { width: auto; max-height: 300px; }
             .footer-notes { grid-template-columns: 1fr 1fr; height: auto; }
         }
+        .container, .main-display, .canvas-wrapper { min-width: 0; min-height: 0; }
+        .sidebar { flex-shrink: 0; }
+        .sidebar > * { flex-shrink: 0; }
+        .status-panel { height: 150px; min-height: 150px; box-sizing: border-box; overflow-wrap: anywhere; }
+        .timeline-controls { flex-shrink: 0; }
     </style>
 </head>
 <body>
@@ -639,7 +644,8 @@
             if(!pt) continue;
             const x = i * unitWidth - offsetX;
 
-            if(pt.type === 'S' || pt.type === 'P') {
+            if ((pt.type === 'S' || pt.type === 'P') &&
+                (i === 0 || config.timeline[i - 1].type !== pt.type)) {
                  ctx.fillStyle = "#f38ba8";
                  ctx.font = "bold 16px Arial";
                  ctx.fillText(pt.type, x, sdaCenter - 45);

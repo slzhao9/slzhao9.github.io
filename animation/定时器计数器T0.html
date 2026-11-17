@@ -161,6 +161,13 @@
         .legend-item { display: flex; align-items: center; gap: 8px; }
         .dot { width: 12px; height: 12px; border-radius: 50%; }
 
+        /* 约束 flex 子项和表单的固有宽度，避免侧栏溢出。 */
+        .container, .main-display { min-width: 0; min-height: 0; }
+        .input-wrapper { min-width: 0; }
+        .input-wrapper input { width: 100%; min-width: 0; box-sizing: border-box; }
+        select, input[type=range] { box-sizing: border-box; }
+        .canvas-wrapper { width: 100%; }
+        canvas { width: 100%; height: auto; }
     </style>
 </head>
 <body>
@@ -546,17 +553,18 @@
 
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.textAlign = "left";
 
         // --- 1. Signal Sources ---
         // OSC
         ctx.fillStyle = "#ff9100";
         ctx.font = "bold 18px sans-serif";
-        ctx.fillText("内部时钟 / 12", pos.osc.x - 40, pos.osc.y + 5);
+        ctx.fillText("内部时钟 / 12", 12, pos.osc.y - 16);
         drawWire(pos.osc.x + 40, pos.osc.y, pos.switchCT.x, pos.switchCT.y + 20, state.c_t === 0);
 
         // Pin T0
         ctx.fillStyle = "#00e5ff";
-        ctx.fillText("引脚 T0 (P3.4)", pos.pin.x - 40, pos.pin.y + 5);
+        ctx.fillText("引脚 T0 (P3.4)", 12, pos.pin.y - 16);
         let pinActive = state.c_t === 1 && manualPulse;
         drawWire(pos.pin.x + 40, pos.pin.y, pos.switchCT.x, pos.switchCT.y + 70, pinActive);
 
