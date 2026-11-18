@@ -30,6 +30,7 @@
         /* 左侧控制面板 */
         .sidebar {
             width: 300px;
+            flex-shrink: 0;
             background-color: var(--panel-bg);
             padding: 20px;
             display: flex;
@@ -84,6 +85,11 @@
             padding: 20px;
             position: relative;
         }
+
+         .main-display { min-width: 0; min-height: 0; }
+        .topology, .knowledge-bar { flex-shrink: 0; }
+        .scope-container { min-height: 0; }
+        #scopeCanvas { position: absolute; inset: 0; }
 
         /* 硬件拓扑图 */
         .topology {
@@ -280,7 +286,7 @@ class ProtocolSimulator {
         this.canvas.width = this.container.clientWidth;
         this.canvas.height = this.container.clientHeight;
         this.pixelPerUs = this.canvas.width / this.timeWindow;
-        if (!this.isPlaying && this.history.length > 0) this.draw(); // Redraw static if stopped
+        if (!this.isPlaying) this.draw(); // Redraw static if stopped
     }
 
     updateHardwareUI(mcuPull, slavePull) {
@@ -312,13 +318,15 @@ class ProtocolSimulator {
     }
 
     // 核心序列生成器
-    run(type) {
-        if (this.isPlaying) return;
+    run(type, fromMacro = false, byte = null, title = "") {
+        if (this.isPlaying || (this.macroRunning && !fromMacro)) return;
         
         this.history = [];
         this.queue = [];
         this.annotations = [];
         this.currentTime = 0;
+        this.sequenceTitle = title;
+        this.lastInfo = null;
         
         // 初始化一段空闲时间
         this.queue.push({d: 20, m:0, s:0, info: "空闲状态：总线被上拉电阻拉高"});
@@ -386,44 +394,66 @@ class ProtocolSimulator {
                 break;
         }
         
+        if (byte !== null) {
+            this.queue = [{d: 20, m: 0, s: 0, info: "总线空闲，按最低位优先传输"}];
+            this.annotations = [];
+            this.timeWindow = 620;
+            for (let bit = 0; bit < 8; bit++) {
+                const value = (byte >> bit) & 1;
+                const info = `第 ${bit + 1}/8 位（bit ${bit}）：${value}`;
+                const start = 20 + bit * 70;
+                if (type === 'readByte') {
+                    this.queue.push({d: 5, m: 1, s: 0, info},
+                        {d: 55, m: 0, s: value ? 0 : 1, info},
+                        {d: 10, m: 0, s: 0, info});
+                } else {
+                    const low = value ? 6 : 60;
+                    this.queue.push({d: low, m: 1, s: 0, info},
+                        {d: 70 - low, m: 0, s: 0, info});
+                }
+                this.annotations.push({start, end: start + 70, text: `b${bit}=${value}`, y: 0.55});
+            }
+            this.queue.push({d: 40, m: 0, s: 0, info: "字节传输完成，总线释放"});
+        }
         this.resize(); // Recalc scale
         this.startAnimation();
     }
 
     // 复杂宏脚本
     async runTempLoop() {
-        if (this.isPlaying) return;
+        if (this.isPlaying || this.macroRunning) return;
+        this.macroRunning = true;
+        try {
         
-        // Helper to run sequence and wait
-        const runSeq = (type, text) => {
-            return new Promise(resolve => {
-                this.run(type);
-                if(text) this.setInfo(text);
-                const check = setInterval(() => {
-                    if(!this.isPlaying) { clearInterval(check); setTimeout(resolve, 500); }
-                }, 100);
-            });
+        document.querySelectorAll('button').forEach(button => button.disabled = true);
+        const runSeq = async (type, title, byte = null) => {
+            this.run(type, true, byte, title);
+            await new Promise(resolve => { this.onAnimationEnd = resolve; });
+            await new Promise(resolve => setTimeout(resolve, 350));
+        };
+        await runSeq('reset', 'Step 1/9：复位并检测存在脉冲');
+        await runSeq('writeByte', 'Step 2/9：发送 Skip ROM（0xCC）', 0xCC);
+        await runSeq('writeByte', 'Step 3/9：发送 Convert T（0x44）', 0x44);
+        this.sequenceTitle = '';
+        this.setInfo('<b>Step 4/9：等待温度转换</b><br>总线保持高电平；此处将转换等待时间放慢演示（假定外部供电）。');
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        await runSeq('reset', 'Step 5/9：再次复位并检测存在脉冲');
+        await runSeq('writeByte', 'Step 6/9：发送 Skip ROM（0xCC）', 0xCC);
+        await runSeq('writeByte', 'Step 7/9：发送 Read Scratchpad（0xBE）', 0xBE);
+        await runSeq('readByte', 'Step 8/9：读取温度低字节（0x91）', 0x91);
+        await runSeq('readByte', 'Step 9/9：读取温度高字节（0x01）', 0x01);
+        this.setInfo('<b>演示结束：示例温度 25.0625 °C</b><br>低字节 0x91 + 高字节 0x01 → 0x0191 ÷ 16。此演示读取温度两个字节，未展示其余暂存器字节及 CRC 校验。');
+        } finally {
+            this.macroRunning = false;
+            document.querySelectorAll('button').forEach(button => button.disabled = false);
         }
-
-        this.setInfo("<b>Step 1: 初始化</b> - 每次操作前必须复位");
-        await runSeq('reset');
-        
-        this.setInfo("<b>Step 2: 发送指令</b> - 跳过ROM (0xCC) + 转换温度 (0x44)。这里演示发送一位 '0'");
-        await runSeq('write0');
-        
-        this.setInfo("<b>Step 3: 等待转换</b> - 此时DS18B20正在测量温度，总线保持高电平");
-        await new Promise(r => setTimeout(r, 1500));
-
-        this.setInfo("<b>Step 4: 读取数据</b> - 再次复位，发送读取指令，然后读取位。这里演示读取一位 '0'");
-        await runSeq('read0');
-        
-        this.setInfo("演示结束。");
     }
 
     startAnimation() {
         this.isPlaying = true;
         this.startTimeReal = performance.now();
         this.startTimeSim = 0;
+        this.lastFrameTime = this.startTimeReal;
         this.currentSegment = null;
         this.segmentStartIndex = 0;
         
@@ -437,8 +467,10 @@ class ProtocolSimulator {
         const speed = document.getElementById('speedRange').value / 5.0; 
         
         // 计算当前模拟时间
-        const elapsedReal = now - this.startTimeReal;
-        const elapsedSim = elapsedReal * speed; // 映射
+        const elapsedReal = now - this.lastFrameTime;
+        this.lastFrameTime = now;
+        this.startTimeSim += elapsedReal * speed * this.timeWindow / 3000;
+        const elapsedSim = this.startTimeSim;
         
         // 查找当前所处的指令片段
         let timeAcc = 0;
@@ -449,7 +481,7 @@ class ProtocolSimulator {
                 activeSeg = seg;
                 // 更新UI文本
                 if(this.lastInfo !== seg.info) {
-                    this.domInfo.innerHTML = seg.info;
+                    this.domInfo.innerHTML = (this.sequenceTitle ? `<b>${this.sequenceTitle}</b><br>` : "") + seg.info;
                     this.lastInfo = seg.info;
                 }
                 // 更新硬件状态
@@ -475,10 +507,16 @@ class ProtocolSimulator {
         }
 
         if (!activeSeg) {
-            // 结束
+            // 结束：落在精确终点，保留完整波形
+            this.currentTime = timeAcc;
             this.isPlaying = false;
             this.updateHardwareUI(false, false);
             this.draw();
+            if (this.onAnimationEnd) {
+                const resolve = this.onAnimationEnd;
+                this.onAnimationEnd = null;
+                resolve();
+            }
             return;
         }
 
@@ -598,7 +636,7 @@ class ProtocolSimulator {
                     // 从低变高，画曲线
                     // 简单的贝塞尔曲线模拟 RC 时间常数
                     // 上升时间设为约 2-5us 的视觉宽度
-                    const riseTime = 5 * this.pixelPerUs; 
+                    const riseTime = Math.min(5, drawEnd - segStart) * this.pixelPerUs; 
                     ctx.quadraticCurveTo(xStart + riseTime/2, targetY, xStart + riseTime, targetY);
                     ctx.lineTo(xEnd, targetY);
                 } else {

@@ -16,6 +16,8 @@
             --binary-bg: #11111b;
         }
 
+        * { box-sizing: border-box; }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
@@ -31,11 +33,13 @@
         .container {
             display: flex;
             flex: 1;
+            min-height: 0;
             overflow: hidden;
         }
 
         /* 左侧控制栏 */
         .sidebar {
+            flex: 0 0 300px;
             width: 300px;
             background-color: var(--panel-bg);
             padding: 20px;
@@ -44,6 +48,10 @@
             flex-direction: column;
             gap: 20px;
             overflow-y: auto;
+        }
+
+        .sidebar > * {
+            flex-shrink: 0;
         }
 
         h2, h3 {
@@ -94,6 +102,8 @@
         /* 右侧演示区 */
         .main-display {
             flex: 1;
+            min-width: 0;
+            min-height: 0;
             padding: 20px;
             display: flex;
             flex-direction: column;
@@ -102,6 +112,8 @@
         }
 
         .canvas-container {
+            min-width: 0;
+            min-height: 160px;
             background-color: #11111b;
             border-radius: 10px;
             border: 1px solid var(--grid-color);
@@ -138,6 +150,7 @@
         /* 编码输出区 */
         .binary-stream {
             height: 60px;
+            flex-shrink: 0;
             background-color: var(--binary-bg);
             border: 1px solid var(--accent-color);
             border-radius: 5px;
@@ -164,6 +177,7 @@
         /* 底部知识点 */
         .footer-notes {
             height: 180px;
+            flex-shrink: 0;
             background-color: var(--panel-bg);
             padding: 15px 30px;
             border-top: 1px solid var(--grid-color);
@@ -189,7 +203,10 @@
         /* 响应式 */
         @media (max-width: 900px) {
             .container { flex-direction: column; overflow-y: auto; }
-            .sidebar { width: auto; height: auto; }
+            body { height: auto; min-height: 100vh; }
+            .container { flex: none; }
+            .sidebar { flex: none; width: auto; height: auto; overflow: visible; }
+            .main-display { flex: none; min-height: 460px; }
             .footer-notes { grid-template-columns: 1fr 1fr; height: auto; }
         }
     </style>
@@ -215,7 +232,7 @@
         <div class="control-group">
             <label>量化精度 (Bit Depth) <span id="bit-val" class="value-display">3-bit</span></label>
             <input type="range" id="bitDepth" min="1" max="5" step="1" value="3">
-            <small style="color: #aaa; display:block; margin-top:5px;">层级数: <span id="levels-count">8</span></small>
+            <small style="color: #aaa; display:block; margin-top:5px;">层级数: <span id="levels-count">8</span><br>层级是可用电平数，采样波形不一定经过每一级。</small>
         </div>
 
         <div class="control-group">
@@ -279,7 +296,7 @@
         isRunning: true,
         time: 0,            // 全局时间
         speed: 0.01,        // 动画速度模拟时间增量
-        maxHistory: 800     // 保存多少帧数据用于绘图
+        visibleCycles: 3    // 横轴固定展示三个信号周期
     };
 
     // DOM 元素
@@ -360,6 +377,13 @@
     inputs.freq.addEventListener('input', (e) => {
         config.signalFreq = parseFloat(e.target.value);
         displays.freq.innerText = config.signalFreq;
+        // 改变信号频率后开始新一轮展示，避免新旧周期混杂。
+        analogData = [];
+        digitalData = [];
+        config.time = 0;
+        lastSampleTime = -1;
+        binaryContainer.innerHTML = '';
+        draw();
     });
     inputs.rate.addEventListener('input', (e) => {
         config.sampleRate = parseInt(e.target.value);
@@ -369,6 +393,15 @@
         config.bitDepth = parseInt(e.target.value);
         displays.bit.innerText = config.bitDepth + "-bit";
         displays.levels.innerText = Math.pow(2, config.bitDepth);
+        // 保留采样时刻和原始电压，按当前精度重建历史波形与编码。
+        digitalData.forEach(sample => {
+            const result = quantize(sample.raw, config.bitDepth);
+            sample.val = result.voltage;
+            sample.code = toBinary(result.levelIndex, config.bitDepth);
+        });
+        binaryContainer.innerHTML = '';
+        digitalData.slice(-20).forEach(sample => addBinaryPacket(sample.code));
+        draw();
     });
     inputs.toggle.addEventListener('click', () => {
         config.isRunning = !config.isRunning;
@@ -410,7 +443,9 @@
             
             // 推入历史数据
             analogData.push({ time: config.time, val: currentVoltage });
-            if(analogData.length > config.maxHistory) analogData.shift();
+            const cutoff = config.time - config.visibleCycles / config.signalFreq;
+            // 保留窗口左边界前一个点，让曲线连续进入画面。
+            while (analogData.length > 2 && analogData[1].time < cutoff) analogData.shift();
 
             // 2. 采样逻辑
             // 如果当前时间超过了上次采样时间 + 采样间隔
@@ -423,6 +458,7 @@
 
                 digitalData.push({
                     startTime: config.time,
+                    raw: currentVoltage,
                     val: qResult.voltage,
                     code: binaryCode
                 });
@@ -432,7 +468,7 @@
             }
 
             // 清理过期的数字信号数据
-            if(digitalData.length > 0 && digitalData[0].startTime < analogData[0].time) {
+            while(digitalData.length > 1 && digitalData[1].startTime < cutoff) {
                 digitalData.shift();
             }
 
@@ -452,11 +488,12 @@
         if(analogData.length < 2) return;
 
         // 计算X轴缩放 (将 analogData 的时间范围映射到 canvas 宽度)
-        const timeWindow = analogData[analogData.length-1].time - analogData[0].time;
+        const timeWindow = config.visibleCycles / config.signalFreq;
         const endTime = analogData[analogData.length-1].time;
+        const windowStart = Math.max(0, endTime - timeWindow);
         
         function getX(t) {
-            const relativeTime = t - (endTime - timeWindow); // 0 to timeWindow
+            const relativeTime = t - windowStart;
             return (relativeTime / timeWindow) * canvas.width;
         }
 
@@ -473,6 +510,20 @@
             ctx.lineTo(canvas.width, y);
         }
         ctx.stroke();
+
+        // 左侧标出量化电平编号；空间不足时抽取刻度，网格仍绘制全部层级。
+        const spacing = Math.abs(mapY(-1) - mapY(1)) / (levels - 1);
+        const labelStep = Math.max(1, Math.ceil(13 / Math.max(1, spacing)));
+        ctx.font = "11px monospace";
+        ctx.fillStyle = "#aeb2c8";
+        ctx.textBaseline = "middle";
+        for (let i = 0; i < levels; i++) {
+            if (i % labelStep === 0 || i === levels - 1) {
+                ctx.fillText(String(i).padStart(2, '0'), 5, mapY((i / (levels - 1)) * 2 - 1));
+            }
+        }
+        ctx.textBaseline = "alphabetic";
+        ctx.fillText(`${config.bitDepth}-bit · ${levels} 个电平 (0–${levels - 1}) · 窗口 3 周期 / ${timeWindow.toFixed(2)} s`, 10, canvas.height - 12);
 
         // --- 绘制模拟信号 (Sine Wave) ---
         ctx.beginPath();
