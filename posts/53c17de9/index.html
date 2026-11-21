@@ -222,12 +222,12 @@
 <li><strong>验证步骤</strong>：
 <ol>
 <li>查看虚拟机 IP 地址。</li>
-<li><strong>预期结果</strong>：虚拟机的 IP 地址与宿主机在不同网段（位于 VMnet8 指定的网段中）。</li>
-<li>测试连通性：
+<li><strong>预期结果</strong>：虚拟机与宿主机 <code>VMnet8</code> 虚拟适配器处于同一私有网段；通常与宿主机物理网卡所连局域网使用不同网段。</li>
+<li>测试连通性（需目标主机/防火墙允许 ICMP 回显请求）：
 <ul>
-<li>虚拟机 <code>ping</code> 外部网站（应通）。</li>
-<li>虚拟机 <code>ping</code> 宿主机物理 IP（应通）。</li>
-<li>宿主机 <code>ping</code> 虚拟机 IP（应通，因为有 VMnet8 虚拟网卡）。</li>
+<li>虚拟机 <code>ping</code> 外部网站（应通，前提是目标允许 ICMP）。</li>
+<li>虚拟机 <code>ping</code> 宿主机物理 IP（应通，需宿主机防火墙放行 ICMP）。</li>
+<li>宿主机 <code>ping</code> 虚拟机 IP（应通，因为有 <code>VMnet8</code> 虚拟网卡，同样需虚拟机防火墙放行 ICMP）。</li>
 </ul>
 </li>
 </ol>
